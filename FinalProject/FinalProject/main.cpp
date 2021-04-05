@@ -3,6 +3,13 @@
 #include <fstream>
 #include "function.h"
 using namespace std;
+struct account{
+	//username 
+	string us;
+	//password
+	string pw;
+	account*next;
+}
 struct Student {
 	string no;
 	string id;
@@ -70,6 +77,17 @@ void OutputCSVFIle(Student* pHeadStudent, char path[]) {
 			pCur = pCur->pNextStudent;
 		}
 	}
+}
+void signUp(){
+	string us,pw;
+	
+	cout << "Enter username : "; cin >> us;
+	cout << "Enter password : "; cin >> pw;
+	
+	ofstream write;
+	write.open("file.txt",ios::app);
+	write << us << pw; 
+	write.close();
 }
 int main() {
 	Student* pHeadStudent = nullptr;
