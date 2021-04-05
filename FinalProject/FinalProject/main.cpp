@@ -48,6 +48,29 @@ void inputStudentData(Student*& pHeadStudent, char path[]) {
 
 	}
 }
+void OutputCSVFIle(Student* pHeadStudent, char path[]) {
+	if (pHeadStudent == nullptr) return;
+	ofstream ofs;
+	ofs.open(path);
+	if (!ofs.is_open()) {
+		cout << "Khong mo duoc file.";
+		return;
+	}
+	Student* pCur = pHeadStudent;
+
+	while (!ofs.eof()) {
+		ofs << pCur->no << ",";
+		ofs << pCur->id << ",";
+		ofs << pCur->firstName << ",";
+		ofs << pCur->lastName << ",";
+		ofs << pCur->gender << ",";
+		ofs << pCur->dateOfBirth << ",";
+		ofs << pCur->socialId << ",";
+		if (pCur != nullptr) {
+			pCur = pCur->pNextStudent;
+		}
+	}
+}
 int main() {
 	Student* pHeadStudent = nullptr;
 	char inputPath[] = "input.csv";
