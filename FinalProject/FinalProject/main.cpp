@@ -89,6 +89,26 @@ void signUp(){
 	write << us << pw; 
 	write.close();
 }
+bool login(account* login, string username, string password)
+{
+	account* pCur = login;
+	ifstream read;
+	read.open("file.txt");
+	while (pCur != nullptr)
+	{
+		getline(read, pCur->us);
+		getline(read, pCur->pw);
+		pCur = pCur->next;
+	}
+	while (login != nullptr)
+	{
+		if (login->us = username && login->pw = password)
+			return true;
+		else login = login->next;
+	}
+	if (login != nullptr) return false;
+	read.close();
+}
 int main() {
 	Student* pHeadStudent = nullptr;
 	char inputPath[] = "input.csv";
