@@ -5,7 +5,7 @@
 #include "Header.h"
 using namespace std;
 
-void inputStudentData(Student*& pHeadStudent, char path[]) {
+void inputStudentData(Student* &pHeadStudent, Student* &pTailStudent, char path[]) {
 	ifstream ifs;
 	ifs.open(path);
 	if (!ifs.is_open())
@@ -14,10 +14,13 @@ void inputStudentData(Student*& pHeadStudent, char path[]) {
 		return;
 	}
 	Student* pTemp = nullptr;
-	Student* pCur = pHeadStudent;
-
-	while (!ifs.eof()) {
+	int n;
+	ifs >> n;
+	string temp;
+	getline(ifs,temp,'\n');
+	for(int i = 0 ; i < n; ++i) {
 		pTemp = new Student;
+		pTemp->pNext = nullptr;
 		getline(ifs, pTemp->no, ',');
 		getline(ifs, pTemp->id, ',');
 		getline(ifs, pTemp->firstName, ',');
@@ -25,14 +28,13 @@ void inputStudentData(Student*& pHeadStudent, char path[]) {
 		getline(ifs, pTemp->gender, ',');
 		getline(ifs, pTemp->dateOfBirth, ',');
 		getline(ifs, pTemp->socialId, '\n');
-		if (pCur != nullptr) {
-			pCur->pNextStudent = pTemp;
-			pCur = pTemp;
+		if (pTailStudent != nullptr) {
+			pTailStudent->pNext = pTemp;
+			pTailStudent = pTemp;
 		}
 		else {
-			pHeadStudent = pCur = pTemp;
+			pHeadStudent = pTailStudent = pTemp;
 		}
-
 	}
 }
 void OutputCSVFIle(Student* pHeadStudent, char path[]) {
@@ -44,7 +46,13 @@ void OutputCSVFIle(Student* pHeadStudent, char path[]) {
 		return;
 	}
 	Student* pCur = pHeadStudent;
-
+	int count = 0;
+	while (pCur != nullptr) {
+		count += 1;
+		pCur = pCur->pNext;
+	}
+	ofs << count << "\n";
+	pCur = pHeadStudent;
 	while (pCur != nullptr) {
 		ofs << pCur->no << ",";
 		ofs << pCur->id << ",";
@@ -53,7 +61,7 @@ void OutputCSVFIle(Student* pHeadStudent, char path[]) {
 		ofs << pCur->gender << ",";
 		ofs << pCur->dateOfBirth << ",";
 		ofs << pCur->socialId << "\n";
-		pCur = pCur->pNextStudent;
+		pCur = pCur->pNext;
 	}
 }
 void signUp(){
@@ -84,7 +92,7 @@ bool login(account* &pLogin, string loginPath)
 	{
 		if (pCur == nullptr) {
 			pLogin = pCur = new account;
-			pCur->next == nullptr;
+			pCur->next = nullptr;
 		}
 		else {
 			pCur->next = new account;
@@ -105,24 +113,90 @@ bool login(account* &pLogin, string loginPath)
 	return false;
 	read.close();
 }
-int main() {
-	/*Student* pHeadStudent = nullptr;
+void createSchoolYear(SchoolYear* &pHeadSchoolYear) {
+	pHeadSchoolYear = new SchoolYear;
+	pHeadSchoolYear->pNext = nullptr;
+	pHeadSchoolYear->pHeadSemester = nullptr;
+	cout << "Enter school year's name\n";
+	getline(cin, pHeadSchoolYear->schoolYearName);
+}
+void addAllStudentsToClass(Class* &pClass) {
+	if (pClass == nullptr) {
+		pClass = new Class;		
+	}
+	pClass->pHeadStudent = nullptr;
+	pClass->pTailStudent = nullptr;
 	char inputPath[] = "input.csv";
-	inputStudentData(pHeadStudent, inputPath);
+	inputStudentData(pClass->pHeadStudent, pClass->pTailStudent, inputPath);
+}
+void create1Student(Student* &pStudent) {
+	if (pStudent == nullptr) {
+		pStudent = new Student;
+	}
+	cout << "Enter student data\n";
+	cout << "no: ";
+	getline(cin,pStudent->no);
+	cout << "id: ";
+	getline(cin, pStudent->id);
+	cout << "firstName: ";
+	getline(cin, pStudent->firstName);
+	cout << "lastName: ";
+	getline(cin, pStudent->lastName);
+	cout << "gender: ";
+	getline(cin, pStudent->gender);
+	cout << "dateOfBirth: ";
+	getline(cin, pStudent->dateOfBirth);
+	cout << "socialId: ";
+	getline(cin, pStudent->socialId);
+	pStudent->pNext = nullptr;
+}
+void add1StudentToClass(Class* &pClass) {
+	if (pClass == nullptr) {
+		pClass = new Class;
+	}
+	Student* pStudent = new Student;
+	create1Student(pStudent);
+	pClass->pTailStudent->pNext = pStudent;
+	pClass->pTailStudent = pStudent;
+}
+int main() {
+
+	// input student from csv file to a list
+	// output student data to a csv file
+
+	/*Student* pHeadStudent = nullptr;
+	Student* pTailStudent = nullptr;
+	char inputPath[] = "input.csv";
+	inputStudentData(pHeadStudent, pTailStudent, inputPath);
 	Student* pTemp = pHeadStudent;
 	while (pTemp != nullptr) {
 		cout << pTemp->firstName << endl;
-		pTemp = pTemp->pNextStudent;
+		pTemp = pTemp->pNext;
 	}
+	cout << endl;
 	char outputPath[] = "output.csv";
 	OutputCSVFIle(pHeadStudent, outputPath);*/
+	
+
 	/*signUp();
 	string temp;
 	getline(cin, temp);
 	*/
+
+
 	/*account* pLogin = nullptr;
 	string loginPath = "loginData.txt";
 	cout << login(pLogin, loginPath);
+	*/
+
+	/*
+	// create 1 class
+	Class* pClass = new Class;	
+	// input student data from csv file to class list of student
+	addAllStudentsToClass(pClass);
+	// add 1 more student to this class
+	add1StudentToClass(pClass);
+	cout << "tail: " << pClass->pTailStudent->no;
 	*/
 	return 0;
 }

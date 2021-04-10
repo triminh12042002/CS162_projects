@@ -15,13 +15,13 @@ struct Student {
 	string gender;
 	string dateOfBirth;
 	string socialId;
-	Student* pNextStudent = nullptr;
+	Student* pNext = nullptr;
 };
 struct Class {
 	string className;
 	Student* pHeadStudent = nullptr;	// first student in the list of students of this class
-	Student* pTailStudent = nullptr;				// last student 
-	Class* pNextClass = nullptr;
+	Student* pTailStudent = nullptr;	// last student 
+	Class* pNext = nullptr;
 };
 struct Course {
 	string startDate;
@@ -37,7 +37,7 @@ struct Course {
 	string hour2;
 	Student* pHeadStudentEnroll = nullptr;	// Course have a list of student who enroll this course
 	Student* pTailStudentEnroll = nullptr;	// use pTail for adding Student to the course easier
-	Course* pNextCourse = nullptr;
+	Course* pNext = nullptr;
 };
 struct Semester {
 	string semesterName;
@@ -45,11 +45,11 @@ struct Semester {
 	string startDate;
 	string endDate;
 	Course* pHeadCourse = nullptr;
-	Semester* pNextSemester = nullptr;
+	Semester* pNext = nullptr;
 };
 struct SchoolYear {
 	string schoolYearName;
 	Semester* pHeadSemester = nullptr;
-	SchoolYear* pNextSchoolYear = nullptr;
+	SchoolYear* pNext = nullptr;
 };
 
