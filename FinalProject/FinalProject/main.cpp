@@ -2,29 +2,9 @@
 #include <string>
 #include <fstream>
 #include "function.h"
+#include "Header.h"
 using namespace std;
-struct account{
-	//username 
-	string us;
-	//password
-	string pw;
-	account*next;
-}
-struct Student {
-	string no;
-	string id;
-	string firstName;
-	string lastName;
-	string gender;
-	string dateOfBirth;
-	string socialId;
-	Student* pNextStudent = nullptr;
-};
-struct Class {
-	string className;
-	Student* pHeadStudent;	// first element in the list of student of this class
-	Class* pNextClass = nullptr;
-};
+
 void inputStudentData(Student*& pHeadStudent, char path[]) {
 	ifstream ifs;
 	ifs.open(path);
@@ -65,17 +45,15 @@ void OutputCSVFIle(Student* pHeadStudent, char path[]) {
 	}
 	Student* pCur = pHeadStudent;
 
-	while (!ofs.eof()) {
+	while (pCur != nullptr) {
 		ofs << pCur->no << ",";
 		ofs << pCur->id << ",";
 		ofs << pCur->firstName << ",";
 		ofs << pCur->lastName << ",";
 		ofs << pCur->gender << ",";
 		ofs << pCur->dateOfBirth << ",";
-		ofs << pCur->socialId << ",";
-		if (pCur != nullptr) {
-			pCur = pCur->pNextStudent;
-		}
+		ofs << pCur->socialId << "\n";
+		pCur = pCur->pNextStudent;
 	}
 }
 void signUp(){
@@ -85,32 +63,50 @@ void signUp(){
 	cout << "Enter password : "; cin >> pw;
 	
 	ofstream write;
-	write.open("file.txt",ios::app);
-	write << us << pw; 
+	write.open("loginData.txt",ios::app);
+	write << us << ',' << pw << '\n'; 
 	write.close();
 }
-bool login(account* login, string username, string password)
+bool login(account* &pLogin, string loginPath)
 {
-	account* pCur = login;
+	
+	string username, password;
+	cout << "Enter username : "; 
+	getline(cin, username);
+	cout << "Enter password : "; 
+	getline(cin, password);
+	
+	account* pCur = nullptr;
+	
 	ifstream read;
-	read.open("file.txt");
+	read.open(loginPath);
+	while (!read.eof())
+	{
+		if (pCur == nullptr) {
+			pLogin = pCur = new account;
+			pCur->next == nullptr;
+		}
+		else {
+			pCur->next = new account;
+			pCur = pCur->next;
+		}
+		
+		getline(read, pCur->us, ',');
+		getline(read, pCur->pw, '\n');
+
+	}
+	pCur = pLogin;
 	while (pCur != nullptr)
 	{
-		getline(read, pCur->us);
-		getline(read, pCur->pw);
-		pCur = pCur->next;
-	}
-	while (login != nullptr)
-	{
-		if (login->us = username && login->pw = password)
+		if (pCur->us == username && pCur->pw == password)
 			return true;
-		else login = login->next;
+		else pCur = pCur->next;
 	}
-	if (login != nullptr) return false;
+	return false;
 	read.close();
 }
 int main() {
-	Student* pHeadStudent = nullptr;
+	/*Student* pHeadStudent = nullptr;
 	char inputPath[] = "input.csv";
 	inputStudentData(pHeadStudent, inputPath);
 	Student* pTemp = pHeadStudent;
@@ -118,5 +114,15 @@ int main() {
 		cout << pTemp->firstName << endl;
 		pTemp = pTemp->pNextStudent;
 	}
+	char outputPath[] = "output.csv";
+	OutputCSVFIle(pHeadStudent, outputPath);*/
+	/*signUp();
+	string temp;
+	getline(cin, temp);
+	*/
+	/*account* pLogin = nullptr;
+	string loginPath = "loginData.txt";
+	cout << login(pLogin, loginPath);
+	*/
 	return 0;
 }
