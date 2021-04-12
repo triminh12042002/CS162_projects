@@ -159,6 +159,74 @@ void add1StudentToClass(Class* &pClass) {
 	pClass->pTailStudent->pNext = pStudent;
 	pClass->pTailStudent = pStudent;
 }
+void deleteCourse(Semester *pHead){
+	string nameOfCourse, idOfCourse;
+	cout << "Input name of the course that you want to delete : "; cin >> nameOfCourse;
+	cout << "Input id of the course that you want to delete : "; cin >> idOfCourse;
+	
+	Course *courseHead = pHead->pHeadCourse;
+	if (courseHead->courseName.compare(nameOfCourse)==0&&courseHead->id.compare(idOfCourse)==0{
+		pHead->pHeadCourse = courseHead->pNext;
+		delete courseHead;
+		return;
+	}
+	    
+	Course *temp = courseHead;
+	courseHead = courseHead->pNext;	
+	while (courseHead){
+		if (courseHead->courseName.compare(nameOfCourse)==0&&courseHead->id.compare(idOfCourse)==0){
+			temp->pNext = courseHead->pNext;
+			delete courseHead;
+			return;
+		}
+		temp = courseHead;
+		courseHead = courseHead->pNext;
+	}
+	cout << "The course that you want to delete does not exits in this semester. " << endl;
+	return;
+}
+void addCourseToSemester(Semester *pHead){
+	Course *newCourse = new Course;
+	string startDate1,endDate1,courseName1,id1,teacherName1,numOfCredits1,maxNumOfStudents1,day1x,hour1x,day2x,hour2x;
+	
+	cout << "Input course start date : "; cin >> startDate1;
+	newCourse->startDate = startDate1;
+	
+	cout << "Input course end date : "; cin >> endDate1;
+	newCourse->endDate = endDate1;
+	
+	cout << "Input course name : "; cin >> courseName1;
+	newCourse->courseName = courseName1;
+	
+	cout << "Input course id : "; cin >> id1;
+	newCourse->id = id1;
+	
+	cout << "Input teacher name : "; cin >> teacherName1;
+	newCourse->teacherName = teacherName1;
+	
+	cout << "Input number of credits in the course : "; cin >> numOfCredits1;
+	newCourse->numOfCredits = numOfCredits1;
+	
+	cout << "Input the maximun number of students : "; cin >> maxNumOfStudents1;
+	newCourse->maxNumOfStudents = maxNumOfStudents1;
+	
+	cout << "Input day 1 : "; cin >> day1x;
+	newCourse->day1 = day1x;
+	
+	cout << "Input hour 1 : " cin >> hour1x;
+	newCourse->hour1 = hour1x;
+	
+	cout << "Input day 2 : "; cin >> day2x;
+	newCourse->day2 = day2x;
+	
+	cout << "Input hour 2 : "; cin >> hour2x;
+	newCourse->hour2 = hour2x;
+	
+	Course *temp = pHead->pHeadCourse;
+	while (temp->pNext)
+		temp = temp->pNext;
+	temp-pNext = newCourse;
+}
 int main() {
 
 	// input student from csv file to a list
