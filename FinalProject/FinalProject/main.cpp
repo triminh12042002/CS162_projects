@@ -227,6 +227,224 @@ void addCourseToSemester(Semester *pHead){
 		temp = temp->pNext;
 	temp-pNext = newCourse;
 }
+void SemesterOfYear(Semester*& pSemester, Course*& pHeadCourse, char* path) //char path="semester"
+{
+	ofstream read;
+	read.open(path, ios::app);
+	Semester* pCur = nullptr;
+	int i = 1;
+	while (i <= 3)
+	{
+		if (pSemester == nullptr)
+		{
+			pSemester = new Semester;
+			pSemester->pNext = nullptr;
+			pCur = pSemester;
+		}
+		cout << "The Semester: ";
+		cin >> pCur->semesterName;
+		cout << "School Year: ";
+		cin >> pCur->schoolYear;
+		cout << "The Date of Starting semester: ";
+		cin >> pCur->startDate;
+		cout << "The Date of Ending semester: ";
+		cin >> pCur->endDate;
+		read << pCur->schoolYear << ',' <<pCur->semesterName << ',' << pCur->startDate << ',' <<pCur-> endDate << '\n';
+		CreateCourseRegistration(pCur->pHeadCourse, pCur, path);
+		//Create new semester
+		pCur->pNext = new Semester;
+		pCur = pCur->pNext;
+	}
+	pCur = nullptr;
+	read.close();
+}
+void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester, string path)
+{
+	ofstream read;
+	read.open(path + pSemester->semesterName + "RegistrationDate", ios::app);//string path="semester";
+	Course* pCur = nullptr;
+	if (pHeadCourse == nullptr)
+	{
+		pHeadCourse = new Course;
+		pHeadCourse->pNext = nullptr;
+	}
+	pCur = pHeadCourse;
+	cout << "The Date of Starting a Course Registration";
+	cin >> pCur->startDate;
+	cout << "The Date of Ending a Course Registration";
+	cin >> pCur->endDate;
+	read << pCur->startDate << ',' << pCur->endDate << '\n';
+	read.close();
+	//There is a file for saving Date of Registration
+}
+void UpdateCourseInformation(Course*& pHeadCourse, Semester* pSem, string path)// string path="semester"
+{
+	if (pHeadCourse == nullptr)
+	{
+		cout << "There is nothing to be updated";
+		return;
+	}
+	ifstream read;
+	read.open(path + pSem->semesterName);//create a file which is isolated with file(RegistrationDate) 
+									   //to store the information of all courses in the semester
+	ofstream write;
+	write.open("temp.txt"); // a file for saving the updated information temparaily
+	Course* pCur = pHeadCourse;
+	string searchIdCourse;
+	cout << "Which Course do you want to Update? Please Input the ID Course: ";
+	getline(cin, searchIdCourse);
+	while (!read.eof())
+	{
+		getline(read, pCur->courseName, ',');
+		getline(read, pCur->id, ',');
+		getline(read, pCur->teacherName, ',');
+		getline(read, pCur->numOfCredits, ',');
+		getline(read, pCur->maxNumOfStudents, ',');
+		getline(read, pCur->day1, ',');
+		getline(read, pCur->hour1, ',');
+		getline(read, pCur->day2, ',');
+		getline(read, pCur->hour2, '\n');
+		if (pCur->id == searchIdCourse) //after searching successfully, we try to change What information of that course we want
+		{
+			string update;
+			string ChangeInformation;
+			getline(cin, update);
+			switch (update)
+			{
+			case courseName:
+				UpDateData(update, ChangeInformation);
+				write << ChangeInformation << ",";
+				write << pCur->id << ",";
+				write << pCur->teacherName << ",";
+				write << pCur->numOfCredits << ",";
+				write << pCur->maxNumOfStudents << ",";
+				write << pCur->day1 << ",";
+				write << pCur->hour1 << ",";
+				write << pCur->day2 << ",";
+				write << pCur->hour2 << "\n";
+				break;
+			case id:
+				UpDateData(update, ChangeInformation);
+				write << pCur->courseName << ",";
+				write << ChangeInformation << ",";
+				write << pCur->teacherName << ",";
+				write << pCur->numOfCredits << ",";
+				write << pCur->maxNumOfStudents << ",";
+				write << pCur->day1 << ",";
+				write << pCur->hour1 << ",";
+				write << pCur->day2 << ",";
+				write << pCur->hour2 << "\n";
+				break;
+			case teacherName:
+				UpDateData(update, ChangeInformation);
+				write << pCur->courseName << ",";
+				write << pCur->id << ",";
+				write << pCur->ChangeInformation << ",";
+				write << pCur->numOfCredits << ",";
+				write << pCur->maxNumOfStudents << ",";
+				write << pCur->day1 << ",";
+				write << pCur->hour1 << ",";
+				write << pCur->day2 << ",";
+				write << pCur->hour2 << "\n";
+				break;
+			case numOfCredits:
+				UpDateData(update, ChangeInformation);
+				write << pCur->courseName << ",";
+				write << pCur->id << ",";
+				write << pCur->teacherName << ",";
+				write << ChangeInformation << ",";
+				write << pCur->maxNumOfStudents << ",";
+				write << pCur->day1 << ",";
+				write << pCur->hour1 << ",";
+				write << pCur->day2 << ",";
+				write << pCur->hour2 << "\n";
+				break;
+			case maxNumOfStudents:
+				UpDateData(update, ChangeInformation);
+				write << pCur->courseName << ",";
+				write << pCur->id << ",";
+				write << pCur->teacherName << ",";
+				write << pCur->numOfCredits << ",";
+				write << ChangeInformation << ",";
+				write << pCur->day1 << ",";
+				write << pCur->hour1 << ",";
+				write << pCur->day2 << ",";
+				write << pCur->hour2 << "\n";
+			case day1:
+				UpDateData(update, ChangeInformation);
+				write << pCur->courseName << ",";
+				write << pCur->id << ",";
+				write << pCur->teacherName << ",";
+				write << pCur->numOfCredits << ",";
+				write << maxNumOfStudents << ",";
+				write << ChangeInformation << ",";
+				write << pCur->hour1 << ",";
+				write << pCur->day2 << ",";
+				write << pCur->hour2 << "\n";
+				break;
+			case hour1:
+				UpDateData(update, ChangeInformation);
+				write << pCur->courseName << ",";
+				write << pCur->id << ",";
+				write << pCur->teacherName << ",";
+				write << pCur->numOfCredits << ",";
+				write << maxNumOfStudents << ",";
+				write << pCur->day1 << ",";
+				write << ChangeInformation << ",";
+				write << pCur->day2 << ",";
+				write << pCur->hour2 << "\n";
+				break;
+			case day2:
+				UpDateData(update, ChangeInformation);
+				write << pCur->courseName << ",";
+				write << pCur->id << ",";
+				write << pCur->teacherName << ",";
+				write << pCur->numOfCredits << ",";
+				write << maxNumOfStudents << ",";
+				write << pCur->day1 << ",";
+				write << pCur->hour1 << ",";
+				write << ChangeInformation << ",";
+				write << pCur->hour2 << "\n";
+				break;
+			case hour2:
+				UpDateData(update, ChangeInformation);
+				write << pCur->courseName << ",";
+				write << pCur->id << ",";
+				write << pCur->teacherName << ",";
+				write << pCur->numOfCredits << ",";
+				write << maxNumOfStudents << ",";
+				write << pCur->day1 << ",";
+				write << pCur->hour1 << ",";
+				write << pCur->day2 << ",";
+				write << ChangeInformation << "\n";
+				break;
+			}
+		}
+		else {
+			write << pCur->courseName << ",";
+			write << pCur->id << ",";
+			write << pCur->teacherName << ",";
+			write << pCur->numOfCredits << ",";
+			write << pCur->maxNumOfStudents<< ",";
+			write << pCur->day1 << ",";
+			write << pCur->hour1 << ",";
+			write << pCur->day2 << ",";
+			write << pCur->hour2 << "\n";
+		}
+	}
+	//swap 2 file: temp changed into semester(1,2,3)
+	read.close();
+	write.close();
+	remove(path + pSem->semesterName);
+	rename("temp.txt", path + pSem->semesterName);
+	cout << "Data Updated Successfully";
+
+}
+void UpDateData(string ThingUpdated, string& ChangeInformation)
+{
+	cout << "Updating " + ThingUpdated<<" : ";
+	getline(cin, ChangeInformation);
+}
 int main() {
 
 	// input student from csv file to a list
