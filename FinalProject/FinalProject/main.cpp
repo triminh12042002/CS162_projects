@@ -162,10 +162,9 @@ void add1StudentToClass(Class* &pClass) {
 void deleteCourse(Semester *pHead){
 	string nameOfCourse, idOfCourse;
 	cout << "Input name of the course that you want to delete : "; cin >> nameOfCourse;
-	cout << "Input id of the course that you want to delete : "; cin >> idOfCourse;
 	
 	Course *courseHead = pHead->pHeadCourse;
-	if (courseHead->courseName.compare(nameOfCourse)==0&&courseHead->id.compare(idOfCourse)==0{
+	if (courseHead->courseName == nameOfCourse){
 		pHead->pHeadCourse = courseHead->pNext;
 		delete courseHead;
 		return;
@@ -174,7 +173,7 @@ void deleteCourse(Semester *pHead){
 	Course *temp = courseHead;
 	courseHead = courseHead->pNext;	
 	while (courseHead){
-		if (courseHead->courseName.compare(nameOfCourse)==0&&courseHead->id.compare(idOfCourse)==0){
+		if (courseHead->courseName == nameOfCourse){
 			temp->pNext = courseHead->pNext;
 			delete courseHead;
 			return;
@@ -213,7 +212,7 @@ void addCourseToSemester(Semester *pHead){
 	cout << "Input day 1 : "; cin >> day1x;
 	newCourse->day1 = day1x;
 	
-	cout << "Input hour 1 : " cin >> hour1x;
+	cout << "Input hour 1 : "; cin >> hour1x;
 	newCourse->hour1 = hour1x;
 	
 	cout << "Input day 2 : "; cin >> day2x;
@@ -225,7 +224,7 @@ void addCourseToSemester(Semester *pHead){
 	Course *temp = pHead->pHeadCourse;
 	while (temp->pNext)
 		temp = temp->pNext;
-	temp-pNext = newCourse;
+	temp->pNext = newCourse;
 }
 void SemesterOfYear(Semester*& pSemester, Course*& pHeadCourse, char* path) //char path="semester"
 {
