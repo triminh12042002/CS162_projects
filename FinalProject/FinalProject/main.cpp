@@ -159,7 +159,7 @@ void add1StudentToClass(Class* &pClass) {
 	pClass->pTailStudent->pNext = pStudent;
 	pClass->pTailStudent = pStudent;
 }
-void deleteCourse(Semester *pHead){
+void deleteCourse(Semester *&pHead){
 	string nameOfCourse, idOfCourse;
 	cout << "Input name of the course that you want to delete : "; cin >> nameOfCourse;
 	
@@ -184,7 +184,7 @@ void deleteCourse(Semester *pHead){
 	cout << "The course that you want to delete does not exits in this semester. " << endl;
 	return;
 }
-void addCourseToSemester(Semester *pHead){
+void addCourseToSemester(Semester *&pHead){
 	Course *newCourse = new Course;
 	string startDate1,endDate1,courseName1,id1,teacherName1,numOfCredits1,maxNumOfStudents1,day1x,hour1x,day2x,hour2x;
 	
@@ -444,7 +444,7 @@ void UpDateData(string ThingUpdated, string& ChangeInformation)
 	cout << "Updating " + ThingUpdated<<" : ";
 	getline(cin, ChangeInformation);
 }
-void ViewListOfStudents(Class *pHead){
+void viewListOfStudents(Class *pHead){
 
 	cout << "LIST OF STUDENTS IN CLASS " << pHead->className << endl;
 	Student *pTemp = pHead->pHeadStudent;
@@ -452,6 +452,24 @@ void ViewListOfStudents(Class *pHead){
 	while(pTemp==nullptr){
 		cout << pTemp->No << "\t" << pTemp->id << "\t" << pTemp->firstName << "\t" << pTemp->lastName << "\t" << pTemp->gender "\t" << pTemp->dateOfBirth << "\t" << pTemp->socialTD << endl;
 		pTemp = pTemp->pNext;
+	}
+}
+void viewListOfCourses(Semester *pHead){
+	cout << "LIST OF COURSES IN SEMESTER " << pHead->semesterName << endl;
+	Course *pTemp = pHead->pHeadCourse;
+	cout << "Course ID\tCourse Name\tNumber of Credits\tTeacher Name\n";
+	while(!pTemp){
+		cout << pTemp->id << "\t" << pTemp->courseName << "\t" << pTemp->numOfCredits << "\t" << pTemp->teacherName << endl;
+		pTemp = pTemp->pNext;
+	}
+}
+void viewListOfClasses(Class *pHead){
+	cout << "LIST OF CLASSES" << endl;
+	int i = 1;
+	while(!pHead){
+		cout << i << ". " << pHead->className << endl;
+		pHead = pHead->pNext;
+		i++;
 	}
 }
 int main() {
