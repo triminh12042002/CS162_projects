@@ -448,7 +448,7 @@ void ViewListOfStudents(Class *pHead){
 
 	cout << "LIST OF STUDENTS IN CLASS " << pHead->className << endl;
 	Student *pTemp = pHead->pHeadStudent;
-	cout << No\tID\tFirst Name\tLast Name\tGender\tDate of Birth\tSocial ID\n";
+	cout << "No\tID\tFirst Name\tLast Name\tGender\tDate of Birth\tSocial ID\n";
 	while(pTemp==nullptr){
 		cout << pTemp->No << "\t" << pTemp->id << "\t" << pTemp->firstName << "\t" << pTemp->lastName << "\t" << pTemp->gender "\t" << pTemp->dateOfBirth << "\t" << pTemp->socialTD << endl;
 		pTemp = pTemp->pNext;
