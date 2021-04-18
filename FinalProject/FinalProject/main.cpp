@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include "function.h"
 #include "Header.h"
 using namespace std;
@@ -276,7 +277,7 @@ void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester, string 
 	read.close();
 	//There is a file for saving Date of Registration
 }
-void UpdateCourseInformation(Course*& pHeadCourse, Semester* pSem, string path)// string path="semester"
+/*void UpdateCourseInformation(Course*& pHeadCourse, Semester* pSem, string path)// string path="semester"
 {
 	if (pHeadCourse == nullptr)
 	{
@@ -439,6 +440,7 @@ void UpdateCourseInformation(Course*& pHeadCourse, Semester* pSem, string path)/
 	cout << "Data Updated Successfully";
 
 }
+*/
 void UpDateData(string ThingUpdated, string& ChangeInformation)
 {
 	cout << "Updating " + ThingUpdated<<" : ";
@@ -450,7 +452,7 @@ void viewListOfStudents(Class *pHead){
 	Student *pTemp = pHead->pHeadStudent;
 	cout << "No\tID\tFirst Name\tLast Name\tGender\tDate of Birth\tSocial ID\n";
 	while(pTemp==nullptr){
-		cout << pTemp->No << "\t" << pTemp->id << "\t" << pTemp->firstName << "\t" << pTemp->lastName << "\t" << pTemp->gender "\t" << pTemp->dateOfBirth << "\t" << pTemp->socialTD << endl;
+		cout << pTemp->no << "\t" << pTemp->id << "\t" << pTemp->firstName << "\t" << pTemp->lastName << "\t" << pTemp->gender << "\t" << pTemp->dateOfBirth << "\t" << pTemp->socialId << endl;
 		pTemp = pTemp->pNext;
 	}
 }
@@ -470,6 +472,76 @@ void viewListOfClasses(Class *pHead){
 		cout << i << ". " << pHead->className << endl;
 		pHead = pHead->pNext;
 		i++;
+	}
+}
+void enrollCourse(Semester* pSemester, Student* pStudent) {
+	Course* pTemp = pSemester->pHeadCourse;
+	int count = 0;
+	int size = 0;
+	while (pTemp != nullptr) {
+		count++;
+		pTemp = pTemp->pNext;
+	}
+	if (count >= 5) {
+		cout << "You have enroll enough courses (5 course per Semester)\n";
+		return;
+	}
+	pTemp = pSemester->pHeadCourse;		// pTemp is in Semester's course
+	viewListOfCourses(pSemester);
+	cout << "Enter Courses Name that you want to enroll\n";
+	string name;
+	getline(cin, name);
+			
+	while (pTemp != nullptr && pTemp->courseName != name) {
+		pTemp = pTemp->pNext;
+	}
+	if (pTemp != nullptr) {
+		Course* pCur = pStudent->pHeadCourse;		// pCur is in Student's course
+		if (pCur == nullptr) {
+			pCur = new Course;
+			*pCur = *pTemp;
+			cout << "Successfully enroll\n";
+		}
+		else {
+			bool canEnroll = true;
+			while (pCur->pNext != nullptr) {
+				if (pTemp->courseName == pCur->courseName) {
+					canEnroll = false;
+					cout << "Course has already been enrolled.\n";
+					break;
+				}
+				else if (pTemp->day1 == pCur->day1) {
+					if (pTemp->hour1 == pCur->hour1) {
+						canEnroll = false;
+						cout << "The 2 sessions are conflicted.";
+						break;
+					}
+				}
+				else if (pTemp->day2 == pCur->day2) {
+					if (pTemp->hour2 == pCur->hour2) {
+						canEnroll = false;
+						cout << "The 2 sessions are conflicted.";
+						break;
+					}
+				}
+				else {
+					pCur = pCur->pNext;
+				}			
+			} if (canEnroll == true) {
+				pCur->pNext = new Course;
+				pCur = pCur->pNext;
+				*pCur = *pTemp;			
+				pCur->pNext = nullptr;
+				cout << "Successfully enroll\n";
+			}
+			else {
+				cout << "cannot enroll\n";
+			}
+		}
+		
+	}
+	else {
+		cout << "Cannot find the course name that you enter.\n Please enter exactly.\n";
 	}
 }
 int main() {

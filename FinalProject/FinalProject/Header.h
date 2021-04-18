@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <fstream>
+#include <sstream>
 using namespace std;
 struct account {
 	string us;		//username 
@@ -15,6 +16,7 @@ struct Student {
 	string gender;
 	string dateOfBirth;
 	string socialId;
+	Course* pHeadCourse = nullptr;
 	Student* pNext = nullptr;
 };
 struct Class {
