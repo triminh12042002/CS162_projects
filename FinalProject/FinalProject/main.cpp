@@ -474,6 +474,14 @@ void viewListOfClasses(Class *pHead){
 		i++;
 	}
 }
+void ViewCourse(Student* pHead) {
+	Course* pCur = pHead->pHeadCourse;
+	while (pCur != nullptr) {
+		cout << "LIST OF ENROLLED COURSES: " << endl;
+		cout << pCur->courseName << endl;
+		pCur = pCur->pNext;
+	}
+}
 void enrollCourse(Semester* pSemester, Student* pStudent) {
 	Course* pTemp = pSemester->pHeadCourse;
 	int count = 0;
