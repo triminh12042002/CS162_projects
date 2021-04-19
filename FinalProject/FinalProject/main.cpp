@@ -121,6 +121,26 @@ void createSchoolYear(SchoolYear* &pHeadSchoolYear) {
 	cout << "Enter school year's name\n";
 	getline(cin, pHeadSchoolYear->schoolYearName);
 }
+void CreateYear(Year* pHeadYear) {
+	cout << "Please enter the schoolyear (e.g. School year 2020-2021, input 2020); 0= exit: ";
+	int x;
+	cin >> x;
+	if (!pHeadYear) {
+		pHeadYear = new Year;
+		pHeadYear->Start = x;
+		pHeadYear->End = x + 1;
+		pHeadYear->pNextYear = nullptr;
+		return;
+	}
+	Year* pCurYear = pHeadYear->pNextYear;
+	while (pHeadYear && x != 0;) {
+		pCurYear = new Year;
+		pCurYear->Start = x;
+		pCurYear->End = x + 1;
+		pCurYear = pCurYear->pNextYear;
+		cout << "Please enter the schoolyear (e.g. School year 2020-2021, input 2020); 0= exit: ";
+		cin >> x;
+	}
 void addAllStudentsToClass(Class* &pClass) {
 	if (pClass == nullptr) {
 		pClass = new Class;		
