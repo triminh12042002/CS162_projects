@@ -141,6 +141,27 @@ void CreateYear(Year* pHeadYear) {
 		cout << "Please enter the schoolyear (e.g. School year 2020-2021, input 2020); 0= exit: ";
 		cin >> x;
 	}
+void CreateClass(Student* pHeadStudent) {
+	Class* pHeadClass = new Class;
+	Class* pCurClass = pHeadClass;
+	Student* pCurStudent = pHeadClass->pHeadStudent;
+	while (pCurClass != nullptr) {
+		while (pCurStudent != pCurClass->pTailStudent) {
+			//Input Student
+			pCurStudent = pCurStudent->pNextStudent;
+		}
+		int Fin;
+		cout << "Move to the next Class? (1= Next, 0= Exit): ";
+		cin >> Fin;
+		if (Fin == 0) {
+			pCurClass->pNext = nullptr;
+			pCurClass = pCurClass->pNext;
+		}
+		else {
+			pCurClass->pNext = new Class;
+			pCurClass = pCurCLass->pNext;
+		}
+	}
 void addAllStudentsToClass(Class* &pClass) {
 	if (pClass == nullptr) {
 		pClass = new Class;		
