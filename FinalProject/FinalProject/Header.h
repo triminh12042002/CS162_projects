@@ -16,7 +16,7 @@ struct Student {
 	string gender;
 	string dateOfBirth;
 	string socialId;
-	Course* pHeadCourse = nullptr;
+	Course *pHeadCourse = nullptr;
 	Student* pNext = nullptr;
 };
 struct Class {
