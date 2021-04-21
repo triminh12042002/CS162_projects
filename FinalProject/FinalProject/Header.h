@@ -1,13 +1,15 @@
 #pragma once
+#include <iostream>
+#include <string>
 #include <string>
 #include <fstream>
-#include <sstream>
 using namespace std;
 struct account {
 	string us;		//username 
 	string pw;		//password
 	account* next = nullptr;
 };
+struct Course;
 struct Student {
 	string no;
 	string id;
@@ -51,7 +53,27 @@ struct Semester {
 };
 struct SchoolYear {
 	string schoolYearName;
+	Class* pHeadClass = nullptr;
 	Semester* pHeadSemester = nullptr;
 	SchoolYear* pNext = nullptr;
 };
 
+
+void inputStudentData(Student*& pHeadStudent, Student*& pTailStudent, char path[]);
+void OutputCSVFIle(Student* pHeadStudent, char path[]);
+void signUp();
+bool login(account*& pLogin, string loginPath);
+void createSchoolYear(SchoolYear*& pHeadSchoolYear);
+void addAllStudentsToClass(Class*& pClass);
+void create1Student(Student*& pStudent);
+void add1StudentToClass(Class*& pClass);
+void deleteCourse(Semester*& pHead);
+void addCourseToSemester(Semester*& pHead);
+void SemesterOfYear(Semester*& pSemester, Course*& pHeadCourse, char* path);
+void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester, string path);
+
+void UpDateData(string ThingUpdated, string& ChangeInformation);
+void viewListOfStudents(Class* pHead);
+void viewListOfCourses(Semester* pHead);
+void viewListOfClasses(Class* pHead);
+void enrollCourse(Semester* pSemester, Student* pStudent);

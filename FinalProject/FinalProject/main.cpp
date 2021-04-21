@@ -1,8 +1,4 @@
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <sstream>
-#include "function.h"
+
 #include "Header.h"
 using namespace std;
 
@@ -12,7 +8,7 @@ void inputStudentData(Student* &pHeadStudent, Student* &pTailStudent, char path[
 	if (!ifs.is_open())
 	{
 		cout << "Khong mo duoc file!";
-		return;
+		return;	
 	}
 	Student* pTemp = nullptr;
 	int n;
@@ -435,6 +431,7 @@ void UpdateCourseInformation(Course*& pHeadCourse, char* path)// string path="se
 	default:
 		break;
 	}
+	
 	read.close();
 	//
 	pCur = pHeadCourse;
