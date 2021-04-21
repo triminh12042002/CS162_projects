@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include <string>
 #include <fstream>
 using namespace std;
 struct account {

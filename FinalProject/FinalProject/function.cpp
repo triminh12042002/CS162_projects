@@ -448,7 +448,7 @@ void viewListOfStudents(Class* pHead) {
 	cout << "LIST OF STUDENTS IN CLASS " << pHead->className << endl;
 	Student* pTemp = pHead->pHeadStudent;
 	cout << "No\tID\tFirst Name\tLast Name\tGender\tDate of Birth\tSocial ID\n";
-	while (pTemp == nullptr) {
+	while (pTemp != nullptr) {
 		cout << pTemp->no << "\t" << pTemp->id << "\t" << pTemp->firstName << "\t" << pTemp->lastName << "\t" << pTemp->gender << "\t" << pTemp->dateOfBirth << "\t" << pTemp->socialId << endl;
 		pTemp = pTemp->pNext;
 	}
@@ -457,7 +457,7 @@ void viewListOfCourses(Semester* pHead) {
 	cout << "LIST OF COURSES IN SEMESTER " << pHead->semesterName << endl;
 	Course* pTemp = pHead->pHeadCourse;
 	cout << "Course ID\tCourse Name\tNumber of Credits\tTeacher Name\n";
-	while (!pTemp) {
+	while (pTemp) {
 		cout << pTemp->id << "\t" << pTemp->courseName << "\t" << pTemp->numOfCredits << "\t" << pTemp->teacherName << endl;
 		pTemp = pTemp->pNext;
 	}
@@ -465,7 +465,7 @@ void viewListOfCourses(Semester* pHead) {
 void viewListOfClasses(Class* pHead) {
 	cout << "LIST OF CLASSES" << endl;
 	int i = 1;
-	while (!pHead) {
+	while (pHead) {
 		cout << i << ". " << pHead->className << endl;
 		pHead = pHead->pNext;
 		i++;

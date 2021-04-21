@@ -117,7 +117,7 @@ void createSchoolYear(SchoolYear* &pHeadSchoolYear) {
 	cout << "Enter school year's name\n";
 	getline(cin, pHeadSchoolYear->schoolYearName);
 }
-void CreateYear(Year* pHeadYear) {
+/*void CreateYear(Year* pHeadYear) {
 	cout << "Please enter the schoolyear (e.g. School year 2020-2021, input 2020); 0= exit: ";
 	int x;
 	cin >> x;
@@ -158,6 +158,7 @@ void CreateClass(Student* pHeadStudent) {
 			pCurClass = pCurCLass->pNext;
 		}
 	}
+	*/
 void addAllStudentsToClass(Class* &pClass) {
 	if (pClass == nullptr) {
 		pClass = new Class;		
@@ -236,21 +237,21 @@ void addCourseToSemester(Course*& pCourse) {
 	getline(cin, pCourse->numOfCredits);
 
 	cout << "Input the maximun number of students : ";
-	getline(pCourse->maxNumOfStudents);
+	getline(cin,pCourse->maxNumOfStudents);
 
 	cout << "Input day 1 : ";
-	getline(pCourse->day1);
+	getline(cin,pCourse->day1);
 
 	cout << "Input hour 1 : ";
-	getline(pCourse->hour1);
+	getline(cin,pCourse->hour1);
 
 	cout << "Input day 2 : ";
-	getline(pCourse->day2);
+	getline(cin,pCourse->day2);
 
 	cout << "Input hour 2 : ";
-	getline(pCourse->hour2);
+	getline(cin,pCourse->hour2);
 }
-void CreateCourseRegistration(Course*& pHeadCourse, string path)
+void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester, string path)
 {
 	ofstream write;
 	write.open(path + pSemester->semesterName);//semester+1. ALL course in the semester 1
@@ -260,7 +261,7 @@ void CreateCourseRegistration(Course*& pHeadCourse, string path)
 	//cout << "The Date of Ending a Course Registration";
 	//cin >> pCur->endDate;
 	//read << pCur->startDate << ',' << pCur->endDate << '\n';
-	int x;
+	int x = 1;
 	while (x != 0)//0 means STOP
 	{
 		if (pHeadCourse == nullptr)
@@ -275,12 +276,14 @@ void CreateCourseRegistration(Course*& pHeadCourse, string path)
 		}
 		pCur->pNext = nullptr;
 		addCourseToSemester(pCur);
-		cout << "You want to add a new Course to this Semester,please press 1 or 0 to stop.";
+		cout << "You want to add a new Course to this Semester,please press 0 to stop.";
 			cin >> x;
 	}
 	pCur = pHeadCourse;
+	Course* pCourse;
 	while (pCur != nullptr)
-	{
+	{	
+		pCourse = pCur;
 		write << pCourse->courseName << ",";
 		write << pCourse->id << ",";
 		write << pCourse->teacherName << ",";
@@ -291,9 +294,9 @@ void CreateCourseRegistration(Course*& pHeadCourse, string path)
 		write << pCourse->hour1 << ",";
 		write << pCourse->day2 << ",";
 		write << pCourse->hour2 << "\n";
-		pCur = pCur->next;
+		pCur = pCur->pNext;
 	}
-	read.close();
+	write.close();
 	//There is a file for saving Date of Registration
 }
 void SemesterOfYear(Semester*& pSemester, char* path) //char path="semester"
@@ -313,7 +316,7 @@ void SemesterOfYear(Semester*& pSemester, char* path) //char path="semester"
 		else {
 			pCur->pNext = new Semester;
 			pCur = pCur->pNext;
-			pCur->next = nullptr;
+			pCur->pNext = nullptr;
 		}
 		//information of each Semester in year
 		cout << "The Semester: ";
@@ -456,7 +459,7 @@ void viewListOfStudents(Class *pHead){
 	cout << "LIST OF STUDENTS IN CLASS " << pHead->className << endl;
 	Student *pTemp = pHead->pHeadStudent;
 	cout << "No\tID\tFirst Name\tLast Name\tGender\tDate of Birth\tSocial ID\n";
-	while(pTemp==nullptr){
+	while(pTemp){
 		cout << pTemp->no << "\t" << pTemp->id << "\t" << pTemp->firstName << "\t" << pTemp->lastName << "\t" << pTemp->gender << "\t" << pTemp->dateOfBirth << "\t" << pTemp->socialId << endl;
 		pTemp = pTemp->pNext;
 	}
@@ -465,7 +468,7 @@ void viewListOfCourses(Semester *pHead){
 	cout << "LIST OF COURSES IN SEMESTER " << pHead->semesterName << endl;
 	Course *pTemp = pHead->pHeadCourse;
 	cout << "Course ID\tCourse Name\tNumber of Credits\tTeacher Name\n";
-	while(!pTemp){
+	while(pTemp){
 		cout << pTemp->id << "\t" << pTemp->courseName << "\t" << pTemp->numOfCredits << "\t" << pTemp->teacherName << endl;
 		pTemp = pTemp->pNext;
 	}
@@ -473,7 +476,7 @@ void viewListOfCourses(Semester *pHead){
 void viewListOfClasses(Class *pHead){
 	cout << "LIST OF CLASSES" << endl;
 	int i = 1;
-	while(!pHead){
+	while(pHead){
 		cout << i << ". " << pHead->className << endl;
 		pHead = pHead->pNext;
 		i++;
