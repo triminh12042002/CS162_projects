@@ -226,71 +226,84 @@ void deleteCourse(Semester *&pHead){
 	cout << "The course that you want to delete does not exits in this semester. " << endl;
 	return;
 }
-void addCourseToSemester(Semester *&pHead){
-	Course *newCourse = new Course;
-	string startDate1,endDate1,courseName1,id1,teacherName1,numOfCredits1,maxNumOfStudents1,day1x,hour1x,day2x,hour2x;
-	
-	cout << "Input course start date : "; cin >> startDate1;
-	newCourse->startDate = startDate1;
-	
-	cout << "Input course end date : "; cin >> endDate1;
-	newCourse->endDate = endDate1;
-	
-	cout << "Input course name : "; cin >> courseName1;
-	newCourse->courseName = courseName1;
-	
-	cout << "Input course id : "; cin >> id1;
-	newCourse->id = id1;
-	
-	cout << "Input teacher name : "; cin >> teacherName1;
-	newCourse->teacherName = teacherName1;
-	
-	cout << "Input number of credits in the course : "; cin >> numOfCredits1;
-	newCourse->numOfCredits = numOfCredits1;
-	
-	cout << "Input the maximun number of students : "; cin >> maxNumOfStudents1;
-	newCourse->maxNumOfStudents = maxNumOfStudents1;
-	
-	cout << "Input day 1 : "; cin >> day1x;
-	newCourse->day1 = day1x;
-	
-	cout << "Input hour 1 : "; cin >> hour1x;
-	newCourse->hour1 = hour1x;
-	
-	cout << "Input day 2 : "; cin >> day2x;
-	newCourse->day2 = day2x;
-	
-	cout << "Input hour 2 : "; cin >> hour2x;
-	newCourse->hour2 = hour2x;
-	
-	Course *temp = pHead->pHeadCourse;
-	while (temp->pNext)
-		temp = temp->pNext;
-	temp->pNext = newCourse;
+void addCourseToSemester(Course*& pCourse) {
+	cout << "Input course name : ";
+	getline(cin, pCourse->courseName);
+
+	cout << "Input course id : ";
+	getline(cin, pCourse->id);
+
+	cout << "Input teacher name : ";
+	getline(cin, pCourse->teacherName);
+
+	cout << "Input number of credits in the course : ";
+	getline(cin, pCourse->numOfCredits);
+
+	cout << "Input the maximun number of students : ";
+	getline(pCourse->maxNumOfStudents);
+
+	cout << "Input day 1 : ";
+	getline(pCourse->day1);
+
+	cout << "Input hour 1 : ";
+	getline(pCourse->hour1);
+
+	cout << "Input day 2 : ";
+	getline(pCourse->day2);
+
+	cout << "Input hour 2 : ";
+	getline(pCourse->hour2);
 }
-void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester, string path)
+void CreateCourseRegistration(Course*& pHeadCourse, string path)
 {
-	ofstream read;
-	read.open(path + pSemester->semesterName + "RegistrationDate", ios::app);//string path="semester";
+	ofstream write;
+	write.open(path + pSemester->semesterName);//semester+1. ALL course in the semester 1
 	Course* pCur = nullptr;
-	if (pHeadCourse == nullptr)
+	//cout << "The Date of Starting a Course Registration";
+	//cin >> pCur->startDate;
+	//cout << "The Date of Ending a Course Registration";
+	//cin >> pCur->endDate;
+	//read << pCur->startDate << ',' << pCur->endDate << '\n';
+	int x;
+	while (x != 0)//0 means STOP
 	{
-		pHeadCourse = new Course;
-		pHeadCourse->pNext = nullptr;
+		if (pHeadCourse == nullptr)
+		{
+			pHeadCourse = new Course;
+			pHeadCourse->pNext = nullptr;
+			pCur = pHeadCourse;
+		}
+		else {
+			pCur->pNext = new Course;
+			pCur = pCur->pNext;
+		}
+		pCur->pNext = nullptr;
+		addCourseToSemester(pCur);
+		cout << "You want to add a new Course to this Semester,please press 1 or 0 to stop.";
+			cin >> x;
 	}
 	pCur = pHeadCourse;
-	cout << "The Date of Starting a Course Registration";
-	cin >> pCur->startDate;
-	cout << "The Date of Ending a Course Registration";
-	cin >> pCur->endDate;
-	read << pCur->startDate << ',' << pCur->endDate << '\n';
+	while (pCur != nullptr)
+	{
+		write << pCourse->courseName << ",";
+		write << pCourse->id << ",";
+		write << pCourse->teacherName << ",";
+		write << pCourse->numOfCredits << ",";
+		write << pCourse->maxNumOfStudents << ",";
+		write << pCourse->courseName << ",";
+		write << pCourse->day1 << ",";
+		write << pCourse->hour1 << ",";
+		write << pCourse->day2 << ",";
+		write << pCourse->hour2 << "\n";
+		pCur = pCur->next;
+	}
 	read.close();
 	//There is a file for saving Date of Registration
 }
-void SemesterOfYear(Semester*& pSemester, Course*& pHeadCourse, char* path) //char path="semester"
+void SemesterOfYear(Semester*& pSemester, char* path) //char path="semester"
 {
 	ofstream read;
-	read.open(path, ios::app);
+	read.open(path);
 	Semester* pCur = nullptr;
 	int i = 1;
 	while (i <= 3)
@@ -301,6 +314,12 @@ void SemesterOfYear(Semester*& pSemester, Course*& pHeadCourse, char* path) //ch
 			pSemester->pNext = nullptr;
 			pCur = pSemester;
 		}
+		else {
+			pCur->pNext = new Semester;
+			pCur = pCur->pNext;
+			pCur->next = nullptr;
+		}
+		//information of each Semester in year
 		cout << "The Semester: ";
 		cin >> pCur->semesterName;
 		cout << "School Year: ";
@@ -309,11 +328,10 @@ void SemesterOfYear(Semester*& pSemester, Course*& pHeadCourse, char* path) //ch
 		cin >> pCur->startDate;
 		cout << "The Date of Ending semester: ";
 		cin >> pCur->endDate;
-		read << pCur->schoolYear << ',' <<pCur->semesterName << ',' << pCur->startDate << ',' <<pCur-> endDate << '\n';
-		CreateCourseRegistration(pCur->pHeadCourse, pCur, path);
+		read << pCur->schoolYear << ',' << pCur->semesterName << ',' << pCur->startDate << ',' << pCur->endDate << '\n';
+		CreateCourseRegistration(pCur->pHeadCourse, pCur, "semester");
 		//Create new semester
-		pCur->pNext = new Semester;
-		pCur = pCur->pNext;
+		i++;
 	}
 	pCur = nullptr;
 	read.close();
