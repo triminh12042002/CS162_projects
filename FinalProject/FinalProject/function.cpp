@@ -1,8 +1,26 @@
 
 #include "Header.h"
+
 using namespace std;
 // ctrl + m + o  de thu nho code
 // ctrl + m + p de phong to code
+void SetColor(int backgound_color, int text_color)
+{
+	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	int color_code = backgound_color * 16 + text_color;
+	SetConsoleTextAttribute(hStdout, color_code);
+}
+void GoTo(SHORT posX, SHORT posY)
+{
+	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD Position;
+	Position.X = posX;
+	Position.Y = posY;
+
+	SetConsoleCursorPosition(hStdout, Position);
+}
+
 void inputStudentData(Student*& pHeadStudent, Student*& pTailStudent, char path[]) {
 	ifstream ifs;
 	ifs.open(path);
@@ -65,9 +83,10 @@ void OutputCSVFIle(Student* pHeadStudent, char path[]) {
 void signUp() {
 	string us, pw;
 
-	cout << "Enter username : "; cin >> us;
-	cout << "Enter password : "; cin >> pw;
-
+	cout << "Enter username : ";
+	getline(cin,us);
+	cout << "Enter password : ";
+	getline(cin,pw);
 	ofstream write;
 	write.open("loginData.txt", ios::app);
 	write << us << ',' << pw << '\n';
@@ -102,14 +121,17 @@ bool login(account*& pLogin, string loginPath)
 
 	}
 	pCur = pLogin;
+	int i = 1;
 	while (pCur != nullptr)
-	{
+	{	
+		cout << i++;
 		if (pCur->us == username && pCur->pw == password)
 			return true;
 		else pCur = pCur->next;
 	}
-	return false;
 	read.close();
+	return false;
+	
 }
 void createSchoolYear(SchoolYear*& pHeadSchoolYear) {
 	pHeadSchoolYear = new SchoolYear;
@@ -124,22 +146,23 @@ void CreateYear(SchoolYear*& pHeadYear) {
 	getline(cin, year, '\n');
 	if (!pHeadYear) {
 		pHeadYear = new SchoolYear;
+		pHeadYear = new SchoolYear;
 		pHeadYear->schoolYearName = year;
-		pHeadSchoolYear->pHeadSemester = nullptr;
+		pHeadYear->pHeadSemester = nullptr;
 		pHeadYear->pNext = nullptr;
 	}
 	SchoolYear* pCurYear = pHeadYear->pNext;
 	while (pHeadYear && year != "STOP") {
 		pCurYear = new SchoolYear;
 		pCurYear->schoolYearName = year;
-		pHeadSchoolYear->pHeadSemester = nullptr;
+		pHeadYear->pHeadSemester = nullptr;
 		pCurYear->pNext = nullptr;
 		pCurYear = pCurYear->pNext;
 		cout << "Input the School Year to direct into year's data(Input STOP to exit): ";
 		getline(cin,year, '\n');
 	}
 }
-/*
+
 void CreateClass(Student* pHeadStudent) {
 	Class* pHeadClass = new Class;
 	Class* pCurClass = pHeadClass;
@@ -147,7 +170,7 @@ void CreateClass(Student* pHeadStudent) {
 	while (pCurClass != nullptr) {
 		while (pCurStudent != pCurClass->pTailStudent) {
 			//Input Student
-			pCurStudent = pCurStudent->pNextStudent;
+			pCurStudent = pCurStudent->pNext;
 		}
 		int Fin;
 		cout << "Move to the next Class? (1= Next, 0= Exit): ";
@@ -158,10 +181,11 @@ void CreateClass(Student* pHeadStudent) {
 		}
 		else {
 			pCurClass->pNext = new Class;
-			pCurClass = pCurCLass->pNext;
+			pCurClass = pCurClass->pNext;
 		}
 	}
-	*/
+}
+	
 void addAllStudentsToClass(Class*& pClass) {
 	if (pClass == nullptr) {
 		pClass = new Class;
@@ -305,7 +329,7 @@ void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester, string 
 void CreateSemesterOfYear(Semester*& pSemester, char* path) //char path="semester"
 {
 	ofstream read;
-	read.open(path);
+	read.open(path,ios::app);
 	Semester* pCur = nullptr;
 	int i = 1;
 	while (i <= 3)

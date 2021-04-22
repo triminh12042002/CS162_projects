@@ -2,6 +2,9 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <Windows.h>
+#include <conio.h>
+#include <cstdlib>
 using namespace std;
 struct account {
 	string us;		//username 
@@ -56,7 +59,11 @@ struct SchoolYear {
 	Semester* pHeadSemester = nullptr;
 	SchoolYear* pNext = nullptr;
 };
-
+struct  ScoreBoardOfCourse {
+	string no, id, fullname, totalMark, finalMark, midtermMark, otherMark;
+};
+void SetColor(int backgound_color, int text_color);
+void GoTo(SHORT posX, SHORT posY);
 
 void inputStudentData(Student*& pHeadStudent, Student*& pTailStudent, char path[]);
 void OutputCSVFIle(Student* pHeadStudent, char path[]);
