@@ -63,16 +63,59 @@ void OutputCSVFIle(Student* pHeadStudent, char path[]);
 void signUp();
 bool login(account*& pLogin, string loginPath);
 void createSchoolYear(SchoolYear*& pHeadSchoolYear);
-void addAllStudentsToClass(Class*& pClass);
+/*void CreateYear(Year* pHeadYear) {
+	cout << "Please enter the schoolyear (e.g. School year 2020-2021, input 2020); 0= exit: ";
+	int x;
+	cin >> x;
+	if (!pHeadYear) {
+		pHeadYear = new Year;
+		pHeadYear->Start = x;
+		pHeadYear->End = x + 1;
+		pHeadYear->pNextYear = nullptr;
+		return;
+	}
+	Year* pCurYear = pHeadYear->pNextYear;
+	while (pHeadYear && x != 0;) {
+		pCurYear = new Year;
+		pCurYear->Start = x;
+		pCurYear->End = x + 1;
+		pCurYear = pCurYear->pNextYear;
+		cout << "Please enter the schoolyear (e.g. School year 2020-2021, input 2020); 0= exit: ";
+		cin >> x;
+	}
+void CreateClass(Student* pHeadStudent) {
+	Class* pHeadClass = new Class;
+	Class* pCurClass = pHeadClass;
+	Student* pCurStudent = pHeadClass->pHeadStudent;
+	while (pCurClass != nullptr) {
+		while (pCurStudent != pCurClass->pTailStudent) {
+			//Input Student
+			pCurStudent = pCurStudent->pNextStudent;
+		}
+		int Fin;
+		cout << "Move to the next Class? (1= Next, 0= Exit): ";
+		cin >> Fin;
+		if (Fin == 0) {
+			pCurClass->pNext = nullptr;
+			pCurClass = pCurClass->pNext;
+		}
+		else {
+			pCurClass->pNext = new Class;
+			pCurClass = pCurCLass->pNext;
+		}
+	}
+	*/
+	void addAllStudentsToClass(Class*& pClass);
 void create1Student(Student*& pStudent);
 void add1StudentToClass(Class*& pClass);
 void deleteCourse(Semester*& pHead);
-void addCourseToSemester(Semester*& pHead);
-void SemesterOfYear(Semester*& pSemester, Course*& pHeadCourse, char* path);
+void addCourseToSemester(Course*& pCourse);
 void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester, string path);
-
-void UpDateData(string ThingUpdated, string& ChangeInformation);
+void SemesterOfYear(Semester*& pSemester, char* path);
+void UpdateCourseInformation(Course*& pHeadCourse, char* path);
 void viewListOfStudents(Class* pHead);
 void viewListOfCourses(Semester* pHead);
 void viewListOfClasses(Class* pHead);
+void ViewCourse(Student* pHead);
 void enrollCourse(Semester* pSemester, Student* pStudent);
+
