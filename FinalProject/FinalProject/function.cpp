@@ -118,7 +118,7 @@ void createSchoolYear(SchoolYear*& pHeadSchoolYear) {
 	cout << "Enter school year's name\n";
 	getline(cin, pHeadSchoolYear->schoolYearName);
 }
-/*void CreateYear(SchoolYear* pHeadYear) {
+void CreateYear(SchoolYear*& pHeadYear) {
 	cout << "Input the School Year to direct into year's data(Input STOP to exit): ";
 	string year;
 	getline(cin, year, '\n');
@@ -139,6 +139,7 @@ void createSchoolYear(SchoolYear*& pHeadSchoolYear) {
 		getline(cin,year, '\n');
 	}
 }
+/*
 void CreateClass(Student* pHeadStudent) {
 	Class* pHeadClass = new Class;
 	Class* pCurClass = pHeadClass;
