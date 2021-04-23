@@ -63,6 +63,7 @@ void OutputCSVFIle(Student* pHeadStudent, char path[]);
 void signUp();
 bool login(account*& pLogin, string loginPath);
 void createSchoolYear(SchoolYear*& pHeadSchoolYear);
+void CreateYear(SchoolYear*& pHeadYear);
 /*void CreateYear(Year* pHeadYear) {
 	cout << "Please enter the schoolyear (e.g. School year 2020-2021, input 2020); 0= exit: ";
 	int x;
