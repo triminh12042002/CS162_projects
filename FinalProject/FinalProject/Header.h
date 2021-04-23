@@ -111,11 +111,13 @@ void add1StudentToClass(Class*& pClass);
 void deleteCourse(Semester*& pHead);
 void addCourseToSemester(Course*& pCourse);
 void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester, string path);
-void SemesterOfYear(Semester*& pSemester, char* path);
+void CreateSemesterOfYear(Semester*& pSemester, char* path);
 void UpdateCourseInformation(Course*& pHeadCourse, char* path);
 void viewListOfStudents(Class* pHead);
 void viewListOfCourses(Semester* pHead);
 void viewListOfClasses(Class* pHead);
 void ViewCourse(Student* pHead);
 void enrollCourse(Semester* pSemester, Student* pStudent);
+void RemoveTheEnrolledCourse(Course* pCourse, char* path, string IdSearched);
+void ViewListOfStudentInCourse(Course* pCourse, char* path);
 

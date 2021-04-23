@@ -300,7 +300,7 @@ void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester, string 
 	write.close();
 	//There is a file for saving Date of Registration
 }
-void SemesterOfYear(Semester*& pSemester, char* path) //char path="semester"
+void CreateSemesterOfYear(Semester*& pSemester, char* path) //char path="semester"
 {
 	ofstream read;
 	read.open(path);
@@ -560,4 +560,90 @@ void enrollCourse(Semester* pSemester, Student* pStudent) {
 	else {
 		cout << "Cannot find the course name that you enter.\n Please enter exactly.\n";
 	}
+}
+void RemoveTheEnrolledCourse(Course* pCourse, char* path, string IdSearched)//remove the student in that course in file.txt
+{													  //id,Name\n
+	ifstream read;									  //char path[]="NameofCourse".cin>>path the main function
+	ofstream write;									  //Ask student to input his/her id before Removing the Enrolled Course 	
+	read.open(path);
+	Student* pCur = nullptr;
+	while (!read.eof())
+	{
+		if (pCourse->pHeadStudentEnroll == nullptr)
+		{
+			pCourse->pHeadStudentEnroll = new Student;
+			pCourse->pHeadStudentEnroll->pNext = nullptr;
+			pCur = pCourse->pHeadStudentEnroll;
+		}
+		else {
+			pCur->pNext = new Student;
+			pCur = pCur->pNext;
+			pCur->pNext = nullptr;
+		}
+		getline(read, pCur->id, ',');
+		getline(read, pCur->firstName, '\n');
+	}
+	pCur = pCourse->pHeadStudentEnroll;
+	Student* temp = pCur;
+	while (pCur != nullptr)
+	{
+		if (pCourse->pHeadStudentEnroll->id == IdSearched)
+		{
+			temp = pCourse->pHeadStudentEnroll;
+			pCourse->pHeadStudentEnroll = pCourse->pHeadStudentEnroll->pNext;
+			delete temp;
+		}
+		else if (pCur->pNext->id == IdSearched)
+		{
+			temp = pCur->pNext;
+			pCur->pNext = pCur->pNext->pNext;
+			delete temp;
+		}
+		pCur = pCur->pNext;
+	}
+	pCur = pCourse->pHeadStudentEnroll;
+	write.open(path);
+	while (pCur != nullptr)
+	{
+		write << pCur->id << ",";
+		write << pCur->firstName << "\n";
+		pCur = pCur->pNext;
+	}
+	read.close();
+	write.close();
+}
+void ViewListOfStudentInCourse(Course* pCourse, char* path)
+{
+	ifstream read;
+	read.open(path);
+	Student* pCur = nullptr;
+	while (!read.eof())
+	{
+		if (pCourse->pHeadStudentEnroll == nullptr)
+		{
+			pCourse->pHeadStudentEnroll = new Student;
+			pCourse->pHeadStudentEnroll->pNext = nullptr;
+			pCur = pCourse->pHeadStudentEnroll;
+		}
+		else {
+			pCur->pNext = new Student;
+			pCur = pCur->pNext;
+			pCur->pNext = nullptr;
+		}
+		getline(read, pCur->id, ',');
+		getline(read, pCur->firstName, '\n');
+	}
+	pCur = pCourse->pHeadStudentEnroll;
+	while (pCur != nullptr)
+	{
+		cout << "The List of Students in Course: ";
+		cout << pCur->id << ",";
+		cout << pCur->firstName << endl;
+		pCur = pCur->pNext;
+	}
+	read.close();
+}
+void InputSchoolYear(SchoolYear*& pSchool, char* path)//Ex: char path[]="Year2020-2021";
+{
+	CreateSemesterOfYear(pSchool->pHeadSemester, path);
 }
