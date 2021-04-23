@@ -118,26 +118,27 @@ void createSchoolYear(SchoolYear*& pHeadSchoolYear) {
 	cout << "Enter school year's name\n";
 	getline(cin, pHeadSchoolYear->schoolYearName);
 }
-/*void CreateYear(Year* pHeadYear) {
-	cout << "Please enter the schoolyear (e.g. School year 2020-2021, input 2020); 0= exit: ";
-	int x;
-	cin >> x;
+/*void CreateYear(SchoolYear* pHeadYear) {
+	cout << "Input the School Year to direct into year's data(Input STOP to exit): ";
+	string year;
+	getline(cin, year, '\n');
 	if (!pHeadYear) {
-		pHeadYear = new Year;
-		pHeadYear->Start = x;
-		pHeadYear->End = x + 1;
-		pHeadYear->pNextYear = nullptr;
-		return;
+		pHeadYear = new SchoolYear;
+		pHeadYear->schoolYearName = year;
+		pHeadSchoolYear->pHeadSemester = nullptr;
+		pHeadYear->pNext = nullptr;
 	}
-	Year* pCurYear = pHeadYear->pNextYear;
-	while (pHeadYear && x != 0;) {
-		pCurYear = new Year;
-		pCurYear->Start = x;
-		pCurYear->End = x + 1;
-		pCurYear = pCurYear->pNextYear;
-		cout << "Please enter the schoolyear (e.g. School year 2020-2021, input 2020); 0= exit: ";
-		cin >> x;
+	SchoolYear* pCurYear = pHeadYear->pNext;
+	while (pHeadYear && year != "STOP") {
+		pCurYear = new SchoolYear;
+		pCurYear->schoolYearName = year;
+		pHeadSchoolYear->pHeadSemester = nullptr;
+		pCurYear->pNext = nullptr;
+		pCurYear = pCurYear->pNext;
+		cout << "Input the School Year to direct into year's data(Input STOP to exit): ";
+		getline(cin,year, '\n');
 	}
+}
 void CreateClass(Student* pHeadStudent) {
 	Class* pHeadClass = new Class;
 	Class* pCurClass = pHeadClass;
