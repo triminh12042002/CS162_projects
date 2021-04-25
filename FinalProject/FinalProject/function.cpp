@@ -133,15 +133,38 @@ bool login(account*& pLogin, string loginPath)
 	return false;
 	
 }
-void createSchoolYear(SchoolYear*& pHeadSchoolYear) {
+void createSchoolYear(SchoolYear*& pHeadSchoolYear,char*path) {
+	
+	SchoolYear* pCur = nullptr;
+	string t;
 	ofstream write;
-	write.open("SchoolYear.txt",ios::app);
-	pHeadSchoolYear = new SchoolYear;
-	pHeadSchoolYear->pNext = nullptr;
-	pHeadSchoolYear->pHeadSemester = nullptr;
-	cout << "Enter school year's name\n";
-	getline(cin, pHeadSchoolYear->schoolYearName);
-	write << pHeadSchoolYear->schoolYearName << "\n";
+	write.open(path);
+	cout << "Input School Year: ";
+	getline(cin, t, '\n');
+	if (pHeadSchoolYear == nullptr)
+	{
+		pHeadSchoolYear = new SchoolYear;
+		pHeadSchoolYear->schoolYearName = t;
+		pHeadSchoolYear->pNext = nullptr;
+		pHeadSchoolYear->pHeadSemester = nullptr;
+	}
+	else {
+		pCur = pHeadSchoolYear;
+		while (pCur != nullptr)
+		{
+			pCur = pCur->pNext;
+		}
+		pCur = new SchoolYear;
+		pCur->schoolYearName = t;
+		pCur->pNext = nullptr;
+		pCur->pHeadSemester = nullptr;
+	}
+	pCur = pHeadSchoolYear;
+	while (pCur != nullptr)
+	{
+		write << pCur->schoolYearName << '\n';
+		pCur = pCur->pNext;
+	}
 	write.close();
 }
 void CreateYear(SchoolYear*& pHeadYear) {
