@@ -3,7 +3,7 @@
 using namespace std;
 
 
-int main() {
+int main(){
 
 	// input student from csv file to a list
 	// output student data to a csv file
