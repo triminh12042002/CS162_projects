@@ -281,6 +281,12 @@ void addCourseToSemester(Course*& pCourse) {
 	cout << "Input course name : ";
 	getline(cin, pCourse->courseName);
 
+	cout << "Input Starting Date : ";
+	getline(cin, pCourse->startDate);
+
+	cout << "Input Starting Date : ";
+	getline(cin, pCourse->endDate);
+
 	cout << "Input course id : ";
 	getline(cin, pCourse->id);
 
@@ -305,18 +311,18 @@ void addCourseToSemester(Course*& pCourse) {
 	cout << "Input hour 2 : ";
 	getline(cin, pCourse->hour2);
 }
-void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester, string path)
+void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester,SchoolYear*pSchool ,string path)//path="Course"
 {
 	ofstream write;
-	write.open(path + pSemester->semesterName);//semester+1. ALL course in the semester 1
+	write.open(path + pSemester->semesterName+pSchool->schoolYearName+".csv",ios:: app);
 	Course* pCur = nullptr;
 	//cout << "The Date of Starting a Course Registration";
 	//cin >> pCur->startDate;
 	//cout << "The Date of Ending a Course Registration";
 	//cin >> pCur->endDate;
 	//read << pCur->startDate << ',' << pCur->endDate << '\n';
-	int x = 1;
-	while (x != 0)//0 means STOP
+	int x=1 ;
+	while (x != 0)
 	{
 		if (pHeadCourse == nullptr)
 		{
@@ -330,33 +336,32 @@ void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester, string 
 		}
 		pCur->pNext = nullptr;
 		addCourseToSemester(pCur);
-		cout << "You want to add a new Course to this Semester,please press 0 to stop.";
+		cout << "You want to add a new Course to this Semester,please input 1 or 0 to stop.";
 		cin >> x;
 	}
 	pCur = pHeadCourse;
-	Course* pCourse;
 	while (pCur != nullptr)
 	{
-		pCourse = pCur;
-		write << pCourse->courseName << ",";
-		write << pCourse->id << ",";
-		write << pCourse->teacherName << ",";
-		write << pCourse->numOfCredits << ",";
-		write << pCourse->maxNumOfStudents << ",";
-		write << pCourse->courseName << ",";
-		write << pCourse->day1 << ",";
-		write << pCourse->hour1 << ",";
-		write << pCourse->day2 << ",";
-		write << pCourse->hour2 << "\n";
+		write << pCur->courseName << ",";
+		write << pCur->startDate << ",";
+		write << pCur->endDate << ",";
+		write << pCur->id << ",";
+		write << pCur->teacherName << ",";
+		write << pCur->numOfCredits << ",";
+		write << pCur->maxNumOfStudents << ",";
+		write << pCur->courseName << ",";
+		write << pCur->day1 << ",";
+		write << pCur->hour1 << ",";
+		write << pCur->day2 << ",";
+		write << pCur->hour2 << "\n";
 		pCur = pCur->pNext;
 	}
 	write.close();
-	//There is a file for saving Date of Registration
 }
-void CreateSemesterOfYear(Semester*& pSemester, char* path) //char path="semester"
+void CreateSemesterOfYear(Semester*& pSemester,SchoolYear*pSchool ,string path) //char path="semester"
 {
 	ofstream read;
-	read.open(path,ios::app);
+	read.open(path+pSchool->schoolYearName+".csv");//create 3 semesters at one time
 	Semester* pCur = nullptr;
 	int i = 1;
 	while (i <= 3)
@@ -374,19 +379,16 @@ void CreateSemesterOfYear(Semester*& pSemester, char* path) //char path="semeste
 		}
 		//information of each Semester in year
 		cout << "The Semester: ";
-		cin >> pCur->semesterName;
+		getline(cin,pCur->semesterName);
 		cout << "School Year: ";
-		cin >> pCur->schoolYear;
+		getline(cin, pCur->schoolYear);
 		cout << "The Date of Starting semester: ";
-		cin >> pCur->startDate;
+		getline(cin,pCur->startDate);
 		cout << "The Date of Ending semester: ";
-		cin >> pCur->endDate;
+		getline(cin,pCur->endDate);
 		read << pCur->schoolYear << ',' << pCur->semesterName << ',' << pCur->startDate << ',' << pCur->endDate << '\n';
-		CreateCourseRegistration(pCur->pHeadCourse, pCur, "semester");
-		//Create new semester
 		i++;
 	}
-	pCur = nullptr;
 	read.close();
 }
 void UpdateCourseInformation(Course*& pHeadCourse, char* path)// string path="semester"
@@ -696,7 +698,4 @@ void ViewListOfStudentInCourse(Course* pCourse, char* path)
 	}
 	read.close();
 }
-void InputSchoolYear(SchoolYear*& pSchool, char* path)//Ex: char path[]="Year2020-2021";
-{
-	CreateSemesterOfYear(pSchool->pHeadSemester, path);
-}
+
