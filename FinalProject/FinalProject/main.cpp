@@ -2,6 +2,9 @@
 #include "Header.h"
 using namespace std;
 
+SchoolYear* pHeadSchoolYear = nullptr;
+SchoolYear* pTempSchoolYear = nullptr;
+int schoolYearSize = 0;
 
 int main(){
 
@@ -45,6 +48,8 @@ int main(){
 	/*Course* pHeadCourse = nullptr;
 	char path[] = "Toan";
 	UpdateCourseInformation(pHeadCourse, path);*/
+	
+	
 	int Set[] = {2,7,7,7,7,7,7,7,7};
 	int counter = 1;
 	char key;
@@ -80,58 +85,28 @@ int main(){
 					key = _getch();
 					system("cls");
 					for (int i = 0;;) {
-
-						GoTo(10, 5);
-						SetColor(0, Set[0]);
-						cout << "Create a school year";
-
-						GoTo(10, 9);
-						SetColor(0, Set[1]);
-						cout << "Create Class";
-
-						GoTo(10, 11);
-						SetColor(0, Set[2]);
-						cout << "Add 1 student to class";
-
-						GoTo(10, 13);
-						SetColor(0, Set[2]);
-						cout << "Add all students to class";
-
-						GoTo(10, 15);
-						SetColor(0, Set[3]);
-						cout << "Create Semester";
-
-						GoTo(10, 17);
-						SetColor(0, Set[4]);
-						cout << "Create Course";
+						pTempSchoolYear = pHeadSchoolYear;
+						cout << "List of school years\n";
+						for (int j = 0; pTempSchoolYear != nullptr && j < schoolYearSize; ++j) {
+							GoTo(10, 5 + 2*i);
+							SetColor(0, Set[0]);
+							cout << pTempSchoolYear->schoolYearName;
+							pTempSchoolYear = pTempSchoolYear->pNext;
+						}
+						
 
 						key = _getch();
-						if (key == 72 && counter >= 2 && counter <= 3) {
+						if (key == 72 && counter >= 2 && counter <= schoolYearSize) {
 							counter--;
 						}
-						if (key == 80 && counter >= 1 && counter <= 2) {
+						if (key == 80 && counter >= 1 && counter <= schoolYearSize-1) {
 							counter++;
 						}
 						if (key == '\r') {
-							if (counter == 1) {
-								cout << "enter login";
-								account* pLogin = nullptr;
-								string loginPath = "loginData.txt";
-								if (login(pLogin, loginPath) == true) {
-									cout << "\nLogin successfully.";
-								}
-
-
+							for (int j = 0; pTempSchoolYear != nullptr && j < schoolYearSize; ++j) {
+							
 							}
-							if (counter == 2) {
-								cout << "enter sign up";
-								signUp();
-								cout << "Sign up successfully.";
-
-							}
-							if (counter == 3) {
-								cout << "enter exit";
-							}
+							
 						}
 						Set[0] = Set[1] = Set[2] = 7;
 						if (counter == 1) {

@@ -102,11 +102,14 @@ bool login(account*& pLogin, string loginPath)
 	getline(cin, password);
 
 	account* pCur = nullptr;
-
+	string temp;
 	ifstream read;
 	read.open(loginPath);
 	while (!read.eof())
 	{
+		getline(read, temp, ',');
+		if (temp == "") break;
+
 		if (pCur == nullptr) {
 			pLogin = pCur = new account;
 			pCur->next = nullptr;
@@ -116,7 +119,7 @@ bool login(account*& pLogin, string loginPath)
 			pCur = pCur->next;
 		}
 
-		getline(read, pCur->us, ',');
+		pCur->us = temp;
 		getline(read, pCur->pw, '\n');
 
 	}
@@ -150,14 +153,15 @@ void createSchoolYear(SchoolYear*& pHeadSchoolYear,char*path) {
 	}
 	else {
 		pCur = pHeadSchoolYear;
-		while (pCur != nullptr)
+		while (pCur->pNext != nullptr)
 		{
 			pCur = pCur->pNext;
 		}
-		pCur = new SchoolYear;
-		pCur->schoolYearName = t;
-		pCur->pNext = nullptr;
-		pCur->pHeadSemester = nullptr;
+		SchoolYear* newyear = new SchoolYear;
+		newyear->schoolYearName = t;
+		newyear->pNext = nullptr;
+		newyear->pHeadSemester = nullptr;
+		pCur->pNext = newyear;
 	}
 	pCur = pHeadSchoolYear;
 	while (pCur != nullptr)
