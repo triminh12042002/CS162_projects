@@ -5,7 +5,35 @@ using namespace std;
 SchoolYear* pHeadSchoolYear = nullptr;
 SchoolYear* pTempSchoolYear = nullptr;
 int schoolYearSize = 0;
+void loadListofSchoolYear(SchoolYear* &pHeadSchoolYear, int &schoolYearSize, char path[]) {
+	ifstream fin;
+	fin.open(path);
+	if (fin.is_open() == false) {
+		cout << "cannot open file\n";
+	}
+	SchoolYear* pTemp = pHeadSchoolYear;
+	string temp;
+	while (!fin.eof()) {
+		if (pTemp == nullptr) {
+			getline(fin, temp,'\n');
+			if (temp == "") break;
+			pHeadSchoolYear = pTemp = new SchoolYear;		
+			pTemp->pNext = nullptr;
+			pTemp->schoolYearName = temp;
+			schoolYearSize++;
 
+		}
+		else {
+			getline(fin, temp,'\n');
+			if (temp == "") break;
+			pTemp->pNext = new SchoolYear;
+			pTemp = pTemp->pNext;			
+			pTemp->schoolYearName = temp;
+			pTemp->pNext = nullptr;
+			schoolYearSize++;
+		}
+	}
+}
 int main(){
 
 	// input student from csv file to a list
@@ -48,9 +76,13 @@ int main(){
 	/*Course* pHeadCourse = nullptr;
 	char path[] = "Toan";
 	UpdateCourseInformation(pHeadCourse, path);*/
-	
-	
-	int Set[] = {2,7,7,7,7,7,7,7,7};
+	char schoolYearPath[] = "SchoolYear.csv";
+	loadListofSchoolYear(pHeadSchoolYear, schoolYearSize, schoolYearPath);
+	int Set[20];
+	for (int i = 0; i < 20; ++i) {
+		Set[i] = 7;
+	}
+	Set[0] = 2;
 	int counter = 1;
 	char key;
 
@@ -88,13 +120,11 @@ int main(){
 						pTempSchoolYear = pHeadSchoolYear;
 						cout << "List of school years\n";
 						for (int j = 0; pTempSchoolYear != nullptr && j < schoolYearSize; ++j) {
-							GoTo(10, 5 + 2*i);
-							SetColor(0, Set[0]);
+							GoTo(10, 5 + 2*j);
+							SetColor(0, Set[j]);
 							cout << pTempSchoolYear->schoolYearName;
 							pTempSchoolYear = pTempSchoolYear->pNext;
 						}
-						
-
 						key = _getch();
 						if (key == 72 && counter >= 2 && counter <= schoolYearSize) {
 							counter--;
@@ -104,20 +134,14 @@ int main(){
 						}
 						if (key == '\r') {
 							for (int j = 0; pTempSchoolYear != nullptr && j < schoolYearSize; ++j) {
-							
-							}
-							
+								if (counter == j + 1) cout << " enter " << pTempSchoolYear->schoolYearName;
+							}				
 						}
-						Set[0] = Set[1] = Set[2] = 7;
-						if (counter == 1) {
-							Set[0] = 2;
+						for (int i = 0; i < 20; ++i) {
+							if (counter == i + 1) Set[i] = 2;
+							else Set[i] = 7;							
 						}
-						if (counter == 2) {
-							Set[1] = 2;
-						}
-						if (counter == 3) {
-							Set[2] = 2;
-						}
+						
 					}
 				}
 				else {
