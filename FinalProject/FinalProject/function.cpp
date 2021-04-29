@@ -83,9 +83,9 @@ void OutputCSVFIle(Student* pHeadStudent, char path[]) {
 void signUp() {
 	string us, pw;
 
-	cout << "Enter username : ";
+	cout << "\nEnter username : ";
 	getline(cin,us);
-	cout << "Enter password : ";
+	cout << "\nEnter password : ";
 	getline(cin,pw);
 	ofstream write;
 	write.open("loginData.txt", ios::app);
@@ -136,20 +136,21 @@ bool login(account*& pLogin, string loginPath)
 	return false;
 	
 }
-void createSchoolYear(SchoolYear*& pHeadSchoolYear,char*path) {
+void createSchoolYear(SchoolYear*& pHeadSchoolYear,int & schoolYearSize, char*path) {
 	
 	SchoolYear* pCur = nullptr;
-	string t;
+	int t;
 	ofstream write;
 	write.open(path);
-	cout << "Input School Year: ";
-	getline(cin, t, '\n');
+	cout << "\nInput the school year (E.g : 2020): ";
+	cin >> t;
 	if (pHeadSchoolYear == nullptr)
 	{
 		pHeadSchoolYear = new SchoolYear;
-		pHeadSchoolYear->schoolYearName = t;
+		pHeadSchoolYear->schoolYearName = to_string(t) + "-" + to_string(t+1);
 		pHeadSchoolYear->pNext = nullptr;
 		pHeadSchoolYear->pHeadSemester = nullptr;
+		schoolYearSize++;
 	}
 	else {
 		pCur = pHeadSchoolYear;
@@ -158,10 +159,11 @@ void createSchoolYear(SchoolYear*& pHeadSchoolYear,char*path) {
 			pCur = pCur->pNext;
 		}
 		SchoolYear* newyear = new SchoolYear;
-		newyear->schoolYearName = t;
+		newyear->schoolYearName = to_string(t) + "-" + to_string(t + 1);;
 		newyear->pNext = nullptr;
 		newyear->pHeadSemester = nullptr;
 		pCur->pNext = newyear;
+		schoolYearSize++;
 	}
 	pCur = pHeadSchoolYear;
 	while (pCur != nullptr)
@@ -193,7 +195,6 @@ void CreateYear(SchoolYear*& pHeadYear) {
 		getline(cin,year, '\n');
 	}
 }
-
 void CreateClass(Student* pHeadStudent) {
 	Class* pHeadClass = new Class;
 	Class* pCurClass = pHeadClass;
@@ -216,7 +217,6 @@ void CreateClass(Student* pHeadStudent) {
 		}
 	}
 }
-	
 void addAllStudentsToClass(Class*& pClass) {
 	if (pClass == nullptr) {
 		pClass = new Class;
