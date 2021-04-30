@@ -78,12 +78,12 @@ void deleteCourse(Semester*& pHead);
 void addCourseToSemester(Course*& pCourse);
 void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester,SchoolYear*pSchool ,string path);
 void CreateSemesterOfYear(Semester*& pSemester,SchoolYear*pSchool ,string path);
-void UpdateCourseInformation(Course*& pHeadCourse, char* path);
+void UpdateCourseInformation(Course*& pHeadCourse, Semester* pSemester, SchoolYear* pSchool, char* path);
 void viewListOfStudents(Class* pHead);
 void viewListOfCourses(Semester* pHead);
 void viewListOfClasses(Class* pHead);
 void ViewCourse(Student* pHead);
 void enrollCourse(Semester* pSemester, Student* pStudent);
 void RemoveTheEnrolledCourse(Course* pCourse, char* path, string IdSearched);
-void ViewListOfStudentInCourse(Course* pCourse, char* path);
+void ViewListOfStudentInCourse(Course* pCourse);
 

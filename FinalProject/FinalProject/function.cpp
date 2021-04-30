@@ -318,31 +318,25 @@ void addCourseToSemester(Course*& pCourse) {
 void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester,SchoolYear*pSchool ,string path)//path="Course"
 {
 	ofstream write;
-	write.open(path + pSemester->semesterName+pSchool->schoolYearName+".csv",ios:: app);
+	write.open(path + pSemester->semesterName+pSchool->schoolYearName+".csv");
 	Course* pCur = nullptr;
-	//cout << "The Date of Starting a Course Registration";
-	//cin >> pCur->startDate;
-	//cout << "The Date of Ending a Course Registration";
-	//cin >> pCur->endDate;
-	//read << pCur->startDate << ',' << pCur->endDate << '\n';
-	int x=1 ;
-	while (x != 0)
+	if(pHeadCourse==nullptr)
 	{
-		if (pHeadCourse == nullptr)
+		pHeadCourse = new Course;
+		pHeadCourse->pNext = nullptr;
+		pCur = pHeadCourse;
+	}
+	else {
+		pCur = pHeadCourse;
+		while (pCur->pNext != nullptr)
 		{
-			pHeadCourse = new Course;
-			pHeadCourse->pNext = nullptr;
-			pCur = pHeadCourse;
-		}
-		else {
-			pCur->pNext = new Course;
 			pCur = pCur->pNext;
 		}
+		pCur->pNext = new Course;
+		pCur = pCur->pNext;
 		pCur->pNext = nullptr;
-		addCourseToSemester(pCur);
-		cout << "You want to add a new Course to this Semester,please input 1 or 0 to stop.";
-		cin >> x;
 	}
+	addCourseToSemester(pCur);
 	pCur = pHeadCourse;
 	while (pCur != nullptr)
 	{
@@ -382,7 +376,7 @@ void CreateSemesterOfYear(Semester*& pSemester,SchoolYear*pSchool ,string path) 
 			pCur->pNext = nullptr;
 		}
 		//information of each Semester in year
-		cout << "The Semester: ";
+		cout << "Semester(1/2/3): ";
 		getline(cin,pCur->semesterName);
 		cout << "School Year: ";
 		getline(cin, pCur->schoolYear);
@@ -395,110 +389,95 @@ void CreateSemesterOfYear(Semester*& pSemester,SchoolYear*pSchool ,string path) 
 	}
 	read.close();
 }
-void UpdateCourseInformation(Course*& pHeadCourse, char* path)// string path="semester"
+void UpdateCourseInformation(Course*& pHeadCourse,Semester*pSemester,SchoolYear*pSchool,char* path)//path="Course"
 {
-	ifstream read;
-	read.open(path);
+	ofstream write;
+	write.open(path+pSemester->semesterName+pSchool->schoolYearName+".csv");
 	ofstream write;
 	Course* pCur = nullptr;
 	string searchIdCourse;
-	while (!read.eof())
-	{
-		if (pHeadCourse == nullptr)
-		{
-			pHeadCourse = new Course;
-			pCur = pHeadCourse;
-		}
-		else {
-			pCur->pNext = new Course;
-			pCur = pCur->pNext;
-		}
-		getline(read, pCur->courseName, ',');
-		getline(read, pCur->id, ',');
-		getline(read, pCur->teacherName, ',');
-		getline(read, pCur->numOfCredits, ',');
-		getline(read, pCur->maxNumOfStudents, ',');
-		getline(read, pCur->day1, ',');
-		getline(read, pCur->hour1, ',');
-		getline(read, pCur->day2, ',');
-		getline(read, pCur->hour2, '\n');
-		pCur->pNext = nullptr;
-	}
-	//
 	pCur = pHeadCourse;
 	cout << "Which Course do you want to Update? Please Input the ID Course: ";
 	getline(cin, searchIdCourse);
 	while (pCur != nullptr && pCur->id != searchIdCourse)
+	{
 		pCur = pCur->pNext;
-	//
-	cout << "What you want to change: " << endl;
-	cout << "1.Course Name" << endl;
-	cout << "2.Id" << endl;
-	cout << "3.Teacher's Name" << endl;
-	cout << "4.NumOfCredits" << endl;
-	cout << "5.MaxNumOfStudent" << endl;
-	cout << "6.Day 1" << endl;
-	cout << "7.Hour 1" << endl;
-	cout << "8.Day 2" << endl;
-	cout << "9.Hour 2" << endl;
-	int x;
-	cin >> x;
-	switch (x)
-	{
-	case 1:
-	{
-		getline(cin, pCur->courseName);
-		break;
 	}
-	case 2:
+	//Look for the Course 
+	if (pCur == nullptr)
 	{
-		getline(cin, pCur->id);
-		break;
+		cout << "This Course does not exist in this semester.";
+		return;
 	}
-	case 3:
+	if (pCur->id == searchIdCourse)
 	{
-		getline(cin, pCur->teacherName);;
-		break;
+		cout << "What you want to change: " << endl;
+		cout << "1.Course Name" << endl;
+		cout << "2.Id" << endl;
+		cout << "3.Teacher's Name" << endl;
+		cout << "4.NumOfCredits" << endl;
+		cout << "5.MaxNumOfStudent" << endl;
+		cout << "6.Day 1" << endl;
+		cout << "7.Hour 1" << endl;
+		cout << "8.Day 2" << endl;
+		cout << "9.Hour 2" << endl;
+		int x;
+		cout << "Please input number here: ";
+		cin >> x;
+		switch (x)
+		{
+		case 1:
+		{
+			getline(cin, pCur->courseName);
+			break;
+		}
+		case 2:
+		{
+			getline(cin, pCur->id);
+			break;
+		}
+		case 3:
+		{
+			getline(cin, pCur->teacherName);;
+			break;
 
+		}
+		case 4:
+		{
+			getline(cin, pCur->numOfCredits);
+			break;
+		}
+		case 5:
+		{
+			getline(cin, pCur->maxNumOfStudents);
+			break;
+		}
+		case 6:
+		{
+			getline(cin, pCur->day1);
+			break;
+		}
+		case 7:
+		{
+			getline(cin, pCur->hour1);
+			break;
+		}
+		case 8:
+		{
+			getline(cin, pCur->day2);
+			break;
+		}
+		case 9:
+		{
+			getline(cin, pCur->hour2);
+			break;
+		}
+		default:
+			break;
+		}
 	}
-	case 4:
-	{
-		getline(cin, pCur->numOfCredits);
-		break;
-	}
-	case 5:
-	{
-		getline(cin, pCur->maxNumOfStudents);
-		break;
-	}
-	case 6:
-	{
-		getline(cin, pCur->day1);
-		break;
-	}
-	case 7:
-	{
-		getline(cin, pCur->hour1);
-		break;
-	}
-	case 8:
-	{
-		getline(cin, pCur->day2);
-		break;
-	}
-	case 9:
-	{
-		getline(cin, pCur->hour2);
-		break;
-	}
-	default:
-		break;
-	}
-
-	read.close();
 	//
 	pCur = pHeadCourse;
-	write.open("Toan.txt");
 	while (pCur != nullptr)
 	{
 		write << pCur->courseName << ",";
@@ -671,35 +650,22 @@ void RemoveTheEnrolledCourse(Course* pCourse, char* path, string IdSearched)//re
 	read.close();
 	write.close();
 }
-void ViewListOfStudentInCourse(Course* pCourse, char* path)
+void ViewListOfStudentInCourse(Course* pCourse)
 {
-	ifstream read;
-	read.open(path);
 	Student* pCur = nullptr;
-	while (!read.eof())
-	{
-		if (pCourse->pHeadStudentEnroll == nullptr)
-		{
-			pCourse->pHeadStudentEnroll = new Student;
-			pCourse->pHeadStudentEnroll->pNext = nullptr;
-			pCur = pCourse->pHeadStudentEnroll;
-		}
-		else {
-			pCur->pNext = new Student;
-			pCur = pCur->pNext;
-			pCur->pNext = nullptr;
-		}
-		getline(read, pCur->id, ',');
-		getline(read, pCur->firstName, '\n');
-	}
 	pCur = pCourse->pHeadStudentEnroll;
-	while (pCur != nullptr)
+	if (pCourse->pHeadStudentEnroll == nullptr)
 	{
-		cout << "The List of Students in Course: ";
-		cout << pCur->id << ",";
-		cout << pCur->firstName << endl;
-		pCur = pCur->pNext;
+		cout << "There is no Student in this Course";
+		return;
 	}
-	read.close();
+	cout << "The List of Students in Course: ";
+		while (pCur != nullptr)
+		{
+			cout << pCur->id << ",";
+			cout << pCur->firstName << " ";
+			cout << pCur->lastName << endl;
+			pCur = pCur->pNext;
+		}
 }
 
