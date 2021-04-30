@@ -84,6 +84,6 @@ void viewListOfCourses(Semester* pHead);
 void viewListOfClasses(Class* pHead);
 void ViewCourse(Student* pHead);
 void enrollCourse(Semester* pSemester, Student* pStudent);
-void RemoveTheEnrolledCourse(Course* pCourse, char* path, string IdSearched);
+void RemoveTheEnrolledCourse(Course* pCourse, Semester* pSemester, SchoolYear* pSchool, char* path, string IdSearched);
 void ViewListOfStudentInCourse(Course* pCourse);
 

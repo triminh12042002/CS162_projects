@@ -599,55 +599,45 @@ void enrollCourse(Semester* pSemester, Student* pStudent) {
 		cout << "Cannot find the course name that you enter.\n Please enter exactly.\n";
 	}
 }
-void RemoveTheEnrolledCourse(Course* pCourse, char* path, string IdSearched)//remove the student in that course in file.txt
-{													  //id,Name\n
-	ifstream read;									  //char path[]="NameofCourse".cin>>path the main function
-	ofstream write;									  //Ask student to input his/her id before Removing the Enrolled Course 	
-	read.open(path);
+void RemoveTheEnrolledCourse(Course* pCourse,Semester*pSemester,SchoolYear*pSchool,char* path, string IdSearched)//char="Student"
+{		
+	//Ask student to input his/her id before Removing the Enrolled Course 									
+	ofstream write;									  	
 	Student* pCur = nullptr;
-	while (!read.eof())
-	{
-		if (pCourse->pHeadStudentEnroll == nullptr)
-		{
-			pCourse->pHeadStudentEnroll = new Student;
-			pCourse->pHeadStudentEnroll->pNext = nullptr;
-			pCur = pCourse->pHeadStudentEnroll;
-		}
-		else {
-			pCur->pNext = new Student;
-			pCur = pCur->pNext;
-			pCur->pNext = nullptr;
-		}
-		getline(read, pCur->id, ',');
-		getline(read, pCur->firstName, '\n');
-	}
 	pCur = pCourse->pHeadStudentEnroll;
 	Student* temp = pCur;
-	while (pCur != nullptr)
+	if (pCourse->pHeadStudentEnroll->id == IdSearched)
 	{
-		if (pCourse->pHeadStudentEnroll->id == IdSearched)
+		temp = pCourse->pHeadStudentEnroll;
+		pCourse->pHeadStudentEnroll = pCourse->pHeadStudentEnroll->pNext;
+		delete temp;
+	}
+	else {
+		while (pCur->pNext != nullptr && pCur->pNext->id != IdSearched)
 		{
-			temp = pCourse->pHeadStudentEnroll;
-			pCourse->pHeadStudentEnroll = pCourse->pHeadStudentEnroll->pNext;
-			delete temp;
+			pCur = pCur->pNext;
 		}
-		else if (pCur->pNext->id == IdSearched)
+		if (pCur->pNext == nullptr)
+		{
+			cout << "Student does not enroll this course";
+			return;
+		}
+		if (pCur->pNext->id == IdSearched)
 		{
 			temp = pCur->pNext;
 			pCur->pNext = pCur->pNext->pNext;
 			delete temp;
 		}
-		pCur = pCur->pNext;
 	}
 	pCur = pCourse->pHeadStudentEnroll;
-	write.open(path);
+	write.open(path+pCourse->courseName+pSemester->semesterName+pSchool->schoolYearName+".csv");
 	while (pCur != nullptr)
 	{
 		write << pCur->id << ",";
-		write << pCur->firstName << "\n";
+		write << pCur->firstName << " ";
+		write << pCur->lastName << "\n";
 		pCur = pCur->pNext;
 	}
-	read.close();
 	write.close();
 }
 void ViewListOfStudentInCourse(Course* pCourse)
