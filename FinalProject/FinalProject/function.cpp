@@ -96,9 +96,9 @@ bool login(account*& pLogin, string loginPath)
 {
 
 	string username, password;
-	cout << "Enter username : ";
+	cout << "\nEnter username : ";
 	getline(cin, username);
-	cout << "Enter password : ";
+	cout << "\nEnter password : ";
 	getline(cin, password);
 
 	account* pCur = nullptr;
@@ -124,10 +124,8 @@ bool login(account*& pLogin, string loginPath)
 
 	}
 	pCur = pLogin;
-	int i = 1;
 	while (pCur != nullptr)
 	{	
-		cout << i++;
 		if (pCur->us == username && pCur->pw == password)
 			return true;
 		else pCur = pCur->next;
@@ -393,7 +391,7 @@ void UpdateCourseInformation(Course*& pHeadCourse,Semester*pSemester,SchoolYear*
 {
 	ofstream write;
 	write.open(path+pSemester->semesterName+pSchool->schoolYearName+".csv");
-	ofstream write;
+	//ofstream write;
 	Course* pCur = nullptr;
 	string searchIdCourse;
 	pCur = pHeadCourse;
