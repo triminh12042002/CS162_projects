@@ -21,6 +21,18 @@ void GoTo(SHORT posX, SHORT posY)
 	SetConsoleCursorPosition(hStdout, Position);
 }
 
+string createDate() {
+	cout << "\nEnter Day :";
+	string day;
+	cin >> day;
+	cout << "\nEnter Month :";
+	string month;
+	cin >> month;
+	cout << "\nEnter Year :";
+	string year;
+	cin >> year;
+	return  day + '/' + month + '/' + year;
+}
 void inputStudentData(Student*& pHeadStudent, Student*& pTailStudent, char path[]) {
 	ifstream ifs;
 	ifs.open(path);
@@ -354,13 +366,23 @@ void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester,SchoolYe
 	}
 	write.close();
 }
-void CreateSemesterOfYear(Semester*& pSemester,SchoolYear*pSchool ,string path) //char path="semester"
+void CreateSemesterOfYear(SchoolYear* pTempSchoolYear, Semester*& pSemester,int &sizeOfSemester ,char* path)
 {
-	ofstream read;
-	read.open(path+pSchool->schoolYearName+".csv");//create 3 semesters at one time
-	Semester* pCur = nullptr;
+	sizeOfSemester = 0;
+	pSemester = nullptr;
+	cout << "\nEnter the number of semesters ( 2 or 3 )";
+	cout << "\nEnter 0 to return";
+	int numSemester = 1;
+	while (!(numSemester >= 2 && numSemester <= 3)) {
+		cin >> numSemester;
+		if (numSemester == 0) return;
+	}
+	sizeOfSemester = numSemester;
+	ofstream write;
+	write.open(path);
+	Semester* pCur = pSemester;
 	int i = 1;
-	while (i <= 3)
+	while (i <= numSemester)
 	{
 		if (pSemester == nullptr)
 		{
@@ -374,18 +396,18 @@ void CreateSemesterOfYear(Semester*& pSemester,SchoolYear*pSchool ,string path) 
 			pCur->pNext = nullptr;
 		}
 		//information of each Semester in year
-		cout << "Semester(1/2/3): ";
-		getline(cin,pCur->semesterName);
-		cout << "School Year: ";
-		getline(cin, pCur->schoolYear);
-		cout << "The Date of Starting semester: ";
-		getline(cin,pCur->startDate);
-		cout << "The Date of Ending semester: ";
-		getline(cin,pCur->endDate);
-		read << pCur->schoolYear << ',' << pCur->semesterName << ',' << pCur->startDate << ',' << pCur->endDate << '\n';
+		cout << "\nSemester " << i;
+		pCur->semesterName = char('0' + i);
+		pCur->schoolYear = pTempSchoolYear->schoolYearName;
+		cout << "\nSchool Year: " << pCur->schoolYear;	// schoolYear of semester has been update before( choose schoolYear -> choose semester )
+		cout << "\nThe Date of Starting semester: ";
+		pCur->startDate = createDate();
+		cout << "\nThe Date of Ending semester: ";
+		pCur->endDate = createDate();
+		write << pCur->schoolYear << ',' << pCur->semesterName << ',' << pCur->startDate << ',' << pCur->endDate << '\n';
 		i++;
 	}
-	read.close();
+	write.close();
 }
 void UpdateCourseInformation(Course*& pHeadCourse,Semester*pSemester,SchoolYear*pSchool,char* path)//path="Course"
 {

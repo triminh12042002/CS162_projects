@@ -78,7 +78,7 @@ void add1StudentToClass(Class*& pClass);
 void deleteCourse(Semester*& pHead);
 void addCourseToSemester(Course*& pCourse);
 void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester,SchoolYear*pSchool ,string path);
-void CreateSemesterOfYear(Semester*& pSemester,SchoolYear*pSchool ,string path);
+void CreateSemesterOfYear(SchoolYear* pTempSchoolYear, Semester*& pSemester, int& sizeOfSemester, char* path);
 void UpdateCourseInformation(Course*& pHeadCourse, Semester* pSemester, SchoolYear* pSchool, char* path);
 void viewListOfStudents(Class* pHead);
 void viewListOfCourses(Semester* pHead);
