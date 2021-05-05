@@ -6,6 +6,7 @@ SchoolYear* pHeadSchoolYear = nullptr;
 SchoolYear* pTempSchoolYear = nullptr;
 int schoolYearSize = 0;
 Class* pTempClass = nullptr;
+Semester* pTempSemester = nullptr;
 bool isContinue = true;
 void loadListofSchoolYear(SchoolYear* &pHeadSchoolYear, int &schoolYearSize, char path[]) {
 	SchoolYear* pT = nullptr;
@@ -90,6 +91,50 @@ void loadListOfClass(Class* &pHeadClass, int& sizeOfListClass, char* path) {
 			pTemp->className = temp;
 			pTemp->pNext = nullptr;
 			sizeOfListClass++;
+		}
+	}
+	fin.close();
+}
+void loadListOfSemester(Semester*& pHeadSemester, int& sizeOfListSemester, char* path) {
+
+	Semester* pT = nullptr;
+	while (pHeadSemester != nullptr) {
+		pT = pHeadSemester;
+		pHeadSemester = pHeadSemester->pNext;
+		delete pT;
+	}
+	pHeadSemester = nullptr;
+	sizeOfListSemester = 0;
+	ifstream fin;
+	fin.open(path);
+	if (fin.is_open() == false) {
+		cout << "\ncannot open file";
+		ofstream fout;
+		fout.open(path);
+		fout.close();
+		fin.open(path);
+		return;
+	}
+	Semester* pTemp = pHeadSemester;
+	string temp;
+	while (!fin.eof()) {
+		if (pTemp == nullptr) {
+			getline(fin, temp, '\n');
+			if (temp == "") break;
+			pHeadSemester = pTemp = new Semester;
+			pTemp->pNext = nullptr;
+			pTemp->semesterName = temp;
+			sizeOfListSemester++;
+
+		}
+		else {
+			getline(fin, temp, '\n');
+			if (temp == "") break;
+			pTemp->pNext = new Semester;
+			pTemp = pTemp->pNext;
+			pTemp->semesterName = temp;
+			pTemp->pNext = nullptr;
+			sizeOfListSemester++;
 		}
 	}
 	fin.close();
@@ -218,16 +263,16 @@ int main(){
 									
 									for (int i = 0;;) {
 										pTempSchoolYear = pHeadSchoolYear;
-										GoTo(0, 0);
+										GoTo(10, 5);
 										SetColor(0, 7);
 										cout << "List of school years\n";
 										for (int j = 0; pTempSchoolYear != nullptr && j < schoolYearSize; ++j) {
-											GoTo(10, 5 + 2 * j);
+											GoTo(10, 7 + 2 * j);
 											SetColor(0, Set[j]);
 											cout << pTempSchoolYear->schoolYearName;
 											pTempSchoolYear = pTempSchoolYear->pNext;
 										}
-										GoTo(10, 5 + 2 * schoolYearSize);
+										GoTo(10, 7 + 2 * schoolYearSize);
 										SetColor(0, Set[schoolYearSize]);
 										cout << "Create School Year\n";
 
@@ -240,25 +285,9 @@ int main(){
 										}
 										if (key == '\r') {
 											pTempSchoolYear = pHeadSchoolYear;
-											for (int j = 0; pTempSchoolYear != nullptr && j < schoolYearSize; ++j) {
+											for (int j = 0; j < schoolYearSize && pTempSchoolYear != nullptr; ++j) {
 												if (counter == j + 1) {
 													cout << "\n enter " << pTempSchoolYear->schoolYearName;
-													// load list of class in this schoolYear
-													Class* pHeadClass = pTempSchoolYear->pHeadClass;
-													string pathListOfClass = "Class" + pTempSchoolYear->schoolYearName + ".csv";
-													int sizeOfListClass = 0;
-													int size = pathListOfClass.size();
-													// declaring character array
-													char* pathListOfClassChar = new char[size+1];
-													// string to char array
-													for (int i = 0; i < size; ++i) {
-														pathListOfClassChar[i] = pathListOfClass[i];
-													}
-													pathListOfClassChar[size] = '\0';
-													loadListOfClass(pHeadClass, sizeOfListClass, pathListOfClassChar);	// load list of class int this school year
-													cout << "\nnew size list" << sizeOfListClass;
-													cout << "\nEnter School Year successfully.";
-													cout << "\nPress any key to continue.";
 													key = _getch();
 													system("cls");
 													for (int i = 0; i < 20; ++i) {
@@ -268,73 +297,235 @@ int main(){
 													counter = 1;
 
 													for (int i = 0;;) {
-														pTempClass = pHeadClass;
-														GoTo(0, 0);
-														SetColor(0, 7);
-														cout << "List of school years\n";
-														for (int j = 0; pTempClass != nullptr && j < sizeOfListClass; ++j) {
-															GoTo(10, 5 + 2 * j);
-															SetColor(0, Set[j]);
-															cout << pTempClass->className;
-															pTempClass = pTempClass->pNext;
-														}
-														GoTo(10, 5 + 2 * sizeOfListClass);
-														SetColor(0, Set[sizeOfListClass]);
-														cout << "Create CLass";
+														GoTo(10, 5);
+														SetColor(0, Set[0]);
+														cout << "Class";
+														
+														GoTo(10, 5 + 2);
+														SetColor(0, Set[1]);
+														cout << "Semester";
+
+														GoTo(10, 5 + 4);
+														SetColor(0, Set[2]);
+														cout << "Return";
 
 														key = _getch();
-														if (key == 72 && counter >= 2 && counter <= sizeOfListClass + 1) {
+														if (key == 72 && counter >= 2 && counter <= 3) {
 															counter--;
 														}
-														if (key == 80 && counter >= 1 && counter <= sizeOfListClass) {
+														if (key == 80 && counter >= 1 && counter <= 2) {
 															counter++;
 														}
 														if (key == '\r') {
-															
-															pTempClass = pHeadClass;
-															for (int j = 0; pTempClass != nullptr && j < sizeOfListClass; ++j) {
-																if (counter == j + 1) {
-																	cout << "\n enter " << pTempClass->className;
-																	// load list of class in this schoolYear
-																	/*Class* pHeadClass = pTempSchoolYear->pHeadClass;
-																	string pathListOfClass = "Class" + pTempSchoolYear->schoolYearName + ".csv";
-																	int sizeOfListClass = 0;
-																	int size = pathListOfClass.size();
-																	// declaring character array
-																	char* pathListOfClassChar = new char[size + 1];
-																	// string to char array
-																	for (int i = 0; i < size; ++i) {
-																		pathListOfClassChar[i] = pathListOfClass[i];
-																	}
-																	pathListOfClassChar[size] = '\0';
-																	loadListOfClass(pHeadClass, sizeOfListClass, pathListOfClassChar);
-																	*/
-
+															if (counter == 1) {			// enter class
+																// load list of class in this schoolYear
+																Class* pHeadClass = pTempSchoolYear->pHeadClass;
+																string pathListOfClass = "Class" + pTempSchoolYear->schoolYearName + ".csv";
+																int sizeOfListClass = 0;
+																int size = pathListOfClass.size();
+																// declaring character array
+																char* pathListOfClassChar = new char[size + 1];
+																// string to char array
+																for (int i = 0; i < size; ++i) {
+																	pathListOfClassChar[i] = pathListOfClass[i];
 																}
-																else {
-																	pTempClass = pTempClass->pNext;
-																}
-															}
-															if (counter == sizeOfListClass + 1) {
-																cout << "\n enter create class\n";
-																/*createSchoolYear(pHeadSchoolYear, schoolYearSize, pathCreateSchoolYear);
-																loadListofSchoolYear(pHeadSchoolYear, schoolYearSize, pathCreateSchoolYear);
+																pathListOfClassChar[size] = '\0';
+																loadListOfClass(pHeadClass, sizeOfListClass, pathListOfClassChar);	// load list of class int this school year
+																cout << "\nnew size list" << sizeOfListClass;
+																cout << "\nEnter School Year successfully.";
+																cout << "\nPress any key to continue.";
+																key = _getch();
 																system("cls");
-																*/
+																for (int i = 0; i < 20; ++i) {
+																	Set[i] = 7;
+																}
+																Set[0] = 2;
+																counter = 1;
+
+																for (int i = 0;;) {
+																	pTempClass = pHeadClass;
+																	GoTo(0, 0);
+																	SetColor(0, 7);
+																	cout << "List of school years";
+																	for (int j = 0; pTempClass != nullptr && j < sizeOfListClass; ++j) {
+																		GoTo(10, 5 + 2 * j);
+																		SetColor(0, Set[j]);
+																		cout << pTempClass->className;
+																		pTempClass = pTempClass->pNext;
+																	}
+																	GoTo(10, 5 + 2 * sizeOfListClass);
+																	SetColor(0, Set[sizeOfListClass]);
+																	cout << "Create CLass";
+
+																	key = _getch();
+																	if (key == 72 && counter >= 2 && counter <= sizeOfListClass + 1) {
+																		counter--;
+																	}
+																	if (key == 80 && counter >= 1 && counter <= sizeOfListClass) {
+																		counter++;
+																	}
+																	if (key == '\r') {
+
+																		pTempClass = pHeadClass;
+																		for (int j = 0; pTempClass != nullptr && j < sizeOfListClass; ++j) {
+																			if (counter == j + 1) {
+																				cout << "\n enter " << pTempClass->className;
+																				// load list of class in this schoolYear
+																				/*Class* pHeadClass = pTempSchoolYear->pHeadClass;
+																				string pathListOfClass = "Class" + pTempSchoolYear->schoolYearName + ".csv";
+																				int sizeOfListClass = 0;
+																				int size = pathListOfClass.size();
+																				// declaring character array
+																				char* pathListOfClassChar = new char[size + 1];
+																				// string to char array
+																				for (int i = 0; i < size; ++i) {
+																					pathListOfClassChar[i] = pathListOfClass[i];
+																				}
+																				pathListOfClassChar[size] = '\0';
+																				loadListOfClass(pHeadClass, sizeOfListClass, pathListOfClassChar);
+																				*/
+
+																			}
+																			else {
+																				pTempClass = pTempClass->pNext;
+																			}
+																		}
+																		if (counter == sizeOfListClass + 1) {
+																			cout << "\n enter create class\n";
+																			/*createSchoolYear(pHeadSchoolYear, schoolYearSize, pathCreateSchoolYear);
+																			loadListofSchoolYear(pHeadSchoolYear, schoolYearSize, pathCreateSchoolYear);
+																			system("cls");
+																			*/
+																		}
+
+																	}
+																	for (int i = 0; i < 20; ++i) {
+																		if (counter == i + 1) Set[i] = 2;
+																		else Set[i] = 7;
+																	}
+																}
+
+							
+															} 
+															if (counter == 2) {		// enter Semester
+																pTempSchoolYear = pHeadSchoolYear;
+																for (int j = 0; pTempSchoolYear != nullptr && j < schoolYearSize; ++j) {
+																	if (counter == j + 1) {
+																		cout << "\n enter " << pTempSchoolYear->schoolYearName;
+																		// load list of semester in this schoolYear
+																		Semester* pHeadSemester = pTempSchoolYear->pHeadSemester;
+																		string pathListOfSemester = "Semester" + pTempSchoolYear->schoolYearName + ".csv";
+																		int sizeOfListSemester = 0;
+																		int size = pathListOfSemester.size();
+																		// declaring character array
+																		char* pathListOfSemesterChar = new char[size + 1];
+																		// string to char array
+																		for (int i = 0; i < size; ++i) {
+																			pathListOfSemesterChar[i] = pathListOfSemester[i];
+																		}
+																		pathListOfSemesterChar[size] = '\0';
+																		loadListOfSemester(pHeadSemester, sizeOfListSemester, pathListOfSemesterChar);	// load list of class int this school year
+																		cout << "\nnew size list" << sizeOfListSemester;
+																		cout << "\nEnter School Year successfully.";
+																		cout << "\nPress any key to continue.";
+																		key = _getch();
+																		system("cls");
+																		for (int i = 0; i < 20; ++i) {
+																			Set[i] = 7;
+																		}
+																		Set[0] = 2;
+																		counter = 1;
+
+																		for (int i = 0;;) {
+																			pTempSemester = pHeadSemester;
+																			GoTo(0, 0);
+																			SetColor(0, 7);
+																			cout << "List of Semester";
+																			for (int j = 0; pTempSemester != nullptr && j < sizeOfListSemester; ++j) {
+																				GoTo(10, 5 + 2 * j);
+																				SetColor(0, Set[j]);
+																				cout << pTempSemester->semesterName;
+																				pTempSemester = pTempSemester->pNext;
+																			}
+																			GoTo(10, 5 + 2 * sizeOfListSemester);
+																			SetColor(0, Set[sizeOfListSemester]);
+																			cout << "Create Semester";
+
+																			key = _getch();
+																			if (key == 72 && counter >= 2 && counter <= sizeOfListSemester + 1) {
+																				counter--;
+																			}
+																			if (key == 80 && counter >= 1 && counter <= sizeOfListSemester) {
+																				counter++;
+																			}
+																			if (key == '\r') {
+
+																				pTempSemester = pHeadSemester;
+																				for (int j = 0; pTempSemester != nullptr && j < sizeOfListSemester; ++j) {
+																					if (counter == j + 1) {
+																						cout << "\n enter " << pTempSemester->semesterName;
+																						// load list of class in this schoolYear
+																						/*Class* pHeadClass = pTempSchoolYear->pHeadClass;
+																						string pathListOfClass = "Class" + pTempSchoolYear->schoolYearName + ".csv";
+																						int sizeOfListClass = 0;
+																						int size = pathListOfClass.size();
+																						// declaring character array
+																						char* pathListOfClassChar = new char[size + 1];
+																						// string to char array
+																						for (int i = 0; i < size; ++i) {
+																							pathListOfClassChar[i] = pathListOfClass[i];
+																						}
+																						pathListOfClassChar[size] = '\0';
+																						loadListOfClass(pHeadClass, sizeOfListClass, pathListOfClassChar);
+																						*/
+
+																					}
+																					else {
+																						pTempClass = pTempClass->pNext;
+																					}
+																				}
+																				if (counter == sizeOfListSemester + 1) {
+																					cout << "\n enter create Semester\n";
+																					/*createSchoolYear(pHeadSchoolYear, schoolYearSize, pathCreateSchoolYear);
+																					loadListofSchoolYear(pHeadSchoolYear, schoolYearSize, pathCreateSchoolYear);
+																					system("cls");
+																					*/
+																				}
+
+																			}
+																			for (int i = 0; i < 20; ++i) {
+																				if (counter == i + 1) Set[i] = 2;
+																				else Set[i] = 7;
+																			}
+
+																		}
+
+																	}
+																	else {
+																		pTempSchoolYear = pTempSchoolYear->pNext;
+																	}
+																}
+																if (counter == schoolYearSize + 1) {
+																	cout << "\n enter create schoolyear\n";
+																	createSchoolYear(pHeadSchoolYear, schoolYearSize, pathCreateSchoolYear);
+																	loadListofSchoolYear(pHeadSchoolYear, schoolYearSize, pathCreateSchoolYear);
+																	system("cls");
+																}
+															} 
+															if (counter == 3) {
+																break;
 															}
-															
 														}
 														for (int i = 0; i < 20; ++i) {
 															if (counter == i + 1) Set[i] = 2;
 															else Set[i] = 7;
 														}
-
 													}
-
 												}
 												else {
 													pTempSchoolYear = pTempSchoolYear->pNext;
 												}
+	
 											}
 											if (counter == schoolYearSize + 1) {
 												cout << "\n enter create schoolyear\n";
