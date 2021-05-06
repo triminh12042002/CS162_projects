@@ -72,6 +72,7 @@ void signUp();
 bool login(account*& pLogin, string loginPath);
 void createSchoolYear(SchoolYear*& pHeadSchoolYear, int& schoolYearSize, char* path);
 void CreateYear(SchoolYear*& pHeadYear);
+void CreateClass(Student* pHeadStudent, int& sizeOfClass, char* path);
 void addAllStudentsToClass(Class*& pClass);
 void create1Student(Student*& pStudent);
 void add1StudentToClass(Class*& pClass);
