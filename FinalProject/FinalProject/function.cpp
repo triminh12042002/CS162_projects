@@ -205,13 +205,15 @@ void CreateYear(SchoolYear*& pHeadYear) {
 		getline(cin,year, '\n');
 	}
 }
-void CreateClass(Student* pHeadStudent) {
+void CreateClass(Student* pHeadStudent, int& sizeOfClass, char* path) {
+	ofstream write;
+	write.open(path);
 	Class* pHeadClass = new Class;
 	Class* pCurClass = pHeadClass;
 	Student* pCurStudent = pHeadClass->pHeadStudent;
 	while (pCurClass != nullptr) {
 		while (pCurStudent != pCurClass->pTailStudent) {
-			//Input Student
+			write << pCurStudent << "\n";
 			pCurStudent = pCurStudent->pNext;
 		}
 		int Fin;
@@ -224,8 +226,10 @@ void CreateClass(Student* pHeadStudent) {
 		else {
 			pCurClass->pNext = new Class;
 			pCurClass = pCurClass->pNext;
+			sizeOfClass++;
 		}
 	}
+	write.close();
 }
 void addAllStudentsToClass(Class*& pClass) {
 	if (pClass == nullptr) {
