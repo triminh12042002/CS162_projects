@@ -20,12 +20,12 @@ void loadListofSchoolYear(SchoolYear* &pHeadSchoolYear, int &schoolYearSize, cha
 	ifstream fin;
 	fin.open(path);
 	if (fin.is_open() == false) {
-		cout << "\ncannot open file";
+		cout << "\nfirst time open file";
+		fin.close();
 		ofstream fout;
 		fout.open(path);
 		fout.close();
 		fin.open(path);
-		return;
 	}
 	SchoolYear* pTemp = pHeadSchoolYear;
 	string temp;
@@ -64,12 +64,12 @@ void loadListOfClass(Class* &pHeadClass, int& sizeOfListClass, char* path) {
 	ifstream fin;
 	fin.open(path);
 	if (fin.is_open() == false) {
-		cout << "\ncannot open file";
+		cout << "\nfirst time open file";
+		fin.close();
 		ofstream fout;
 		fout.open(path);
 		fout.close();
 		fin.open(path);
-		return;
 	}
 	Class* pTemp = pHeadClass;
 	string temp;
@@ -108,12 +108,12 @@ void loadListOfSemester(Semester*& pHeadSemester, int& sizeOfListSemester, char*
 	ifstream fin;
 	fin.open(path);
 	if (fin.is_open() == false) {
-		cout << "\ncannot open file";
+		cout << "\nfirst time open file";
+		fin.close();
 		ofstream fout;
 		fout.open(path);
 		fout.close();
 		fin.open(path);
-		return;
 	}
 	Semester* pTemp = pHeadSemester;
 	string temp;
@@ -371,10 +371,6 @@ int main(){
 																}
 																pathListOfClassChar[size] = '\0';
 																loadListOfClass(pHeadClass, sizeOfListClass, pathListOfClassChar);	// load list of class int this school year
-																cout << "\nnew size list" << sizeOfListClass;
-																cout << "\nEnter School Year successfully.";
-																cout << "\nPress any key to continue.";
-																key = _getch();
 																system("cls");
 																for (int i = 0; i < 20; ++i) {
 																	Set[i] = 7;
@@ -383,6 +379,7 @@ int main(){
 																counter = 1;
 
 																for (int i = 0;;) {
+																	pTempClass = pHeadClass;
 																	if (isContinue == false) break;
 																	if (counter == 0) {
 																		for (int i = 0; i < 20; ++i) {
@@ -405,18 +402,18 @@ int main(){
 																	cout << "Create CLass";
 
 																	GoTo(10, 5 + 2 * (sizeOfListClass + 1));
-																	SetColor(0, Set[sizeOfListClass]);
+																	SetColor(0, Set[sizeOfListClass + 1]);
 																	cout << "Return";
 
 																	GoTo(10, 5 + 2 * (sizeOfListClass + 2));
-																	SetColor(0, Set[sizeOfListClass]);
+																	SetColor(0, Set[sizeOfListClass + 2]);
 																	cout << "Back to first menu";
 
 																	key = _getch();
-																	if (key == 72 && counter >= 2 && counter <= sizeOfListClass + 1) {
+																	if (key == 72 && counter >= 2 && counter <= sizeOfListClass + 3) {
 																		counter--;
 																	}
-																	if (key == 80 && counter >= 1 && counter <= sizeOfListClass) {
+																	if (key == 80 && counter >= 1 && counter <= sizeOfListClass + 2) {
 																		counter++;
 																	}
 																	if (key == '\r') {
@@ -480,8 +477,10 @@ int main(){
 																				pTempClass = pTempClass->pNext;
 																			}
 																		}
-																		if (counter == sizeOfListClass + 1) {
-																			cout << "\n enter create class\n";
+																		if (counter == sizeOfListClass + 1) {	//  enter create class
+																			SetColor(0, 7);
+																			createClass(pHeadClass, sizeOfListClass, pathListOfClassChar);
+																			system("cls");
 																		}
 																		if (counter == sizeOfListClass + 2) {	// return
 																			counter = 0;
@@ -494,8 +493,6 @@ int main(){
 																			system("cls");
 																			break;
 																		}
-																		
-
 																	}
 																	for (int i = 0; i < 20; ++i) {
 																		if (counter == i + 1) Set[i] = 2;
@@ -518,11 +515,6 @@ int main(){
 																}
 																pathListOfSemesterChar[size] = '\0';
 																loadListOfSemester(pHeadSemester, sizeOfListSemester, pathListOfSemesterChar);	// load list of semester in  this school year
-																cout << "\nnew size list" << sizeOfListSemester;
-																cout << "\nEnter Semester successfully.";
-																cout << "\nPress any key to continue.";
-																key = _getch();
-																system("cls");
 																for (int i = 0; i < 20; ++i) {
 																	Set[i] = 7;
 																}
@@ -530,10 +522,18 @@ int main(){
 																counter = 1;
 																
 																for (int i = 0;;) {
-																	GoTo(10, 0);
-																	SetColor(0, 7);
-																	cout << "List of Semester";
 																	pTempSemester = pHeadSemester;
+																	if (isContinue == false) break;
+																	if (counter == 0) {
+																		for (int i = 0; i < 20; ++i) {
+																			Set[i] = 7;
+																		}
+																		Set[0] = 2;
+																		counter = 1;
+																	}
+																	GoTo(0, 0);
+																	SetColor(0, 7);
+																	cout << "List of Semester" << sizeOfListSemester;
 																	for (int j = 0; pTempSemester != nullptr && j < sizeOfListSemester; ++j) {
 																		GoTo(10, 5 + 2 * j);
 																		SetColor(0, Set[j]);
@@ -544,11 +544,19 @@ int main(){
 																	SetColor(0, Set[sizeOfListSemester]);
 																	cout << "Create Semester";
 
+																	GoTo(10, 5 + 2 * (sizeOfListSemester + 1));
+																	SetColor(0, Set[sizeOfListSemester + 1]);
+																	cout << "Return";
+
+																	GoTo(10, 5 + 2 * (sizeOfListSemester + 2));
+																	SetColor(0, Set[sizeOfListSemester + 2]);
+																	cout << "Back to first menu";
+
 																	key = _getch();
-																	if (key == 72 && counter >= 2 && counter <= sizeOfListSemester + 1) {
+																	if (key == 72 && counter >= 2 && counter <= sizeOfListSemester + 3) {
 																		counter--;
 																	}
-																	if (key == 80 && counter >= 1 && counter <= sizeOfListSemester) {
+																	if (key == 80 && counter >= 1 && counter <= sizeOfListSemester + 2) {
 																		counter++;
 																	}
 																	if (key == '\r') {
@@ -577,11 +585,22 @@ int main(){
 																				pTempSemester = pTempSemester->pNext;
 																			}
 																		}
-																		if (counter == sizeOfListSemester + 1) {
+																		if (counter == sizeOfListSemester + 1) {	// create semester
 																			SetColor(0, 7);
 																			cout << "\n enter create Semester\n";
 																			CreateSemesterOfYear(pTempSchoolYear, pHeadSemester , sizeOfListSemester, pathListOfSemesterChar);
 																			system("cls");
+																		}
+																		if (counter == sizeOfListSemester + 2) {	// return
+																			counter = 0;
+																			system("cls");
+																			break;
+																		}
+																		if (counter == sizeOfListSemester + 3) {	// back to first menu
+																			counter = 0;
+																			isContinue = 0;
+																			system("cls");
+																			break;
 																		}
 
 																	}

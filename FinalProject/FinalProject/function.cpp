@@ -150,8 +150,6 @@ void createSchoolYear(SchoolYear*& pHeadSchoolYear,int & schoolYearSize, char*pa
 	
 	SchoolYear* pCur = nullptr;
 	int t;
-	ofstream write;
-	write.open(path);
 	cout << "\nInput the school year (E.g : 2020): ";
 	cin >> t;
 	if (pHeadSchoolYear == nullptr)
@@ -175,10 +173,47 @@ void createSchoolYear(SchoolYear*& pHeadSchoolYear,int & schoolYearSize, char*pa
 		pCur->pNext = newyear;
 		schoolYearSize++;
 	}
+	ofstream write;
+	write.open(path);
 	pCur = pHeadSchoolYear;
 	while (pCur != nullptr)
 	{
 		write << pCur->schoolYearName << '\n';
+		pCur = pCur->pNext;
+	}
+	write.close();
+}
+void createClass(Class* &pHeadClass, int& sizeOfClass, char* path) {
+	Class* pCur = nullptr;
+	if (pHeadClass == nullptr)
+	{
+		pHeadClass = new Class;
+		cout << "\nEnter name of class";
+		cin >> pHeadClass->className;
+		pHeadClass->pNext = nullptr;
+		pHeadClass->pHeadStudent = nullptr;
+		sizeOfClass++;
+	}
+	else {
+		pCur = pHeadClass;
+		while (pCur->pNext != nullptr)
+		{
+			pCur = pCur->pNext;
+		}
+		Class* newClass = new Class;
+		cout << "\nEnter name of class";
+		cin >> newClass->className;
+		newClass->pNext = nullptr;
+		newClass->pHeadStudent = nullptr;
+		pCur->pNext = newClass;
+		sizeOfClass++;
+	}
+	ofstream write;
+	write.open(path);
+	pCur = pHeadClass;
+	while (pCur != nullptr)
+	{
+		write << pCur->className << '\n';
 		pCur = pCur->pNext;
 	}
 	write.close();

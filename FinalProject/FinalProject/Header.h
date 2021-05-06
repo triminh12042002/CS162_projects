@@ -75,6 +75,7 @@ void OutputCSVFIle(Student* pHeadStudent, char path[]);
 void signUp();
 bool login(account*& pLogin, string loginPath);
 void createSchoolYear(SchoolYear*& pHeadSchoolYear, int& schoolYearSize, char* path);
+void createClass(Class*& pHeadClass, int& sizeOfClass, char* path);
 void CreateYear(SchoolYear*& pHeadYear);
 void CreateClass(Student* pHeadStudent, int& sizeOfClass, char* path);
 void addAllStudentsToClass(Class*& pClass);
