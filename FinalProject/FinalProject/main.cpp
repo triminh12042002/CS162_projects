@@ -199,7 +199,14 @@ int main(){
 	if (true) {
 		//system("cls");
 		for (int i = 0;;) {
-
+			isContinue = true;
+			if (counter == 0) {
+				for (int i = 0; i < 20; ++i) {
+					Set[i] = 7;
+				}
+				Set[0] = 2;
+				counter = 1;
+			}
 			GoTo(10, 5);
 			SetColor(0, Set[0]);
 			cout << "Staff";
@@ -220,12 +227,17 @@ int main(){
 				counter++;
 			}
 			if (key == '\r') {
+				SetColor(0, 7);
 				if (counter == 1) {
 					cout << "\nEnter Staff";
 					for (int i = 0;;) {
-						if (isContinue == false) {
-							cout << "\nExit\n";
-							break;
+						if (isContinue == false) break;
+						if (counter == 0) {
+							for (int i = 0; i < 20; ++i) {
+								Set[i] = 7;
+							}
+							Set[0] = 2;
+							counter = 1;
 						}
 						GoTo(10, 5);
 						SetColor(0, Set[0]);
@@ -237,7 +249,7 @@ int main(){
 
 						GoTo(10, 9);
 						SetColor(0, Set[2]);
-						cout << "Exit";
+						cout << "Return";
 						key = _getch();
 						if (key == 72 && counter >= 2 && counter <= 3) {
 							counter--;
@@ -246,8 +258,9 @@ int main(){
 							counter++;
 						}
 						if (key == '\r') {
+							SetColor(0, 7);
 							if (counter == 1) {			// access in login option
-								cout << "enter login";
+								cout << "\nenter login";
 								account* pLogin = nullptr;
 								string loginPath = "staffLoginData.txt";
 								if (login(pLogin, loginPath) == true) {
@@ -264,6 +277,14 @@ int main(){
 									counter = 1;
 									
 									for (int i = 0;;) {
+										if (isContinue == false) break;
+										if (counter == 0) {
+											for (int i = 0; i < 20; ++i) {
+												Set[i] = 7;
+											}
+											Set[0] = 2;
+											counter = 1;
+										}
 										pTempSchoolYear = pHeadSchoolYear;
 										GoTo(10, 5);
 										SetColor(0, 7);
@@ -278,16 +299,25 @@ int main(){
 										SetColor(0, Set[schoolYearSize]);
 										cout << "Create School Year\n";
 
+										GoTo(10, 7 + 2 * (schoolYearSize + 1));
+										SetColor(0, Set[schoolYearSize + 1]);
+										cout << "Return\n";
+
+										GoTo(10, 7 + 2 * (schoolYearSize + 2));
+										SetColor(0, Set[schoolYearSize + 2]);
+										cout << "Back to first menu\n";
+
 										key = _getch();
-										if (key == 72 && counter >= 2 && counter <= schoolYearSize + 1) {
+										if (key == 72 && counter >= 2 && counter <= schoolYearSize + 3) {
 											counter--;
 										}
-										if (key == 80 && counter >= 1 && counter <= schoolYearSize) {
+										if (key == 80 && counter >= 1 && counter <= schoolYearSize + 2) {
 											counter++;
 										}
 										if (key == '\r') {
 											pTempSchoolYear = pHeadSchoolYear;
 											for (int j = 0; j < schoolYearSize && pTempSchoolYear != nullptr; ++j) {
+												if (isContinue == false) break;
 												if (counter == j + 1) {
 													cout << "\n enter " << pTempSchoolYear->schoolYearName;
 													key = _getch();
@@ -299,6 +329,14 @@ int main(){
 													counter = 1;
 
 													for (int i = 0;;) {
+														if (isContinue == false) break;
+														if (counter == 0) {
+															for (int i = 0; i < 20; ++i) {
+																Set[i] = 7;
+															}
+															Set[0] = 2;
+															counter = 1;
+														}
 														GoTo(10, 5);
 														SetColor(0, Set[0]);
 														cout << "Class";
@@ -345,10 +383,17 @@ int main(){
 																counter = 1;
 
 																for (int i = 0;;) {
-																	pTempClass = pHeadClass;
+																	if (isContinue == false) break;
+																	if (counter == 0) {
+																		for (int i = 0; i < 20; ++i) {
+																			Set[i] = 7;
+																		}
+																		Set[0] = 2;
+																		counter = 1;
+																	}
 																	GoTo(0, 0);
 																	SetColor(0, 7);
-																	cout << "List of school years";
+																	cout << "List of Classes";
 																	for (int j = 0; pTempClass != nullptr && j < sizeOfListClass; ++j) {
 																		GoTo(10, 5 + 2 * j);
 																		SetColor(0, Set[j]);
@@ -358,6 +403,14 @@ int main(){
 																	GoTo(10, 5 + 2 * sizeOfListClass);
 																	SetColor(0, Set[sizeOfListClass]);
 																	cout << "Create CLass";
+
+																	GoTo(10, 5 + 2 * (sizeOfListClass + 1));
+																	SetColor(0, Set[sizeOfListClass]);
+																	cout << "Return";
+
+																	GoTo(10, 5 + 2 * (sizeOfListClass + 2));
+																	SetColor(0, Set[sizeOfListClass]);
+																	cout << "Back to first menu";
 
 																	key = _getch();
 																	if (key == 72 && counter >= 2 && counter <= sizeOfListClass + 1) {
@@ -370,23 +423,58 @@ int main(){
 
 																		pTempClass = pHeadClass;
 																		for (int j = 0; pTempClass != nullptr && j < sizeOfListClass; ++j) {
+																			if (isContinue == false) break;
 																			if (counter == j + 1) {
 																				cout << "\n enter " << pTempClass->className;
-																				// load list of class in this schoolYear
-																				/*Class* pHeadClass = pTempSchoolYear->pHeadClass;
-																				string pathListOfClass = "Class" + pTempSchoolYear->schoolYearName + ".csv";
-																				int sizeOfListClass = 0;
-																				int size = pathListOfClass.size();
-																				// declaring character array
-																				char* pathListOfClassChar = new char[size + 1];
-																				// string to char array
-																				for (int i = 0; i < size; ++i) {
-																					pathListOfClassChar[i] = pathListOfClass[i];
+																				
+																				cout << "\nPress any key to continue.";
+																				key = _getch();
+																				system("cls");
+																				for (int i = 0; i < 20; ++i) {
+																					Set[i] = 7;
 																				}
-																				pathListOfClassChar[size] = '\0';
-																				loadListOfClass(pHeadClass, sizeOfListClass, pathListOfClassChar);
-																				*/
+																				Set[0] = 2;
+																				counter = 1;
+																				for (int i = 0;;) {
+																					pTempClass = pHeadClass;
+																					GoTo(0, 0);
+																					SetColor(0, 5);
+																					cout << "List of Students";
+																					
+																					GoTo(10, 5 + 2 );
+																					SetColor(0, Set[0]);
+																					cout << "Add 1 student";
 
+																					GoTo(10, 5 + 4);
+																					SetColor(0, Set[0]);
+																					cout << "Add all student";
+
+																					GoTo(10, 5 + 6);
+																					SetColor(0, Set[0]);
+																					cout << "Return";
+
+																					key = _getch();
+																					if (key == 72 && counter >= 2 && counter <= 3) {
+																						counter--;
+																					}
+																					if (key == 80 && counter >= 1 && counter <= 2) {
+																						counter++;
+																					}
+																					if (key == '\r') {
+																						if (counter == 1) {
+																							cout << "Enter Add 1 student";
+																						} if (counter == 2) {
+																							cout << "Enter Add all student";
+																						} if (counter == 3) {
+																							cout << "Enter return";
+																						}
+																						
+																					}
+																					for (int i = 0; i < 20; ++i) {
+																						if (counter == i + 1) Set[i] = 2;
+																						else Set[i] = 7;
+																					}
+																				}
 																			}
 																			else {
 																				pTempClass = pTempClass->pNext;
@@ -394,11 +482,19 @@ int main(){
 																		}
 																		if (counter == sizeOfListClass + 1) {
 																			cout << "\n enter create class\n";
-																			/*createSchoolYear(pHeadSchoolYear, schoolYearSize, pathCreateSchoolYear);
-																			loadListofSchoolYear(pHeadSchoolYear, schoolYearSize, pathCreateSchoolYear);
-																			system("cls");
-																			*/
 																		}
+																		if (counter == sizeOfListClass + 2) {	// return
+																			counter = 0;
+																			system("cls");
+																			break;
+																		}
+																		if (counter == sizeOfListClass + 1) {	// back to first menu
+																			counter = 0;
+																			isContinue = 0;
+																			system("cls");
+																			break;
+																		}
+																		
 
 																	}
 																	for (int i = 0; i < 20; ++i) {
@@ -406,8 +502,6 @@ int main(){
 																		else Set[i] = 7;
 																	}
 																}
-
-							
 															} 
 															if (counter == 2) {		// enter Semester
 																
@@ -501,7 +595,9 @@ int main(){
 																
 															} 
 															if (counter == 3) {
-																break;
+																counter = 0;
+																system("cls");
+																break;	// return class, semester in school year
 															}
 														}
 														for (int i = 0; i < 20; ++i) {
@@ -520,6 +616,17 @@ int main(){
 												createSchoolYear(pHeadSchoolYear, schoolYearSize, pathCreateSchoolYear);
 												system("cls");
 											}
+											if (counter == schoolYearSize + 2) {	// return
+												counter = 0;
+												system("cls");
+												break;
+											}
+											if (counter == schoolYearSize + 3) {	// return first menu
+												counter = 0;
+												isContinue = 0;
+												system("cls");
+												break;
+											}
 										}
 										for (int i = 0; i < 20; ++i) {
 											if (counter == i + 1) Set[i] = 2;
@@ -537,7 +644,7 @@ int main(){
 
 							}
 							if (counter == 2) {
-								cout << "enter sign up";
+								cout << "Enter sign up";
 								signUp();
 								cout << "\nSign up successfully.";
 								cout << "\nPress any key to return to the menu\n";
@@ -545,8 +652,9 @@ int main(){
 
 							}
 							if (counter == 3) {
-								cout << "enter exit";
-								isContinue = false;
+								counter = 0;
+								system("cls");
+								break;								
 							}
 						}
 						Set[0] = Set[1] = Set[2] = 7;
@@ -566,7 +674,7 @@ int main(){
 					cout << "\nEnter Student";
 				}
 				if (counter == 3) {
-					cout << "\nexit";
+					cout << "\nExit";
 					break;
 				}
 			}

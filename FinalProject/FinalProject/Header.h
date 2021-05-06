@@ -63,6 +63,10 @@ struct SchoolYear {
 struct  ScoreBoardOfCourse {
 	string no, id, fullname, totalMark, finalMark, midtermMark, otherMark;
 };
+struct  ScoreBoardOfClass {
+	string no, id, fullname;
+
+};
 void SetColor(int backgound_color, int text_color);
 void GoTo(SHORT posX, SHORT posY);
 
