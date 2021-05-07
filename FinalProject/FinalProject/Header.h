@@ -97,5 +97,6 @@ void ViewCourse(Student* pHead);
 void enrollCourse(Semester* pSemester, Student* pStudent);
 void RemoveTheEnrolledCourse(Course* pCourse, Semester* pSemester, SchoolYear* pSchool, char* path, string IdSearched);
 void ViewListOfStudentInCourse(Course* pCourse);
+void ViewScoreBoard(int& numberOfStudent);
 string createDate();
 
