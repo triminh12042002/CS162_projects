@@ -743,4 +743,56 @@ void ViewListOfStudentInCourse(Course* pCourse)
 			pCur = pCur->pNext;
 		}
 }
-
+void ViewScoreBoard(int& numberOfStudent) {
+    ifstream write;
+    ScoreBoardOfCourse ScoreCourse;
+    int i = 3;
+    write.open("ScoreCourse.csv");
+    if (!write.is_open()) {
+        cout << "Error Loading File.";
+    }
+    else {
+        Draw(15, numberOfStudent, 0, 0);
+        GoTo(1, 1);
+        cout << "NO";
+        GoTo(8, 1);
+        cout << "ID";
+        GoTo(18, 1);
+        cout << "FULL NAME";
+        GoTo(41, 1);
+        cout << "MID";
+        GoTo(46, 1);
+        cout << "FIN";
+        GoTo(51, 1);
+        cout << "TOT";
+        GoTo(56, 1);
+        cout << "OTH";
+        while (!write.eof()) {
+            getline(write,ScoreCourse.no, ',');
+            getline(write, ScoreCourse.id, ',');
+            getline(write, ScoreCourse.fullname, ',');
+            getline(write, ScoreCourse.midtermMark, ',');
+            getline(write, ScoreCourse.finalMark, ',');
+            getline(write, ScoreCourse.totalMark, ',');
+            getline(write, ScoreCourse.otherMark, ',');
+            GoTo(2, i);
+            cout << ScoreCourse.no;
+            GoTo(5, i);
+            cout << ScoreCourse.id;
+            GoTo(16, i);
+            cout << ScoreCourse.fullname;
+            GoTo(42, i);
+            cout << ScoreCourse.midtermMark;
+            GoTo(47, i);
+            cout << ScoreCourse.finalMark;
+            GoTo(52, i);
+            cout << ScoreCourse.totalMark;
+            GoTo(57, i);
+            cout << ScoreCourse.otherMark;
+            i += 2;
+        }
+        
+    }
+    int wait;
+    cin >> wait;
+}
