@@ -7,6 +7,7 @@ SchoolYear* pTempSchoolYear = nullptr;
 int schoolYearSize = 0;
 Class* pTempClass = nullptr;
 Semester* pTempSemester = nullptr;
+Course* pTempCourse = nullptr;
 bool isContinue = true;
 void loadListofSchoolYear(SchoolYear* &pHeadSchoolYear, int &schoolYearSize, char path[]) {
 	SchoolYear* pT = nullptr;
@@ -135,9 +136,107 @@ void loadListOfSemester(Semester*& pHeadSemester, int& sizeOfListSemester, char*
 		pTemp->semesterName = temp;
 		getline(fin, temp, ',');
 		pTemp->startDate = temp;
-		getline(fin, temp, '\n');
+		getline(fin, temp, ',');
 		pTemp->endDate = temp;
+		getline(fin, temp, ',');
+		pTemp->regisStartDate = temp;
+		getline(fin, temp, '\n');
+		pTemp->regisEndDate = temp;
 		sizeOfListSemester++;
+	}
+	fin.close();
+}
+void loadListOfStudent(Student*& pHeadStudent, int& sizeOfListStudent, char* path) {
+
+	Student* pT = nullptr;
+	while (pHeadStudent != nullptr) {
+		pT = pHeadStudent;
+		pHeadStudent = pHeadStudent->pNext;
+		delete pT;
+	}
+	pHeadStudent = nullptr;
+	sizeOfListStudent = 0;
+	ifstream fin;
+	fin.open(path);
+	if (fin.is_open() == false) {
+		fin.close();
+		ofstream fout;
+		fout.open(path);
+		fout.close();
+		fin.open(path);
+	}
+	Student* pTemp = pHeadStudent;
+	string temp;
+	while (!fin.eof()) {
+		getline(fin, temp, ',');
+		if (temp == "") break;
+		if (pTemp == nullptr) {
+			pHeadStudent = pTemp = new Student;
+			pTemp->pNext = nullptr;
+		}
+		else {
+			pTemp->pNext = new Student;
+			pTemp = pTemp->pNext;
+			pTemp->pNext = nullptr;
+		}
+		pTemp->pNext = nullptr;
+		pTemp->no = temp;
+		getline(fin, pTemp->id, ',');
+		getline(fin, pTemp->firstName, ',');
+		getline(fin, pTemp->lastName, ',');
+		getline(fin, pTemp->gender, ',');
+		getline(fin, pTemp->dateOfBirth, ',');
+		getline(fin, pTemp->socialId, '\n');
+		sizeOfListStudent++;
+	}
+	fin.close();
+}
+void loadListOfCourse(Course*& pHeadCourse, int& sizeOfListCourse, char* path) {
+
+	Course* pT = nullptr;
+	while (pHeadCourse != nullptr) {
+		pT = pHeadCourse;
+		pHeadCourse = pHeadCourse->pNext;
+		delete pT;
+	}
+	pHeadCourse = nullptr;
+	sizeOfListCourse = 0;
+	ifstream fin;
+	fin.open(path);
+	if (fin.is_open() == false) {
+		fin.close();
+		ofstream fout;
+		fout.open(path);
+		fout.close();
+		fin.open(path);
+	}
+	Course* pTemp = pHeadCourse;
+	string temp;
+	while (!fin.eof()) {
+		getline(fin, temp, ',');
+		if (temp == "") break;
+		if (pTemp == nullptr) {
+			pHeadCourse = pTemp = new Course;
+			pTemp->pNext = nullptr;
+		}
+		else {
+			pTemp->pNext = new Course;
+			pTemp = pTemp->pNext;
+			pTemp->pNext = nullptr;
+		}
+		pTemp->pNext = nullptr;
+		pTemp->courseName = temp;
+		getline(fin, pTemp->startDate,',');
+		getline(fin, pTemp->endDate, ',');
+		getline(fin, pTemp->id, ',');
+		getline(fin, pTemp->teacherName, ',');
+		getline(fin, pTemp->numOfCredits, ',');
+		getline(fin, pTemp->maxNumOfStudents, ',');
+		getline(fin, pTemp->day1, ',');
+		getline(fin, pTemp->hour1, ',');
+		getline(fin, pTemp->day2, ',');
+		getline(fin, pTemp->hour2, '\n');
+		sizeOfListCourse++;
 	}
 	fin.close();
 }
@@ -262,7 +361,7 @@ int main(){
 							if (counter == 1) {			// access in login option
 								cout << "\nenter login";
 								account* pLogin = nullptr;
-								string loginPath = "staffLoginData.txt";
+								string loginPath = "staffLoginData.csv";
 								if (login(pLogin, loginPath) == true) {
 									char pathCreateSchoolYear[] = "SchoolYear.csv";
 									loadListofSchoolYear(pHeadSchoolYear, schoolYearSize, pathCreateSchoolYear);	// load list school year
@@ -423,9 +522,19 @@ int main(){
 																			if (isContinue == false) break;
 																			if (counter == j + 1) {
 																				cout << "\n enter " << pTempClass->className;
-																				
-																				cout << "\nPress any key to continue.";
-																				key = _getch();
+																				// load list of student in this class
+																				Student* pHeadStudent = pTempClass->pHeadStudent;
+																				string pathListOfStudent = "Student" + pTempClass->className + pTempSchoolYear->schoolYearName + ".csv";
+																				int sizeOfListStudent = 0;
+																				int size = pathListOfStudent.size();
+																				// declaring character array
+																				char* pathListOfStudentChar = new char[size + 1];
+																				// string to char array
+																				for (int i = 0; i < size; ++i) {
+																					pathListOfStudentChar[i] = pathListOfStudent[i];
+																				}
+																				pathListOfStudentChar[size] = '\0';
+																				loadListOfStudent(pHeadStudent, sizeOfListStudent, pathListOfStudentChar);	// load list of class int this school year
 																				system("cls");
 																				for (int i = 0; i < 20; ++i) {
 																					Set[i] = 7;
@@ -433,37 +542,51 @@ int main(){
 																				Set[0] = 2;
 																				counter = 1;
 																				for (int i = 0;;) {
-																					pTempClass = pHeadClass;
-																					GoTo(0, 0);
-																					SetColor(0, 5);
-																					cout << "List of Students";
-																					
 																					GoTo(10, 5 + 2 );
 																					SetColor(0, Set[0]);
 																					cout << "Add 1 student";
 
 																					GoTo(10, 5 + 4);
-																					SetColor(0, Set[0]);
+																					SetColor(0, Set[1]);
 																					cout << "Add all student";
 
 																					GoTo(10, 5 + 6);
-																					SetColor(0, Set[0]);
+																					SetColor(0, Set[2]);
 																					cout << "Return";
 
+																					GoTo(10, 5 + 8);
+																					SetColor(0, Set[3]);
+																					cout << "Back to first menu";
+
 																					key = _getch();
-																					if (key == 72 && counter >= 2 && counter <= 3) {
+																					if (key == 72 && counter >= 2 && counter <= 4) {
 																						counter--;
 																					}
-																					if (key == 80 && counter >= 1 && counter <= 2) {
+																					if (key == 80 && counter >= 1 && counter <= 3) {
 																						counter++;
 																					}
 																					if (key == '\r') {
-																						if (counter == 1) {
-																							cout << "Enter Add 1 student";
+																						if (counter == 1) {	// add 1 student
+																							cout << "\nEnter Add 1 student";
+																							add1StudentToClass(pHeadStudent, sizeOfListStudent, pathListOfStudentChar);
+																							OutputCSVFIle(pHeadStudent, pathListOfStudentChar);
+																							system("cls");
 																						} if (counter == 2) {
-																							cout << "Enter Add all student";
-																						} if (counter == 3) {
-																							cout << "Enter return";
+																							cout << "\nEnter path of csv file that store all student data";
+																							char pathStudentData[50];
+																							cin >> pathStudentData;
+																							loadListOfStudent(pHeadStudent, sizeOfListStudent, pathStudentData);
+																							OutputCSVFIle(pHeadStudent, pathListOfStudentChar);
+																							system("cls");
+																						} if (counter == 3) {	// return
+																							counter = 0;
+																							system("cls");
+																							break;
+																						} if (counter == 4) {	// back to first menu
+																							counter = 0;
+																							isContinue = 0;
+																							system("cls");
+																							break;
 																						}
 																						
 																					}
@@ -515,6 +638,7 @@ int main(){
 																}
 																pathListOfSemesterChar[size] = '\0';
 																loadListOfSemester(pHeadSemester, sizeOfListSemester, pathListOfSemesterChar);	// load list of semester in  this school year
+																system("cls");
 																for (int i = 0; i < 20; ++i) {
 																	Set[i] = 7;
 																}
@@ -565,21 +689,93 @@ int main(){
 																		for (int j = 0; pTempSemester != nullptr && j < sizeOfListSemester; ++j) {
 																			if (counter == j + 1) {
 																				cout << "\n enter " << pTempSemester->semesterName;
-																				// load list of class in this schoolYear
-																				/*Class* pHeadClass = pTempSchoolYear->pHeadClass;
-																				string pathListOfClass = "Class" + pTempSchoolYear->schoolYearName + ".csv";
-																				int sizeOfListClass = 0;
-																				int size = pathListOfClass.size();
+
+																				// load list of course in this semester
+																				Course* pHeadCourse = pTempSemester->pHeadCourse;
+																				string pathListOfCourse = "Course" + pTempSemester->semesterName + pTempSchoolYear->schoolYearName + ".csv";
+																				int sizeOfListCourse = 0;
+																				int size = pathListOfCourse.size();
 																				// declaring character array
-																				char* pathListOfClassChar = new char[size + 1];
+																				char* pathListOfCourseChar = new char[size + 1];
 																				// string to char array
 																				for (int i = 0; i < size; ++i) {
-																					pathListOfClassChar[i] = pathListOfClass[i];
+																					pathListOfCourseChar[i] = pathListOfCourse[i];
 																				}
-																				pathListOfClassChar[size] = '\0';
-																				loadListOfClass(pHeadClass, sizeOfListClass, pathListOfClassChar);
-																				*/
+																				pathListOfCourseChar[size] = '\0';
+																				loadListOfCourse(pHeadCourse, sizeOfListCourse, pathListOfCourseChar);	// load list of semester in  this school year
+																				system("cls");
+																				for (int i = 0; i < 20; ++i) {
+																					Set[i] = 7;
+																				}
+																				Set[sizeOfListCourse] = 2;
+																				counter = sizeOfListCourse + 1;
 
+																				for (int i = 0;;) {
+																					pTempCourse = pHeadCourse;
+																					if (isContinue == false) break;
+																					if (counter == 0) {
+																						for (int i = 0; i < 20; ++i) {
+																							Set[i] = 7;
+																						}
+																						Set[sizeOfListCourse] = 2;
+																						counter = sizeOfListCourse + 1;
+																					}
+																					GoTo(0, 0);
+																					SetColor(0, 7);
+																					cout << "Number of course: " << sizeOfListCourse;
+																					for (int j = 0; pTempCourse != nullptr && j < sizeOfListCourse; ++j) {
+																						GoTo(10, 5 + 2 * j);
+																						SetColor(0, Set[j]);
+																						cout << pTempCourse->courseName;
+																						pTempCourse = pTempCourse->pNext;
+																					}
+																					GoTo(10, 5 + 2 * sizeOfListCourse);
+																					SetColor(0, Set[sizeOfListCourse]);
+																					cout << "Add Course";
+
+																					GoTo(10, 5 + 2 * (sizeOfListCourse + 1));
+																					SetColor(0, Set[sizeOfListCourse + 1]);
+																					cout << "Return";
+
+																					GoTo(10, 5 + 2 * (sizeOfListCourse + 2));
+																					SetColor(0, Set[sizeOfListCourse + 2]);
+																					cout << "Back to first menu";
+
+																					key = _getch();
+																					if (key == 72 && counter >= sizeOfListCourse + 2 && counter <= sizeOfListCourse + 3) {
+																						counter--;
+																					}
+																					if (key == 80 && counter >= sizeOfListCourse + 1 && counter <= sizeOfListCourse + 2) {
+																						counter++;
+																					}
+																					if (key == '\r') {
+																						if (counter == sizeOfListCourse + 1) {  // add course
+																							CreateCourseRegistration(pHeadCourse,sizeOfListCourse, pathListOfCourseChar);
+																							for (int i = 0; i < 20; ++i) {
+																								Set[i] = 7;
+																							}
+																							Set[sizeOfListCourse] = 2;
+																							counter = sizeOfListCourse + 1;
+																							system("cls");
+																						}
+																						if (counter == sizeOfListCourse + 2) {	// return
+																							counter = 0;
+																							system("cls");
+																							break;
+																						}
+																						if (counter == sizeOfListCourse + 3) {	// first menu
+																							counter = 0;
+																							isContinue = 0;
+																							system("cls");
+																							break;
+																						}
+																					}
+																					for (int i = 0; i < 20; ++i) {
+																						if (counter == i + 1) Set[i] = 2;
+																						else Set[i] = 7;
+																					}
+																				}
+	
 																			}
 																			else {
 																				pTempSemester = pTempSemester->pNext;

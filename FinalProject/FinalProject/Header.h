@@ -31,6 +31,7 @@ struct Class {
 	Class* pNext = nullptr;
 };
 struct Course {
+	
 	string startDate;
 	string endDate;
 	string courseName;
@@ -47,10 +48,13 @@ struct Course {
 	Course* pNext = nullptr;
 };
 struct Semester {
+	
 	string semesterName;
 	string schoolYear;
 	string startDate;
 	string endDate;
+	string regisStartDate;
+	string regisEndDate;
 	Course* pHeadCourse = nullptr;
 	Semester* pNext = nullptr;
 };
@@ -70,7 +74,7 @@ struct  ScoreBoardOfClass {
 void SetColor(int backgound_color, int text_color);
 void GoTo(SHORT posX, SHORT posY);
 
-void inputStudentData(Student*& pHeadStudent, Student*& pTailStudent, char path[]);
+//void inputStudentData(Student*& pHeadStudent, Student*& pTailStudent, char path[]);
 void OutputCSVFIle(Student* pHeadStudent, char path[]);
 void signUp();
 bool login(account*& pLogin, string loginPath);
@@ -78,12 +82,12 @@ void createSchoolYear(SchoolYear*& pHeadSchoolYear, int& schoolYearSize, char* p
 void createClass(Class*& pHeadClass, int& sizeOfClass, char* path);
 void CreateYear(SchoolYear*& pHeadYear);
 void CreateClass(Student* pHeadStudent, int& sizeOfClass, char* path);
-void addAllStudentsToClass(Class*& pClass);
+//void addAllStudentsToClass(Class*& pClass);
 void create1Student(Student*& pStudent);
-void add1StudentToClass(Class*& pClass);
+void add1StudentToClass(Student*& pHeadStudent, int &sizeOfListStudent, char* path);
 void deleteCourse(Semester*& pHead);
 void addCourseToSemester(Course*& pCourse);
-void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester,SchoolYear*pSchool ,string path);
+void CreateCourseRegistration(Course*& pHeadCourse, int& size, char* pathListOfCourseChar);
 void CreateSemesterOfYear(SchoolYear* pTempSchoolYear, Semester*& pSemester, int& sizeOfSemester, char* path);
 void UpdateCourseInformation(Course*& pHeadCourse, Semester* pSemester, SchoolYear* pSchool, char* path);
 void viewListOfStudents(Class* pHead);
@@ -93,4 +97,5 @@ void ViewCourse(Student* pHead);
 void enrollCourse(Semester* pSemester, Student* pStudent);
 void RemoveTheEnrolledCourse(Course* pCourse, Semester* pSemester, SchoolYear* pSchool, char* path, string IdSearched);
 void ViewListOfStudentInCourse(Course* pCourse);
+string createDate();
 

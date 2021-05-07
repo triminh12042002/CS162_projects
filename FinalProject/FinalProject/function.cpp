@@ -33,7 +33,7 @@ string createDate() {
 	cin >> year;
 	return  day + '/' + month + '/' + year;
 }
-void inputStudentData(Student*& pHeadStudent, Student*& pTailStudent, char path[]) {
+/*void addAllStudentsToClass(Student*& pHeadStudent,int sizeOfListStudent, char path[]) {
 	ifstream ifs;
 	ifs.open(path);
 	if (!ifs.is_open())
@@ -56,15 +56,16 @@ void inputStudentData(Student*& pHeadStudent, Student*& pTailStudent, char path[
 		getline(ifs, pTemp->gender, ',');
 		getline(ifs, pTemp->dateOfBirth, ',');
 		getline(ifs, pTemp->socialId, '\n');
-		if (pTailStudent != nullptr) {
-			pTailStudent->pNext = pTemp;
-			pTailStudent = pTemp;
+		if (pHeadStudent != nullptr) {
+			pHeadStudent->pNext = pTemp;
+			pHeadStudent = pTemp;
 		}
 		else {
-			pHeadStudent = pTailStudent = pTemp;
+			pHeadStudent = pTail = pTemp;
 		}
 	}
 }
+*/
 void OutputCSVFIle(Student* pHeadStudent, char path[]) {
 	if (pHeadStudent == nullptr) return;
 	ofstream ofs;
@@ -100,7 +101,7 @@ void signUp() {
 	cout << "\nEnter password : ";
 	getline(cin,pw);
 	ofstream write;
-	write.open("loginData.txt", ios::app);
+	write.open("staffLoginData.csv", ios::app);
 	write << us << ',' << pw << '\n';
 	write.close();
 }
@@ -266,15 +267,6 @@ void CreateClass(Student* pHeadStudent, int& sizeOfClass, char* path) {
 	}
 	write.close();
 }
-void addAllStudentsToClass(Class*& pClass) {
-	if (pClass == nullptr) {
-		pClass = new Class;
-	}
-	pClass->pHeadStudent = nullptr;
-	pClass->pTailStudent = nullptr;
-	char inputPath[] = "input.csv";
-	inputStudentData(pClass->pHeadStudent, pClass->pTailStudent, inputPath);
-}
 void create1Student(Student*& pStudent) {
 	if (pStudent == nullptr) {
 		pStudent = new Student;
@@ -296,14 +288,39 @@ void create1Student(Student*& pStudent) {
 	getline(cin, pStudent->socialId);
 	pStudent->pNext = nullptr;
 }
-void add1StudentToClass(Class*& pClass) {
-	if (pClass == nullptr) {
-		pClass = new Class;
+void add1StudentToClass(Student*& pHeadStudent,int &sizeOfListStudent,char* path) {
+	Student* pCur = nullptr;
+	Student* newStudent = new Student;
+	newStudent->pNext = nullptr;
+	cout << "\ninput student data";
+	cout << "\nno: ";
+	getline(cin, newStudent->no);
+	cout << "\nid: ";
+	getline(cin, newStudent->id);
+	cout << "\nfirstName: ";
+	getline(cin, newStudent->firstName);
+	cout << "\nlastName: ";
+	getline(cin, newStudent->lastName);
+	cout << "\ngender: ";
+	getline(cin, newStudent->gender);
+	cout << "\ndateOfBirth: ";
+	getline(cin, newStudent->dateOfBirth);
+	cout << "\nsocialId: ";
+	getline(cin, newStudent->socialId);
+	if (pHeadStudent == nullptr)
+	{
+		pHeadStudent = newStudent;
+		sizeOfListStudent++;
 	}
-	Student* pStudent = new Student;
-	create1Student(pStudent);
-	pClass->pTailStudent->pNext = pStudent;
-	pClass->pTailStudent = pStudent;
+	else {
+		pCur = pHeadStudent;
+		while (pCur->pNext != nullptr)
+		{
+			pCur = pCur->pNext;
+		}
+		pCur->pNext = newStudent;
+		sizeOfListStudent++;
+	}
 }
 void deleteCourse(Semester*& pHead) {
 	string nameOfCourse, idOfCourse;
@@ -337,7 +354,7 @@ void addCourseToSemester(Course*& pCourse) {
 	cout << "Input Starting Date : ";
 	getline(cin, pCourse->startDate);
 
-	cout << "Input Starting Date : ";
+	cout << "Input Ending Date : ";
 	getline(cin, pCourse->endDate);
 
 	cout << "Input course id : ";
@@ -364,10 +381,14 @@ void addCourseToSemester(Course*& pCourse) {
 	cout << "Input hour 2 : ";
 	getline(cin, pCourse->hour2);
 }
-void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester,SchoolYear*pSchool ,string path)//path="Course"
+void CreateCourseRegistration(Course*& pHeadCourse, int& size ,char* pathListOfCourseChar)
 {
 	ofstream write;
-	write.open(path + pSemester->semesterName+pSchool->schoolYearName+".csv");
+	write.open(pathListOfCourseChar);
+	if (!write.is_open()) {
+		cout << "cannot open";
+		return;
+	}
 	Course* pCur = nullptr;
 	if(pHeadCourse==nullptr)
 	{
@@ -386,6 +407,7 @@ void CreateCourseRegistration(Course*& pHeadCourse, Semester* pSemester,SchoolYe
 		pCur->pNext = nullptr;
 	}
 	addCourseToSemester(pCur);
+	size++;
 	pCur = pHeadCourse;
 	while (pCur != nullptr)
 	{
@@ -443,7 +465,11 @@ void CreateSemesterOfYear(SchoolYear* pTempSchoolYear, Semester*& pSemester,int 
 		pCur->startDate = createDate();
 		cout << "\nThe Date of Ending semester: ";
 		pCur->endDate = createDate();
-		write << pCur->schoolYear << ',' << pCur->semesterName << ',' << pCur->startDate << ',' << pCur->endDate << '\n';
+		cout << "\nThe Date of Starting Registration: ";
+		pCur->regisStartDate = createDate();
+		cout << "\nThe Date of Ending Registration: ";
+		pCur->regisEndDate = createDate();
+		write << pCur->schoolYear << ',' << pCur->semesterName << ',' << pCur->startDate << ',' << pCur->endDate << ',' << pCur->regisStartDate  << ',' << pCur->regisEndDate << '\n';
 		i++;
 	}
 	write.close();
