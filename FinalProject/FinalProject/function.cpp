@@ -1,4 +1,4 @@
-
+﻿
 #include "Header.h"
 
 using namespace std;
@@ -1016,4 +1016,395 @@ void ListofStudentInClass(int NumberOfStudent, Class* pHead)
 		cout << pTemp->socialId;
 		pTemp = pTemp->pNext;
 	}
+}
+void ScoreBoardOfClass(int NumberOfStudent)
+{
+	//9 học sinh thì NumberOfStudnet = 10
+	GoTo(1, 1);
+	cout << "No";
+	GoTo(6, 1);
+	cout << "ID";
+	GoTo(13, 1);
+	cout << "Full Name";
+	GoTo(28, 1);
+	cout << "Subject 1";
+	GoTo(39, 1);
+	cout << "Subject 2";
+	GoTo(50, 1);
+	cout << "Subject 3";
+	GoTo(61, 1);
+	cout << "Subject 4";
+	GoTo(72, 1);
+	cout << "Subject 5";
+	GoTo(83, 1);
+	cout << "Subject 6";
+	GoTo(94, 1);
+	cout << "GPA";
+	GoTo(101, 1);
+	cout << "Note";
+	int x = 1;
+	for (int i = 3; i < 2 * NumberOfStudent; i = i + 2)
+	{
+		GoTo(1, i);
+		cout << x;
+		GoTo(4, i);
+		cout << "20125121";
+		GoTo(13, i);
+		cout << "Thanh Tu";
+		GoTo(32, i);
+		cout << "8";
+		GoTo(43, i);
+		cout << "7";
+		GoTo(54, i);
+		cout << "10";
+		GoTo(65, i);
+		cout << "2";
+		GoTo(76, i);
+		cout << "5";
+		GoTo(87, i);
+		cout << "6";
+		GoTo(95, i);
+		cout << "8";
+		x++;
+	}
+}
+void DrawListofStudentInClass(int width, int height, int x, int y) {
+	// top board
+	GoTo(x, y);
+	cout << char(201);
+	for (int j = 1; j <= 4 * width - 1; ++j) {
+		//if (j % 4 == 0) cout << char(209);
+	   //else cout << char(205);
+		switch (j)
+		{
+		case 3:
+		{
+			cout << char(209);
+			break;
+		}
+		case 12:
+		{
+			cout << char(209);
+			break;
+		}
+		case 27:
+		{
+			cout << char(209);
+			break;
+		}
+		case 38:
+		{
+			cout << char(209);
+			break;
+		}
+		case 49:
+		{
+			cout << char(209);
+			break;
+		}
+		case 60:
+		{
+			cout << char(209);
+			break;
+		}
+		case 71:
+		{
+			cout << char(209);
+			break;
+		}
+		case 82:
+		{cout << char(209);
+		break;
+		}
+		case 93:
+		{
+			cout << char(209);
+			break;
+		}
+		case 98:
+		{
+			cout << char(209);
+			break;
+		}
+		default:
+		{
+			cout << char(205);
+		}
+		}
+	}
+	cout << char(187);
+	// mid board
+	cout << endl;
+	GoTo(x, y + 2);
+	// final mark
+
+	// 
+	for (int i = 2; i <= 2 * height - 1 + 2; ++i) {
+		if (i == 1) {
+			cout << char(186);
+			for (int j = 2; j <= 4 * width - 1; ++j) {
+				//if (j % 4 == 0) cout << char(179);// ve gach xuong
+				//else cout << " ";
+				switch (j)
+				{
+				case 3:
+				{
+					cout << char(179);
+					break;
+				}
+				case 12:
+				{
+					cout << char(179);
+					break;
+				}
+				case 27:
+				{
+					cout << char(179);
+					break;
+				}
+				case 38:
+				{
+					cout << char(179);
+					break;
+				}
+				case 49:
+				{
+					cout << char(179);
+					break;
+				}
+				case 60:
+				{
+					cout << char(179);
+					break;
+				}
+				case 71:
+				{
+					cout << char(179);
+					break;
+				}
+				case 82:
+				{cout << char(179);
+				break;
+				}
+				case 93:
+				{
+					cout << char(179);
+					break;
+				}
+				case 98:
+				{
+					cout << char(179);
+					break;
+				}
+				default:
+				{
+					cout << " ";
+				}
+				}
+			}
+			cout << char(186);
+			cout << endl;
+			GoTo(x, ++y);
+		}
+		else {
+			if (i % 2 == 0) {
+				cout << char(199);
+				for (int j = 1; j <= 4 * width - 1; ++j) {
+					// if (j % 4 == 0) cout << char(197);
+					 //else cout << char(196);
+					switch (j)
+					{
+					case 3:
+					{
+						cout << char(197);
+						break;
+					}
+					case 12:
+					{
+						cout << char(197);
+						break;
+					}
+					case 27:
+					{
+						cout << char(197);
+						break;
+					}
+					case 38:
+					{
+						cout << char(197);
+						break;
+					}
+					case 49:
+					{
+						cout << char(197);
+						break;
+					}
+					case 60:
+					{
+						cout << char(197);
+						break;
+					}
+					case 71:
+					{
+						cout << char(197);
+						break;
+					}
+					case 82:
+					{cout << char(197);
+					break;
+					}
+					case 93:
+					{
+						cout << char(197);
+						break;
+					}
+					case 98:
+					{
+						cout << char(197);
+						break;
+					}
+					default:
+					{
+						cout << char(196);
+
+					}
+					}
+				}
+				cout << char(182);
+				cout << endl;
+				GoTo(x, ++y);
+			}
+			else {
+				cout << char(186);
+				for (int j = 1; j <= 4 * width - 1; ++j) {
+					//if (j % 4 == 0) cout << char(179);// ve gach xuong
+					//else cout << " ";
+					switch (j)
+					{
+					case 3:
+					{
+						cout << char(179);
+						break;
+					}
+					case 12:
+					{
+						cout << char(179);
+						break;
+					}
+					case 27:
+					{
+						cout << char(179);
+						break;
+					}
+					case 38:
+					{
+						cout << char(179);
+						break;
+					}
+					case 49:
+					{
+						cout << char(179);
+						break;
+					}
+					case 60:
+					{
+						cout << char(179);
+						break;
+					}
+					case 71:
+					{
+						cout << char(179);
+						break;
+					}
+					case 82:
+					{cout << char(179);
+					break;
+					}
+					case 93:
+					{
+						cout << char(179);
+						break;
+					}
+					case 98:
+					{
+						cout << char(179);
+						break;
+					}
+					default:
+					{
+						cout << " ";
+					}
+					}
+				}
+				cout << char(186);
+				cout << endl;
+				GoTo(x, ++y);
+			}
+		}
+
+	}
+	// bot board
+	cout << char(200);
+	for (int j = 1; j <= 4 * width - 1; ++j) {
+		//if (j % 4 == 0) cout << char(207);
+		//else cout << char(205);
+		switch (j)
+		{
+		case 3:
+		{
+			cout << char(207);
+			break;
+		}
+		case 12:
+		{
+			cout << char(207);
+			break;
+		}
+		case 27:
+		{
+			cout << char(207);
+			break;
+		}
+		case 38:
+		{
+			cout << char(207);
+			break;
+		}
+		case 49:
+		{
+			cout << char(207);
+			break;
+		}
+		case 60:
+		{
+			cout << char(207);
+			break;
+		}
+		case 71:
+		{
+			cout << char(207);
+			break;
+		}
+		case 82:
+		{cout << char(207);
+		break;
+		}
+		case 93:
+		{
+			cout << char(207);
+			break;
+		}
+		case 98:
+		{
+			cout << char(207);
+			break;
+		}
+		default:
+		{
+			cout << char(205);
+
+		}
+		}
+	}
+	cout << char(188);
 }

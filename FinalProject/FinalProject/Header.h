@@ -99,5 +99,10 @@ bool enrollCourse(Course* pCourse, Student* pStudent, string &pTempCourseName);
 void RemoveTheEnrolledCourse(Course* pCourse, Semester* pSemester, SchoolYear* pSchool, char* path, string IdSearched);
 void ViewListOfStudentInCourse(Course* pCourse);
 //void ViewScoreBoard(int& numberOfStudent);
+void DrawListofStudentInClass(int width, int height, int x, int y);
+void ListofStudentInClass(int NumberOfStudent, Class* pHead);
+void ScoreBoardOfClass(int NumberOfStudent);
+void DrawListofStudentInClass(int width, int height, int x, int y);
 string createDate();
+
 
