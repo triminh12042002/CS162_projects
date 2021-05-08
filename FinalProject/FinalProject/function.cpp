@@ -802,3 +802,218 @@ void ViewListOfStudentInCourse(Course* pCourse)
     int wait;
     cin >> wait;
 }*/
+void DrawListofStudentInClass(int width, int height, int x, int y) {
+	// top board
+	GoTo(x, y);
+	cout << char(201);
+	for (int j = 1; j <= 4 * width - 1; ++j) {
+		//if (j % 4 == 0) cout << char(209);
+	   //else cout << char(205);
+		switch (j)
+		{
+		case 3:
+		{
+			cout << char(209);
+			break;
+		}
+		case 12:
+		{
+			cout << char(209);
+			break;
+		}
+		case 27:
+		{
+			cout << char(209);
+			break;
+		}
+		case 34:
+		{
+			cout << char(209);
+			break;
+		}
+		case 45:
+		{
+			cout << char(209);
+			break;
+		}
+		case 56:
+		{
+			cout << char(209);
+			break;
+		}
+		default:
+		{
+			cout << char(205);
+		}
+		}
+	}
+	cout << char(187);
+	// mid board
+	cout << endl;
+	GoTo(x, ++y);
+	// final mark
+
+	// 
+	for (int i = 2; i <= 2 * height - 1 + 2; ++i) {
+		if (i % 2 == 0) {
+			cout << char(199);
+			for (int j = 1; j <= 4 * width - 1; ++j) {
+				// if (j % 4 == 0) cout << char(197);
+				 //else cout << char(196);
+				switch (j)
+				{
+				case 3:
+				{
+					cout << char(197);
+					break;
+				}
+				case 12:
+				{
+					cout << char(197);
+					break;
+				}
+				case 27:
+				{
+					cout << char(197);
+					break;
+				}
+				case 34:
+				{
+					cout << char(197);
+					break;
+				}
+				case 45:
+				{
+					cout << char(197);
+					break;
+				}
+				case 56:
+				{
+					cout << char(197);
+					break;
+				}
+				default:
+				{
+					cout << char(196);
+
+				}
+				}
+			}
+			cout << char(182);
+			cout << endl;
+			GoTo(x, ++y);
+		}
+		else {
+			cout << char(186);
+			for (int j = 1; j <= 4 * width - 1; ++j) {
+				//if (j % 4 == 0) cout << char(179);// ve gach xuong
+				//else cout << " ";
+				switch (j)
+				{
+				case 3:
+				{
+					cout << char(179);
+					break;
+				}
+				case 12:
+				{
+					cout << char(179);
+					break;
+				}
+				case 27:
+				{
+					cout << char(179);
+					break;
+				}
+				case 34:
+				{
+					cout << char(179);
+					break;
+				}
+				case 45:
+				{
+					cout << char(179);
+					break;
+				}
+				case 56:
+				{
+					cout << char(179);
+					break;
+				}
+				default:
+				{
+					cout << " ";
+				}
+				}
+			}
+			cout << char(186);
+			cout << endl;
+			GoTo(x, ++y);
+		}
+	}
+	// bot board
+	cout << char(200);
+	for (int j = 1; j <= 4 * width - 1; ++j) {
+		//if (j % 4 == 0) cout << char(207);
+		//else cout << char(205);
+		switch (j)
+		{
+		case 3:
+		{
+			cout << char(207);
+			break;
+		}
+		case 12:
+		{
+			cout << char(207);
+			break;
+		}
+		case 27:
+		{
+			cout << char(207);
+			break;
+		}
+		case 34:
+		{
+			cout << char(207);
+			break;
+		}
+		case 45:
+		{
+			cout << char(207);
+			break;
+		}
+		case 56:
+		{
+			cout << char(207);
+			break;
+		}
+		default:
+		{
+			cout << char(205);
+
+		}
+		}
+	}
+	cout << char(188);
+}
+void ListofStudentInClass(int NumberOfStudent, Class* pHead)
+{
+	Student* pTemp = pHead->pHeadStudent;
+	for (int i = 1; i < 2 * NumberOfStudent; i = i + 2)
+	{
+		GoTo(1, i);
+		cout << pTemp->no;
+		GoTo(4, i);
+		cout << pTemp->id;
+		GoTo(13, i);
+		cout << pTemp->firstName + " " + pTemp->lastName;
+		GoTo(28, i);
+		cout << pTemp->gender;
+		GoTo(35, i);
+		cout << pTemp->dateOfBirth;
+		GoTo(46, i);
+		cout << pTemp->socialId;
+		pTemp = pTemp->pNext;
+	}
+}
