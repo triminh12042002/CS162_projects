@@ -6,6 +6,7 @@
 #include <Windows.h>
 #include <conio.h>
 #include <cstdlib>
+#include <sstream>
 using namespace std;
 struct account {
 	string us;		//username 
@@ -76,8 +77,8 @@ void GoTo(SHORT posX, SHORT posY);
 
 //void inputStudentData(Student*& pHeadStudent, Student*& pTailStudent, char path[]);
 void OutputCSVFIle(Student* pHeadStudent, char path[]);
-void signUp();
-bool login(account*& pLogin, string loginPath);
+void signUp(string path);
+bool login(account*& pLogin, string loginPath, string &user);
 void createSchoolYear(SchoolYear*& pHeadSchoolYear, int& schoolYearSize, char* path);
 void createClass(Class*& pHeadClass, int& sizeOfClass, char* path);
 void CreateYear(SchoolYear*& pHeadYear);
@@ -91,10 +92,10 @@ void CreateCourseRegistration(Course*& pHeadCourse, int& size, char* pathListOfC
 void CreateSemesterOfYear(SchoolYear* pTempSchoolYear, Semester*& pSemester, int& sizeOfSemester, char* path);
 void UpdateCourseInformation(Course*& pHeadCourse, Semester* pSemester, SchoolYear* pSchool, char* path);
 void viewListOfStudents(Class* pHead);
-void viewListOfCourses(Semester* pHead);
+void viewListOfCourses(Course* pHead);
 void viewListOfClasses(Class* pHead);
 void ViewCourse(Student* pHead);
-void enrollCourse(Semester* pSemester, Student* pStudent);
+bool enrollCourse(Course* pCourse, Student* pStudent, string &pTempCourseName);
 void RemoveTheEnrolledCourse(Course* pCourse, Semester* pSemester, SchoolYear* pSchool, char* path, string IdSearched);
 void ViewListOfStudentInCourse(Course* pCourse);
 string createDate();

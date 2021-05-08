@@ -75,12 +75,6 @@ void OutputCSVFIle(Student* pHeadStudent, char path[]) {
 		return;
 	}
 	Student* pCur = pHeadStudent;
-	int count = 0;
-	while (pCur != nullptr) {
-		count += 1;
-		pCur = pCur->pNext;
-	}
-	ofs << count << "\n";
 	pCur = pHeadStudent;
 	while (pCur != nullptr) {
 		ofs << pCur->no << ",";
@@ -93,7 +87,7 @@ void OutputCSVFIle(Student* pHeadStudent, char path[]) {
 		pCur = pCur->pNext;
 	}
 }
-void signUp() {
+void signUp(string path) {
 	string us, pw;
 
 	cout << "\nEnter username : ";
@@ -101,16 +95,17 @@ void signUp() {
 	cout << "\nEnter password : ";
 	getline(cin,pw);
 	ofstream write;
-	write.open("staffLoginData.csv", ios::app);
+	write.open(path, ios::app);
 	write << us << ',' << pw << '\n';
 	write.close();
 }
-bool login(account*& pLogin, string loginPath)
+bool login(account*& pLogin, string loginPath, string &user)
 {
 
 	string username, password;
 	cout << "\nEnter username : ";
 	getline(cin, username);
+	user = username;
 	cout << "\nEnter password : ";
 	getline(cin, password);
 
@@ -588,9 +583,8 @@ void viewListOfStudents(Class* pHead) {
 		pTemp = pTemp->pNext;
 	}
 }
-void viewListOfCourses(Semester* pHead) {
-	cout << "LIST OF COURSES IN SEMESTER " << pHead->semesterName << endl;
-	Course* pTemp = pHead->pHeadCourse;
+void viewListOfCourses(Course* pHead) {
+	Course* pTemp = pHead;
 	cout << "Course ID\tCourse Name\tNumber of Credits\tTeacher Name\n";
 	while (pTemp) {
 		cout << pTemp->id << "\t" << pTemp->courseName << "\t" << pTemp->numOfCredits << "\t" << pTemp->teacherName << endl;
@@ -614,20 +608,21 @@ void ViewCourse(Student* pHead) {
 		pCur = pCur->pNext;
 	}
 }
-void enrollCourse(Semester* pSemester, Student* pStudent) {
-	Course* pTemp = pSemester->pHeadCourse;
+bool enrollCourse(Course* pCourse, Student* pStudent, string &pTempCourseName) {
+	Course* pTemp = pCourse;	// pTemp is in Semester's course
+	Course* pCur = pStudent->pHeadCourse;		// pCur is in Student's course
 	int count = 0;
 	int size = 0;
-	while (pTemp != nullptr) {
+	while (pCur != nullptr) {
 		count++;
-		pTemp = pTemp->pNext;
+		pCur = pCur->pNext;
 	}
 	if (count >= 5) {
 		cout << "You have enroll enough courses (5 course per Semester)\n";
-		return;
+		return false;;
 	}
-	pTemp = pSemester->pHeadCourse;		// pTemp is in Semester's course
-	viewListOfCourses(pSemester);
+	pTemp = pCourse;		
+	viewListOfCourses(pCourse);
 	cout << "Enter Courses Name that you want to enroll\n";
 	string name;
 	getline(cin, name);
@@ -636,15 +631,18 @@ void enrollCourse(Semester* pSemester, Student* pStudent) {
 		pTemp = pTemp->pNext;
 	}
 	if (pTemp != nullptr) {
-		Course* pCur = pStudent->pHeadCourse;		// pCur is in Student's course
+		pCur = pStudent->pHeadCourse;	
 		if (pCur == nullptr) {
-			pCur = new Course;
+			pStudent->pHeadCourse = pCur = new Course;
 			*pCur = *pTemp;
 			cout << "Successfully enroll\n";
+			pTempCourseName = name;
+			return true;
 		}
 		else {
 			bool canEnroll = true;
-			while (pCur->pNext != nullptr) {
+			pCur = pStudent->pHeadCourse;
+			while (pCur != nullptr) {
 				if (pTemp->courseName == pCur->courseName) {
 					canEnroll = false;
 					cout << "Course has already been enrolled.\n";
@@ -668,14 +666,21 @@ void enrollCourse(Semester* pSemester, Student* pStudent) {
 					pCur = pCur->pNext;
 				}
 			} if (canEnroll == true) {
+				pCur = pStudent->pHeadCourse;
+				while (pCur->pNext != nullptr) {
+					pCur = pCur->pNext;
+				}
 				pCur->pNext = new Course;
 				pCur = pCur->pNext;
 				*pCur = *pTemp;
 				pCur->pNext = nullptr;
 				cout << "Successfully enroll\n";
+				pTempCourseName = name;
+				return true;
 			}
 			else {
 				cout << "cannot enroll\n";
+				return false;
 			}
 		}
 
@@ -683,6 +688,7 @@ void enrollCourse(Semester* pSemester, Student* pStudent) {
 	else {
 		cout << "Cannot find the course name that you enter.\n Please enter exactly.\n";
 	}
+	return false;
 }
 void RemoveTheEnrolledCourse(Course* pCourse,Semester*pSemester,SchoolYear*pSchool,char* path, string IdSearched)//char="Student"
 {		
