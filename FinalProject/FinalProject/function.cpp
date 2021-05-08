@@ -749,7 +749,7 @@ void ViewListOfStudentInCourse(Course* pCourse)
 			pCur = pCur->pNext;
 		}
 }
-void ViewScoreBoard(int& numberOfStudent) {
+/*void ViewScoreBoard(int& numberOfStudent) {
     ifstream write;
     ScoreBoardOfCourse ScoreCourse;
     int i = 3;
@@ -801,4 +801,4 @@ void ViewScoreBoard(int& numberOfStudent) {
     }
     int wait;
     cin >> wait;
-}
+}*/
