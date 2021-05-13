@@ -1074,7 +1074,7 @@ void ScoreBoardOfClass(int NumberOfStudent)
 		x++;
 	}
 }
-void DrawListofStudentInClass(int width, int height, int x, int y) {
+/*void DrawListofStudentInClass(int width, int height, int x, int y) {
 	// top board
 	GoTo(x, y);
 	cout << char(201);
@@ -1413,4 +1413,4 @@ void DrawListofStudentInClass(int width, int height, int x, int y) {
 		}
 	}
 	cout << char(188);
-}
+}*/
