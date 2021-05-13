@@ -651,6 +651,8 @@ bool enrollCourse(Course* pCourse, Student* pStudent, string &pTempCourseName) {
 				else if (pTemp->day1 == pCur->day1) {
 					if (pTemp->hour1 == pCur->hour1) {
 						canEnroll = false;
+						cout << "\n" << pCur->courseName << "\tday1:  " << pCur->day1 << "\thour1: " << pCur->hour1 << endl;
+						cout << "\n" << pTemp->courseName << "\tday1:  " << pTemp->day1 << "\thour1: " << pTemp->hour1 << endl;
 						cout << "The 2 sessions are conflicted.";
 						break;
 					}
@@ -658,14 +660,18 @@ bool enrollCourse(Course* pCourse, Student* pStudent, string &pTempCourseName) {
 				else if (pTemp->day2 == pCur->day2) {
 					if (pTemp->hour2 == pCur->hour2) {
 						canEnroll = false;
-						cout << "The 2 sessions are conflicted.";
+						cout << "\n" << pCur->courseName << "\tday2:  " << pCur->day2 << "\thour2: " << pCur->hour2 << endl;
+						cout << "\n" << pTemp->courseName << "\tday2:  " << pTemp->day2 << "\thour2: " << pTemp->hour2 << endl;
+						cout << "\nThe 2 sessions are conflicted.";
 						break;
 					}
 				}
 				else {
-					pCur = pCur->pNext;
+					
 				}
-			} if (canEnroll == true) {
+				pCur = pCur->pNext;
+			} 
+			if (canEnroll == true) {
 				pCur = pStudent->pHeadCourse;
 				while (pCur->pNext != nullptr) {
 					pCur = pCur->pNext;

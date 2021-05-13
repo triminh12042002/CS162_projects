@@ -1077,13 +1077,13 @@ int main(){
 													cout << "\nno student in this course";
 												}
 												else {
-													cout << endl << pHeadStudentInCourse->firstName;
+													cout << endl << pHeadStudentInCourse->firstName << endl;
 												}
 												pTempStudent = pHeadStudentInCourse;
-												while (pTempStudent != nullptr) {
-													cout << pTempStudent->id << endl;
+												while (pTempStudent != nullptr) {	
+													cout << "  id: " << pTempStudent->id << "    user: " << user << endl;	// print all student in 1 course
 													if (pTempStudent->id == user) {
-														cout << "\nfind 1 course";
+														cout << "\nfind 1 course\n";
 														break; // find student
 													}
 													pTempStudent = pTempStudent->pNext;
@@ -1102,7 +1102,7 @@ int main(){
 												}
 												pTempCourse = pTempCourse->pNext;
 											}
-											pStudent->pHeadCourse = pTempEnrolledCourse;
+											pStudent->pHeadCourse = pHeadEnrolledCourse;
 											
 
 											if (counter == 1) {	// enroll course
@@ -1111,37 +1111,44 @@ int main(){
 												if (enrollCourse(pHeadCourse, pStudent, pTempCourseName) == false || pStudent->pHeadCourse == nullptr) {
 													cout << "\ncannot";
 													key = _getch();
-													break;
+													system("cls");
 												}
-												pathListOfStudentInCourse = "Student" + pTempCourseName + defaultSemester + defaultSchoolYear + ".csv";
-												size = pathListOfStudentInCourse.size();
-												pathListOfStudentInCourseChar = new char[size + 1];
-												for (int i = 0; i < size; ++i) {
-													pathListOfStudentInCourseChar[i] = pathListOfStudentInCourse[i];
+												else {
+													pathListOfStudentInCourse = "Student" + pTempCourseName + defaultSemester + defaultSchoolYear + ".csv";
+													size = pathListOfStudentInCourse.size();
+													pathListOfStudentInCourseChar = new char[size + 1];
+													for (int i = 0; i < size; ++i) {
+														pathListOfStudentInCourseChar[i] = pathListOfStudentInCourse[i];
+													}
+													pathListOfStudentInCourseChar[size] = '\0';
+													cout << endl << pathListOfStudentInCourseChar;
+													ofstream fout;
+													fout.open(pathListOfStudentInCourseChar, ios::app);	// add that student to file list of student in course 
+													if (!fout.is_open()) {
+														cout << "\ncannot open file";
+														break;
+													}
+													fout << pStudent->no << ',';
+													fout << pStudent->id << ',';
+													fout << pStudent->firstName << ',';
+													fout << pStudent->lastName << ',';
+													fout << pStudent->gender << ',';
+													fout << pStudent->dateOfBirth << ',';
+													fout << pStudent->socialId << '\n';
+													fout.close();
+													cout << "\n write success";
+													key = _getch();
+													system("cls");
 												}
-												pathListOfStudentInCourseChar[size] = '\0';
-												cout << endl << pathListOfStudentInCourseChar;
-												ofstream fout;
-												fout.open(pathListOfStudentInCourseChar, ios::app);
-												if (!fout.is_open()) {
-													cout << "\ncannot open file";
-													break;
-												}
-												fout << pStudent->no << ',';
-												fout << pStudent->id, ',';
-												fout << pStudent->firstName << ',';
-												fout << pStudent->lastName << ',';
-												fout << pStudent->gender << ',';
-												fout << pStudent->dateOfBirth << ',';
-												fout << pStudent->socialId << '\n';
-												fout.close();
-												cout << "\n write success";
-												key = _getch();
-												system("cls");
+												
 											}
 											if (counter == 2) {	// view enrolled course
-												if (pTempEnrolledCourse == nullptr) {
+												if (pHeadEnrolledCourse == nullptr) {
 													cout << "\nNot enroll any course";
+												}
+												else {
+													Course* pTemp = pHeadEnrolledCourse;
+													viewListOfCourses(pTemp);
 												}
 
 											}
