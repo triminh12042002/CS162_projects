@@ -1106,22 +1106,22 @@ void DrawListofStudentInClass(int width, int height, int x, int y) {
 			cout << char(209);
 			break;
 		}
-		case 27:
+		case 40:
 		{
 			cout << char(209);
 			break;
 		}
-		case 34:
+		case 47:
 		{
 			cout << char(209);
 			break;
 		}
-		case 45:
+		case 58:
 		{
 			cout << char(209);
 			break;
 		}
-		case 56:
+		case 69:
 		{
 			cout << char(209);
 			break;
@@ -1157,22 +1157,22 @@ void DrawListofStudentInClass(int width, int height, int x, int y) {
 					cout << char(197);
 					break;
 				}
-				case 27:
+				case 40:
 				{
 					cout << char(197);
 					break;
 				}
-				case 34:
+				case 47:
 				{
 					cout << char(197);
 					break;
 				}
-				case 45:
+				case 58:
 				{
 					cout << char(197);
 					break;
 				}
-				case 56:
+				case 69:
 				{
 					cout << char(197);
 					break;
@@ -1205,22 +1205,22 @@ void DrawListofStudentInClass(int width, int height, int x, int y) {
 					cout << char(179);
 					break;
 				}
-				case 27:
+				case 40:
 				{
 					cout << char(179);
 					break;
 				}
-				case 34:
+				case 47:
 				{
 					cout << char(179);
 					break;
 				}
-				case 45:
+				case 58:
 				{
 					cout << char(179);
 					break;
 				}
-				case 56:
+				case 69:
 				{
 					cout << char(179);
 					break;
@@ -1253,22 +1253,22 @@ void DrawListofStudentInClass(int width, int height, int x, int y) {
 			cout << char(207);
 			break;
 		}
-		case 27:
+		case 40:
 		{
 			cout << char(207);
 			break;
 		}
-		case 34:
+		case 47:
 		{
 			cout << char(207);
 			break;
 		}
-		case 45:
+		case 58:
 		{
 			cout << char(207);
 			break;
 		}
-		case 56:
+		case 69:
 		{
 			cout << char(207);
 			break;
