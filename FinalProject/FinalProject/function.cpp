@@ -1689,3 +1689,187 @@ void ScoreBoardOfClass(int NumberOfStudent)
 	}
 	cout << char(188);
 }*/
+void DrawCourseScore(int width, int height, int x, int y) {
+    // top board
+    GoTo(x, y);
+    cout << char(201);
+    for (int j = 1; j <= 4 * width - 1; ++j) {
+        //if (j % 4 == 0) cout << char(209);
+        //else cout << char(205);
+        switch (j) {
+        case 4:
+            cout << char(209);
+            break;
+        case 15:
+            cout << char(209);
+            break;
+        case 40:
+            cout << char(209);
+            break;
+        case 45:
+            cout << char(209);
+            break;
+        case 50:
+            cout << char(209);
+            break;
+        case 55:
+            cout << char(209);
+            break;
+        default:
+            cout << char(205);
+            break;
+        }
+    }
+    cout << char(187);
+    // mid board
+    GoTo(x, ++y);
+    for (int i = 1; i <= 2 * height - 1; ++i) {
+        if (i % 2 == 0) {
+            cout << char(199);
+            for (int j = 1; j <= 4 * width - 1; ++j) {
+                //if (j % 4 == 0) cout << char(197); // gach xuong
+                //else cout << char(196);
+                switch (j) {
+                case 4:
+                    cout << char(197);
+                    break;
+                case 15:
+                    cout << char(197);
+                    break;
+                case 40:
+                    cout << char(197);
+                    break;
+                case 45:
+                    cout << char(197);
+                    break;
+                case 50:
+                    cout << char(197);
+                    break;
+                case 55:
+                    cout << char(197);
+                    break;
+                default:
+                    cout << char(196);
+                    break;
+                }
+            }
+            cout << char(182);
+            GoTo(x, ++y);
+        }
+        else { // khoang trang
+            cout << char(186);
+            for (int j = 1; j <= 4 * width - 1; ++j) {
+                //if (j % 4 == 0) cout << char(179);
+                //else cout << " ";
+                switch (j) {
+                case 4:
+                    cout << char(179);
+                    break;
+                case 15:
+                    cout << char(179);
+                    break;
+                case 40:
+                    cout << char(179);
+                    break;
+                case 45:
+                    cout << char(179);
+                    break;
+                case 50:
+                    cout << char(179);
+                    break;
+                case 55:
+                    cout << char(179);
+                    break;
+                default:
+                    cout << " ";
+                    break;
+                }
+            }
+            cout << char(186);
+            GoTo(x, ++y);
+        }
+    }
+    // bot board
+    cout << char(200);
+    for (int j = 1; j <= 4 * width - 1; ++j) {
+        //if (j % 4 == 0) cout << char(207);
+        //else cout << char(205);
+        switch (j) {
+        case 4:
+            cout << char(207);
+            break;
+        case 15:
+            cout << char(207);
+            break;
+        case 40:
+            cout << char(207);
+            break;
+        case 45:
+            cout << char(207);
+            break;
+        case 50:
+            cout << char(207);
+            break;
+        case 55:
+            cout << char(207);
+            break;
+        default:
+            cout << char(205);
+            break;
+        }
+    }
+    cout << char(188);
+}
+void ViewScoreBoard(int& numberOfStudent) {
+    ifstream write;
+    ScoreBoardOfCourse ScoreCourse;
+    int i = 3;
+    write.open("ScoreCourse.csv");
+    if (!write.is_open()) {
+        cout << "Error Loading File.";
+    }
+    else {
+        DrawCourseScore(15, numberOfStudent, 0, 0);
+        GoTo(1, 1);
+        cout << "NO";
+        GoTo(8, 1);
+        cout << "ID";
+        GoTo(18, 1);
+        cout << "FULL NAME";
+        GoTo(41, 1);
+        cout << "MID";
+        GoTo(46, 1);
+        cout << "FIN";
+        GoTo(51, 1);
+        cout << "TOT";
+        GoTo(56, 1);
+        cout << "OTH";
+        while (!write.eof()) {
+            getline(write,ScoreCourse.no, ',');
+            getline(write, ScoreCourse.id, ',');
+            getline(write, ScoreCourse.fullname, ',');
+            getline(write, ScoreCourse.midtermMark, ',');
+            getline(write, ScoreCourse.finalMark, ',');
+            getline(write, ScoreCourse.totalMark, ',');
+            getline(write, ScoreCourse.otherMark, ',');
+            GoTo(2, i);
+            cout << ScoreCourse.no;
+            GoTo(5, i);
+            cout << ScoreCourse.id;
+            GoTo(16, i);
+            cout << ScoreCourse.fullname;
+            GoTo(42, i);
+            cout << ScoreCourse.midtermMark;
+            GoTo(47, i);
+            cout << ScoreCourse.finalMark;
+            GoTo(52, i);
+            cout << ScoreCourse.totalMark;
+            GoTo(57, i);
+            cout << ScoreCourse.otherMark;
+            i += 2;
+        }
+        
+    }
+    int wait;
+    cin >> wait;
+}
