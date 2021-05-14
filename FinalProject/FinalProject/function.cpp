@@ -551,13 +551,13 @@ void add1StudentToClass(Student*& pHeadStudent,int &sizeOfListStudent,char* path
 		sizeOfListStudent++;
 	}
 }
-void deleteCourse(Semester*& pHead) {
+void deleteCourse(Course*& pHead) {
 	string nameOfCourse, idOfCourse;
 	cout << "Input name of the course that you want to delete : "; cin >> nameOfCourse;
 
-	Course* courseHead = pHead->pHeadCourse;
+	Course* courseHead = pHead;
 	if (courseHead->courseName == nameOfCourse) {
-		pHead->pHeadCourse = courseHead->pNext;
+		pHead = courseHead->pNext;
 		delete courseHead;
 		return;
 	}
@@ -703,17 +703,15 @@ void CreateSemesterOfYear(SchoolYear* pTempSchoolYear, Semester*& pSemester,int 
 	}
 	write.close();
 }
-void UpdateCourseInformation(Course*& pHeadCourse,Semester*pSemester,SchoolYear*pSchool,char* path)//path="Course"
+void UpdateCourseInformation(Course*& pHeadCourse,char* path)
 {
-	ofstream write;
-	write.open(path+pSemester->semesterName+pSchool->schoolYearName+".csv");
-	//ofstream write;
+	
 	Course* pCur = nullptr;
-	string searchIdCourse;
+	string courseName;
 	pCur = pHeadCourse;
 	cout << "Which Course do you want to Update? Please Input the ID Course: ";
-	getline(cin, searchIdCourse);
-	while (pCur != nullptr && pCur->id != searchIdCourse)
+	getline(cin, courseName);
+	while (pCur != nullptr && pCur->courseName != courseName)
 	{
 		pCur = pCur->pNext;
 	}
@@ -722,9 +720,10 @@ void UpdateCourseInformation(Course*& pHeadCourse,Semester*pSemester,SchoolYear*
 	{
 		cout << "This Course does not exist in this semester.";
 		return;
-	}
-	if (pCur->id == searchIdCourse)
+	} 
+	if (pCur->courseName == courseName)
 	{
+
 		cout << "What you want to change: " << endl;
 		cout << "1.Course Name" << endl;
 		cout << "2.Id" << endl;
@@ -738,6 +737,8 @@ void UpdateCourseInformation(Course*& pHeadCourse,Semester*pSemester,SchoolYear*
 		int x;
 		cout << "Please input number here: ";
 		cin >> x;
+		string temp;
+		getline(cin, temp);
 		switch (x)
 		{
 		case 1:
@@ -790,7 +791,10 @@ void UpdateCourseInformation(Course*& pHeadCourse,Semester*pSemester,SchoolYear*
 			break;
 		}
 	}
-	//
+	
+	ofstream write;
+	write.open(path);
+	//ofstream write;
 	pCur = pHeadCourse;
 	while (pCur != nullptr)
 	{
@@ -1278,10 +1282,11 @@ void DrawListofStudentInClass(int width, int height, int x, int y) {
 	}
 	cout << char(188);
 }
-void ListofStudentInClass(int NumberOfStudent, Class* pHead)
+void ListofStudentInClass(int NumberOfStudent, Student* pHead)
 {
-	Student* pTemp = pHead->pHeadStudent;
-	for (int i = 1; i < 2 * NumberOfStudent; i = i + 2)
+	DrawListofStudentInClass(14, NumberOfStudent, 0, 0);
+	Student* pTemp = pHead;
+	for (int i = 2; i < 2 * NumberOfStudent+1; i = i + 2)
 	{
 		GoTo(1, i);
 		cout << pTemp->no;
@@ -1349,7 +1354,7 @@ void ScoreBoardOfClass(int NumberOfStudent)
 		x++;
 	}
 }
-/*void DrawListofStudentInClass(int width, int height, int x, int y) {
+void DrawScorceBoardOfClass(int width, int height, int x, int y) {
 	// top board
 	GoTo(x, y);
 	cout << char(201);
@@ -1688,7 +1693,7 @@ void ScoreBoardOfClass(int NumberOfStudent)
 		}
 	}
 	cout << char(188);
-}*/
+}
 void DrawCourseScore(int width, int height, int x, int y) {
     // top board
     GoTo(x, y);
@@ -1820,11 +1825,11 @@ void DrawCourseScore(int width, int height, int x, int y) {
     }
     cout << char(188);
 }
-void ViewScoreBoard(int& numberOfStudent) {
+void ViewScoreBoard(int& numberOfStudent, char* path) {
     ifstream write;
     ScoreBoardOfCourse ScoreCourse;
     int i = 3;
-    write.open("ScoreCourse.csv");
+    write.open(path);
     if (!write.is_open()) {
         cout << "Error Loading File.";
     }

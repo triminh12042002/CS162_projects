@@ -93,11 +93,11 @@ void CreateClass(Student* pHeadStudent, int& sizeOfClass, char* path);
 //void addAllStudentsToClass(Class*& pClass);
 void create1Student(Student*& pStudent);
 void add1StudentToClass(Student*& pHeadStudent, int &sizeOfListStudent, char* path);
-void deleteCourse(Semester*& pHead);
+void deleteCourse(Course*& pHead);
 void addCourseToSemester(Course*& pCourse);
 void CreateCourseRegistration(Course*& pHeadCourse, int& size, char* pathListOfCourseChar);
 void CreateSemesterOfYear(SchoolYear* pTempSchoolYear, Semester*& pSemester, int& sizeOfSemester, char* path);
-void UpdateCourseInformation(Course*& pHeadCourse, Semester* pSemester, SchoolYear* pSchool, char* path);
+void UpdateCourseInformation(Course*& pHeadCourse, char* path);
 void viewListOfStudents(Class* pHead);
 void viewListOfCourses(Course* pHead);
 void viewListOfClasses(Class* pHead);
@@ -107,10 +107,10 @@ void RemoveTheEnrolledCourse(Course* pEnrolledCourse, string defaultSemester, st
 void ViewListOfStudentInCourse(Course* pCourse);
 //void ViewScoreBoard(int& numberOfStudent);
 void DrawListofStudentInClass(int width, int height, int x, int y);
-void ListofStudentInClass(int NumberOfStudent, Class* pHead);
+void ListofStudentInClass(int NumberOfStudent, Student* pHead);
 void ScoreBoardOfClass(int NumberOfStudent);
-void DrawListofStudentInClass(int width, int height, int x, int y);
+void DrawScorceBoardOfClass(int width, int height, int x, int y);
 string createDate();
 void DrawCourseScore(int width, int height, int x, int y);
-void ViewScoreBoard(int& numberOfStudent);
+void ViewScoreBoard(int& numberOfStudent, char* path);
 

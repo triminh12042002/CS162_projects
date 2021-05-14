@@ -504,6 +504,10 @@ int main(){
 																					SetColor(0, 7);
 																					cout << "Number of course: " << sizeOfListCourse;
 																					
+																					GoTo(10, 3);
+																					SetColor(0, 6);
+																					cout << "the beginning of a semester";
+
 																					GoTo(10, 5 );
 																					SetColor(0, Set[0]);
 																					cout << "View Courses";
@@ -521,18 +525,42 @@ int main(){
 																					cout << "Delete Course";
 
 																					GoTo(10, 5 + 2 * 4);
-																					SetColor(0, Set[4]);
-																					cout << "Return";
+																					SetColor(0, 6);
+																					cout << "The end of semester";
 
 																					GoTo(10, 5 + 2 * 5);
+																					SetColor(0, Set[4]);
+																					cout << "Export list of student";
+
+																					GoTo(10, 5 + 2 * 6);
 																					SetColor(0, Set[5]);
+																					cout << "Import list of scoreboard of course";
+
+																					GoTo(10, 5 + 2 * 7);
+																					SetColor(0, Set[6]);
+																					cout << "View scoreboard of course";
+
+																					GoTo(10, 5 + 2 * 8);
+																					SetColor(0, Set[7]);
+																					cout << "Update student result";
+
+																					GoTo(10, 5 + 2 * 9);
+																					SetColor(0, Set[8]);
+																					cout << "View scoreboard of course"; 
+
+																					GoTo(10, 5 + 2 * 10);
+																					SetColor(0, Set[9]);
+																					cout << "Return";
+
+																					GoTo(10, 5 + 2 * 11);
+																					SetColor(0, Set[10]);
 																					cout << "Back to first menu";
 
 																					key = _getch();
-																					if (key == 72 && counter >= 2 && counter <=  6) {
+																					if (key == 72 && counter >= 2 && counter <=  11) {
 																						counter--;
 																					}
-																					if (key == 80 && counter >= 1 && counter <= 5) {
+																					if (key == 80 && counter >= 1 && counter <= 10) {
 																						counter++;
 																					}
 																					if (key == '\r') {
@@ -559,16 +587,37 @@ int main(){
 																						}
 																						if (counter == 3) {	//update course info
 																							cout << "enter update course info";
+																							// load list of course in semester
+																							system("cls");
+																							UpdateCourseInformation(pHeadCourse, pathListOfCourseChar);
+																							
+
 																						}
 																						if (counter == 4) {	//delete course
 																							cout << "enter delete course";
+																							deleteCourse(pHeadCourse);
 																						}
-																						if (counter == 5) {	// return
+																						if (counter == 5) {	//export list of student
+																							cout << "enter export";
+																						}
+																						if (counter == 6) {	//import score board
+																							cout << "enter delete course";
+																						}
+																						if (counter == 7) {	// view scoreboard of score
+																							cout << "enter delete course";
+																						}
+																						if (counter == 8) {	//update student result
+																							cout << "enter delete course";
+																						}
+																						if (counter == 9) {	//view scoreboard of class
+																							cout << "enter delete course";
+																						}
+																						if (counter == 10) {	// return
 																							counter = 0;
 																							system("cls");
 																							break;
 																						}
-																						if (counter ==  6) {	// first menu
+																						if (counter ==  11) {	// first menu
 																							counter = 0;
 																							isContinue = 0;
 																							system("cls");
@@ -843,6 +892,7 @@ int main(){
 											}
 											if (pTempStudent == nullptr) {
 												cout << "cannot find your class";
+
 												break;
 											}
 											Student* pStudent = pTempStudent;
@@ -992,6 +1042,7 @@ int main(){
 													cout << endl << pathListOfStudentChar;
 													loadListOfStudent(pTempClass->pHeadStudent, sizeOfListStudent, pathListOfStudentChar);
 													// view 
+													ListofStudentInClass(sizeOfListStudent, pTempClass->pHeadStudent);
 													cout << "\n view success";
 												}
 												else {
@@ -1030,6 +1081,7 @@ int main(){
 													Student* pHeadStudentInCourse = nullptr;
 													loadListOfStudent(pHeadStudentInCourse, sizeOfListStudent, pathListOfStudentInCourseChar);
 													// view
+													ListofStudentInClass(sizeOfListStudent, pHeadStudentInCourse);
 													cout << "\n view success";
 												}
 												else {
