@@ -1,3 +1,0 @@
-toan,cs161,Vu,11,50,monday,11:30,tuesday,11:30
-Hoa,cs162,Vu,11,50,monday,11:30,tuesday,11:30
-Ly,cs163,Vu,11,50,monday,11:30,tuesday,11:30

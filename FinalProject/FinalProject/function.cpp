@@ -21,6 +21,240 @@ void GoTo(SHORT posX, SHORT posY)
 	SetConsoleCursorPosition(hStdout, Position);
 }
 
+
+void loadListofSchoolYear(SchoolYear*& pHeadSchoolYear, int& schoolYearSize, char path[]) {
+	SchoolYear* pT = nullptr;
+	while (pHeadSchoolYear != nullptr) {
+		pT = pHeadSchoolYear;
+		pHeadSchoolYear = pHeadSchoolYear->pNext;
+		delete pT;
+	}
+	pHeadSchoolYear = nullptr;
+	schoolYearSize = 0;
+	ifstream fin;
+	fin.open(path);
+	if (fin.is_open() == false) {
+		cout << "\nfirst time open file";
+		fin.close();
+		ofstream fout;
+		fout.open(path);
+		fout.close();
+		fin.open(path);
+	}
+	SchoolYear* pTemp = pHeadSchoolYear;
+	string temp;
+	while (!fin.eof()) {
+		if (pTemp == nullptr) {
+			getline(fin, temp, '\n');
+			if (temp == "") break;
+			pHeadSchoolYear = pTemp = new SchoolYear;
+			pTemp->pNext = nullptr;
+			pTemp->schoolYearName = temp;
+			schoolYearSize++;
+
+		}
+		else {
+			getline(fin, temp, '\n');
+			if (temp == "") break;
+			pTemp->pNext = new SchoolYear;
+			pTemp = pTemp->pNext;
+			pTemp->schoolYearName = temp;
+			pTemp->pNext = nullptr;
+			schoolYearSize++;
+		}
+	}
+	fin.close();
+}
+void loadListOfClass(Class*& pHeadClass, int& sizeOfListClass, char* path) {
+
+	Class* pT = nullptr;
+	while (pHeadClass != nullptr) {
+		pT = pHeadClass;
+		pHeadClass = pHeadClass->pNext;
+		delete pT;
+	}
+	pHeadClass = nullptr;
+	sizeOfListClass = 0;
+	ifstream fin;
+	fin.open(path);
+	if (fin.is_open() == false) {
+		cout << "\nfirst time open file";
+		fin.close();
+		ofstream fout;
+		fout.open(path);
+		fout.close();
+		fin.open(path);
+	}
+	Class* pTemp = pHeadClass;
+	string temp;
+	while (!fin.eof()) {
+		if (pTemp == nullptr) {
+			getline(fin, temp, '\n');
+			if (temp == "") break;
+			pHeadClass = pTemp = new Class;
+			pTemp->pNext = nullptr;
+			pTemp->className = temp;
+			sizeOfListClass++;
+
+		}
+		else {
+			getline(fin, temp, '\n');
+			if (temp == "") break;
+			pTemp->pNext = new Class;
+			pTemp = pTemp->pNext;
+			pTemp->className = temp;
+			pTemp->pNext = nullptr;
+			sizeOfListClass++;
+		}
+	}
+	fin.close();
+}
+void loadListOfSemester(Semester*& pHeadSemester, int& sizeOfListSemester, char* path) {
+
+	Semester* pT = nullptr;
+	while (pHeadSemester != nullptr) {
+		pT = pHeadSemester;
+		pHeadSemester = pHeadSemester->pNext;
+		delete pT;
+	}
+	pHeadSemester = nullptr;
+	sizeOfListSemester = 0;
+	ifstream fin;
+	fin.open(path);
+	if (fin.is_open() == false) {
+		cout << "\nfirst time open file";
+		fin.close();
+		ofstream fout;
+		fout.open(path);
+		fout.close();
+		fin.open(path);
+	}
+	Semester* pTemp = pHeadSemester;
+	string temp;
+	while (!fin.eof()) {
+		getline(fin, temp, ',');
+		if (temp == "") break;
+		if (pTemp == nullptr) {
+			pHeadSemester = pTemp = new Semester;
+			pTemp->pNext = nullptr;
+		}
+		else {
+			pTemp->pNext = new Semester;
+			pTemp = pTemp->pNext;
+			pTemp->pNext = nullptr;
+		}
+		pTemp->pNext = nullptr;
+		pTemp->schoolYear = temp;
+		getline(fin, temp, ',');
+		pTemp->semesterName = temp;
+		getline(fin, temp, ',');
+		pTemp->startDate = temp;
+		getline(fin, temp, ',');
+		pTemp->endDate = temp;
+		getline(fin, temp, ',');
+		pTemp->regisStartDate = temp;
+		getline(fin, temp, '\n');
+		pTemp->regisEndDate = temp;
+		sizeOfListSemester++;
+	}
+	fin.close();
+}
+void loadListOfStudent(Student*& pHeadStudent, int& sizeOfListStudent, char* path) {
+
+	Student* pT = nullptr;
+	while (pHeadStudent != nullptr) {
+		pT = pHeadStudent;
+		pHeadStudent = pHeadStudent->pNext;
+		delete pT;
+	}
+	pHeadStudent = nullptr;
+	sizeOfListStudent = 0;
+	ifstream fin;
+	fin.open(path);
+	if (fin.is_open() == false) {
+		fin.close();
+		ofstream fout;
+		fout.open(path);
+		fout.close();
+		fin.open(path);
+	}
+	Student* pTemp = pHeadStudent;
+	string temp;
+	while (!fin.eof()) {
+		getline(fin, temp, ',');
+		if (temp == "") break;
+		if (pTemp == nullptr) {
+			pHeadStudent = pTemp = new Student;
+			pTemp->pNext = nullptr;
+		}
+		else {
+			pTemp->pNext = new Student;
+			pTemp = pTemp->pNext;
+			pTemp->pNext = nullptr;
+		}
+		pTemp->pNext = nullptr;
+		pTemp->no = temp;
+		getline(fin, pTemp->id, ',');
+		getline(fin, pTemp->firstName, ',');
+		getline(fin, pTemp->lastName, ',');
+		getline(fin, pTemp->gender, ',');
+		getline(fin, pTemp->dateOfBirth, ',');
+		getline(fin, pTemp->socialId, '\n');
+		sizeOfListStudent++;
+	}
+	fin.close();
+}
+void loadListOfCourse(Course*& pHeadCourse, int& sizeOfListCourse, char* path) {
+
+	Course* pT = nullptr;
+	while (pHeadCourse != nullptr) {
+		pT = pHeadCourse;
+		pHeadCourse = pHeadCourse->pNext;
+		delete pT;
+	}
+	pHeadCourse = nullptr;
+	sizeOfListCourse = 0;
+	ifstream fin;
+	fin.open(path);
+	if (fin.is_open() == false) {
+		fin.close();
+		ofstream fout;
+		fout.open(path);
+		fout.close();
+		fin.open(path);
+	}
+	Course* pTemp = pHeadCourse;
+	string temp;
+	while (!fin.eof()) {
+		getline(fin, temp, ',');
+		if (temp == "") break;
+		if (pTemp == nullptr) {
+			pHeadCourse = pTemp = new Course;
+			pTemp->pNext = nullptr;
+		}
+		else {
+			pTemp->pNext = new Course;
+			pTemp = pTemp->pNext;
+			pTemp->pNext = nullptr;
+		}
+		pTemp->pNext = nullptr;
+		pTemp->courseName = temp;
+		getline(fin, pTemp->startDate, ',');
+		getline(fin, pTemp->endDate, ',');
+		getline(fin, pTemp->id, ',');
+		getline(fin, pTemp->teacherName, ',');
+		getline(fin, pTemp->numOfCredits, ',');
+		getline(fin, pTemp->maxNumOfStudents, ',');
+		getline(fin, pTemp->day1, ',');
+		getline(fin, pTemp->hour1, ',');
+		getline(fin, pTemp->day2, ',');
+		getline(fin, pTemp->hour2, '\n');
+		sizeOfListCourse++;
+	}
+	fin.close();
+}
+
+
 string createDate() {
 	cout << "\nEnter Day :";
 	string day;
@@ -696,46 +930,87 @@ bool enrollCourse(Course* pCourse, Student* pStudent, string &pTempCourseName) {
 	}
 	return false;
 }
-void RemoveTheEnrolledCourse(Course* pCourse,Semester*pSemester,SchoolYear*pSchool,char* path, string IdSearched)//char="Student"
+void RemoveTheEnrolledCourse(Course* pEnrolledCourse, string defaultSemester, string defaultSchoolYear, string IdSearched)
 {		
-	//Ask student to input his/her id before Removing the Enrolled Course 									
-	ofstream write;									  	
-	Student* pCur = nullptr;
-	pCur = pCourse->pHeadStudentEnroll;
-	Student* temp = pCur;
-	if (pCourse->pHeadStudentEnroll->id == IdSearched)
-	{
-		temp = pCourse->pHeadStudentEnroll;
-		pCourse->pHeadStudentEnroll = pCourse->pHeadStudentEnroll->pNext;
-		delete temp;
+	
+	viewListOfCourses(pEnrolledCourse);
+	cout << "Enter Courses Name that you want to remove\n";
+	string name;
+	getline(cin, name);
+	Course* pTemp = pEnrolledCourse;
+	while (pTemp != nullptr && pTemp->courseName != name) {
+		pTemp = pTemp->pNext;
 	}
-	else {
-		while (pCur->pNext != nullptr && pCur->pNext->id != IdSearched)
-		{
-			pCur = pCur->pNext;
+	if (pTemp != nullptr) {
+		// load list of student in this course
+		string pathListOfStudentInCourse = "Student" + pTemp->courseName + defaultSemester + defaultSchoolYear + ".csv";
+		int size = pathListOfStudentInCourse.size();
+		char* pathListOfStudentInCourseChar = new char[size + 1];
+		for (int i = 0; i < size; ++i) {
+			pathListOfStudentInCourseChar[i] = pathListOfStudentInCourse[i];
 		}
-		if (pCur->pNext == nullptr)
-		{
-			cout << "Student does not enroll this course";
+		pathListOfStudentInCourseChar[size] = '\0';
+		cout << endl << pathListOfStudentInCourseChar;
+		ifstream fin;
+		fin.open(pathListOfStudentInCourseChar);
+		if (!fin.is_open()) {
+			cout << "\ncannot open file";
 			return;
 		}
-		if (pCur->pNext->id == IdSearched)
+		int sizeOfListStudent = 0;
+		loadListOfStudent(pTemp->pHeadStudentEnroll, sizeOfListStudent, pathListOfStudentInCourseChar);
+		fin.close();
+
+		// delete student from the list and write list of student again to file
+		
+		Student* pCur = nullptr;
+		pCur = pTemp->pHeadStudentEnroll;
+		Student* temp = pCur;
+		if (pTemp->pHeadStudentEnroll->id == IdSearched)
 		{
-			temp = pCur->pNext;
-			pCur->pNext = pCur->pNext->pNext;
+			temp = pTemp->pHeadStudentEnroll;
+			pTemp->pHeadStudentEnroll = pTemp->pHeadStudentEnroll->pNext;
 			delete temp;
 		}
+		else {
+			while (pCur->pNext != nullptr && pCur->pNext->id != IdSearched)
+			{
+				pCur = pCur->pNext;
+			}
+			if (pCur->pNext == nullptr)
+			{
+				cout << "Student does not enroll this course";
+				return;
+			}
+			if (pCur->pNext->id == IdSearched)
+			{
+				temp = pCur->pNext;
+				pCur->pNext = pCur->pNext->pNext;
+				delete temp;
+				cout << "\nsuccesfully remove course";
+			}
+		}
+		pCur = pTemp->pHeadStudentEnroll;
+		ofstream fout;
+		fout.open(pathListOfStudentInCourseChar);
+		while (pCur != nullptr)
+		{
+			fout << pCur->no << ',';
+			fout << pCur->id << ',';
+			fout << pCur->firstName << ',';
+			fout << pCur->lastName << ',';
+			fout << pCur->gender << ',';
+			fout << pCur->dateOfBirth << ',';
+			fout << pCur->socialId << '\n';
+			pCur = pCur->pNext;
+		}
+		fout.close();
+		cout << "\nrewrite succesfully";
 	}
-	pCur = pCourse->pHeadStudentEnroll;
-	write.open(path+pCourse->courseName+pSemester->semesterName+pSchool->schoolYearName+".csv");
-	while (pCur != nullptr)
-	{
-		write << pCur->id << ",";
-		write << pCur->firstName << " ";
-		write << pCur->lastName << "\n";
-		pCur = pCur->pNext;
+	else {
+		cout << "Cannot find the course name that you enter.\n Please enter exactly.\n";
 	}
-	write.close();
+	
 }
 void ViewListOfStudentInCourse(Course* pCourse)
 {

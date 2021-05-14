@@ -14,240 +14,13 @@ Semester* pTempSemester = nullptr;
 Course* pTempCourse = nullptr;
 Student* pTempStudent = nullptr;
 bool isContinue = true;
-void loadListofSchoolYear(SchoolYear* &pHeadSchoolYear, int &schoolYearSize, char path[]) {
-	SchoolYear* pT = nullptr;
-	while (pHeadSchoolYear != nullptr) {
-		pT = pHeadSchoolYear;
-		pHeadSchoolYear = pHeadSchoolYear->pNext;
-		delete pT;
-	}
-	pHeadSchoolYear = nullptr;
-	schoolYearSize = 0;
-	ifstream fin;
-	fin.open(path);
-	if (fin.is_open() == false) {
-		cout << "\nfirst time open file";
-		fin.close();
-		ofstream fout;
-		fout.open(path);
-		fout.close();
-		fin.open(path);
-	}
-	SchoolYear* pTemp = pHeadSchoolYear;
-	string temp;
-	while (!fin.eof()) {
-		if (pTemp == nullptr) {
-			getline(fin, temp,'\n');
-			if (temp == "") break;
-			pHeadSchoolYear = pTemp = new SchoolYear;		
-			pTemp->pNext = nullptr;
-			pTemp->schoolYearName = temp;
-			schoolYearSize++;
 
-		}
-		else {
-			getline(fin, temp,'\n');
-			if (temp == "") break;
-			pTemp->pNext = new SchoolYear;
-			pTemp = pTemp->pNext;			
-			pTemp->schoolYearName = temp;
-			pTemp->pNext = nullptr;
-			schoolYearSize++;
-		}
-	}
-	fin.close();
-}
-void loadListOfClass(Class* &pHeadClass, int& sizeOfListClass, char* path) {
-	
-	Class* pT = nullptr;
-	while (pHeadClass != nullptr) {
-		pT = pHeadClass;
-		pHeadClass = pHeadClass->pNext;
-		delete pT;
-	}
-	pHeadClass = nullptr;
-	sizeOfListClass = 0;
-	ifstream fin;
-	fin.open(path);
-	if (fin.is_open() == false) {
-		cout << "\nfirst time open file";
-		fin.close();
-		ofstream fout;
-		fout.open(path);
-		fout.close();
-		fin.open(path);
-	}
-	Class* pTemp = pHeadClass;
-	string temp;
-	while (!fin.eof()) {
-		if (pTemp == nullptr) {
-			getline(fin, temp, '\n');
-			if (temp == "") break;
-			pHeadClass = pTemp = new Class;
-			pTemp->pNext = nullptr;
-			pTemp->className = temp;
-			sizeOfListClass++;
-
-		}
-		else {
-			getline(fin, temp, '\n');
-			if (temp == "") break;
-			pTemp->pNext = new Class;
-			pTemp = pTemp->pNext;
-			pTemp->className = temp;
-			pTemp->pNext = nullptr;
-			sizeOfListClass++;
-		}
-	}
-	fin.close();
-}
-void loadListOfSemester(Semester*& pHeadSemester, int& sizeOfListSemester, char* path) {
-
-	Semester* pT = nullptr;
-	while (pHeadSemester != nullptr) {
-		pT = pHeadSemester;
-		pHeadSemester = pHeadSemester->pNext;
-		delete pT;
-	}
-	pHeadSemester = nullptr;
-	sizeOfListSemester = 0;
-	ifstream fin;
-	fin.open(path);
-	if (fin.is_open() == false) {
-		cout << "\nfirst time open file";
-		fin.close();
-		ofstream fout;
-		fout.open(path);
-		fout.close();
-		fin.open(path);
-	}
-	Semester* pTemp = pHeadSemester;
-	string temp;
-	while (!fin.eof()) {
-		getline(fin, temp, ',');
-		if (temp == "") break;
-		if (pTemp == nullptr) {
-			pHeadSemester = pTemp = new Semester;
-			pTemp->pNext = nullptr;
-		}
-		else {
-			pTemp->pNext = new Semester;
-			pTemp = pTemp->pNext;
-			pTemp->pNext = nullptr;
-		}
-		pTemp->pNext = nullptr;
-		pTemp->schoolYear = temp;
-		getline(fin, temp, ',');
-		pTemp->semesterName = temp;
-		getline(fin, temp, ',');
-		pTemp->startDate = temp;
-		getline(fin, temp, ',');
-		pTemp->endDate = temp;
-		getline(fin, temp, ',');
-		pTemp->regisStartDate = temp;
-		getline(fin, temp, '\n');
-		pTemp->regisEndDate = temp;
-		sizeOfListSemester++;
-	}
-	fin.close();
-}
-void loadListOfStudent(Student*& pHeadStudent, int& sizeOfListStudent, char* path) {
-
-	Student* pT = nullptr;
-	while (pHeadStudent != nullptr) {
-		pT = pHeadStudent;
-		pHeadStudent = pHeadStudent->pNext;
-		delete pT;
-	}
-	pHeadStudent = nullptr;
-	sizeOfListStudent = 0;
-	ifstream fin;
-	fin.open(path);
-	if (fin.is_open() == false) {
-		fin.close();
-		ofstream fout;
-		fout.open(path);
-		fout.close();
-		fin.open(path);
-	}
-	Student* pTemp = pHeadStudent;
-	string temp;
-	while (!fin.eof()) {
-		getline(fin, temp, ',');
-		if (temp == "") break;
-		if (pTemp == nullptr) {
-			pHeadStudent = pTemp = new Student;
-			pTemp->pNext = nullptr;
-		}
-		else {
-			pTemp->pNext = new Student;
-			pTemp = pTemp->pNext;
-			pTemp->pNext = nullptr;
-		}
-		pTemp->pNext = nullptr;
-		pTemp->no = temp;
-		getline(fin, pTemp->id, ',');
-		getline(fin, pTemp->firstName, ',');
-		getline(fin, pTemp->lastName, ',');
-		getline(fin, pTemp->gender, ',');
-		getline(fin, pTemp->dateOfBirth, ',');
-		getline(fin, pTemp->socialId, '\n');
-		sizeOfListStudent++;
-	}
-	fin.close();
-}
-void loadListOfCourse(Course*& pHeadCourse, int& sizeOfListCourse, char* path) {
-
-	Course* pT = nullptr;
-	while (pHeadCourse != nullptr) {
-		pT = pHeadCourse;
-		pHeadCourse = pHeadCourse->pNext;
-		delete pT;
-	}
-	pHeadCourse = nullptr;
-	sizeOfListCourse = 0;
-	ifstream fin;
-	fin.open(path);
-	if (fin.is_open() == false) {
-		fin.close();
-		ofstream fout;
-		fout.open(path);
-		fout.close();
-		fin.open(path);
-	}
-	Course* pTemp = pHeadCourse;
-	string temp;
-	while (!fin.eof()) {
-		getline(fin, temp, ',');
-		if (temp == "") break;
-		if (pTemp == nullptr) {
-			pHeadCourse = pTemp = new Course;
-			pTemp->pNext = nullptr;
-		}
-		else {
-			pTemp->pNext = new Course;
-			pTemp = pTemp->pNext;
-			pTemp->pNext = nullptr;
-		}
-		pTemp->pNext = nullptr;
-		pTemp->courseName = temp;
-		getline(fin, pTemp->startDate,',');
-		getline(fin, pTemp->endDate, ',');
-		getline(fin, pTemp->id, ',');
-		getline(fin, pTemp->teacherName, ',');
-		getline(fin, pTemp->numOfCredits, ',');
-		getline(fin, pTemp->maxNumOfStudents, ',');
-		getline(fin, pTemp->day1, ',');
-		getline(fin, pTemp->hour1, ',');
-		getline(fin, pTemp->day2, ',');
-		getline(fin, pTemp->hour2, '\n');
-		sizeOfListCourse++;
-	}
-	fin.close();
-}
 int main(){
-	string defaultSchoolYear = "2020-2021";
-	string defaultSemester = "2";
+	const string defaultSchoolYear = "2020-2021";
+	const string defaultSemester = "2";
+	const string defaultYear = "2021";
+	const string defaultMonth = "5";
+	const string defaultDay = "16";
 	// input student from csv file to a list
 	// output student data to a csv file
 
@@ -970,6 +743,12 @@ int main(){
 											Set[0] = 2;
 											counter = 1;
 										}
+
+										GoTo(10, 3);
+										SetColor(0, 7);
+										cout << "a course registration session is active";
+
+
 										GoTo(10, 5);
 										SetColor(0, Set[0]);
 										cout << "Enroll";
@@ -983,13 +762,37 @@ int main(){
 										cout << "Remove enrolled course";
 
 										GoTo(10, 11);
+										SetColor(0, 7);
+										cout << "a course registration session is close";
+
+										GoTo(10, 13);
 										SetColor(0, Set[3]);
+										cout << "View list of your course";
+
+										GoTo(10, 15);
+										SetColor(0, Set[4]);
+										cout << "View list of Class";
+
+										GoTo(10, 17);
+										SetColor(0, Set[5]);
+										cout << "View list of student in class";
+
+										GoTo(10, 19);
+										SetColor(0, Set[6]);
+										cout << "View list of course";
+
+										GoTo(10, 21);
+										SetColor(0, Set[7]);
+										cout << "View list of student in course";
+
+										GoTo(10, 23);
+										SetColor(0, Set[8]);
 										cout << "Return";
 										key = _getch();
-										if (key == 72 && counter >= 2 && counter <= 4) {
+										if (key == 72 && counter >= 2 && counter <= 9) {
 											counter--;
 										}
-										if (key == 80 && counter >= 1 && counter <= 3) {
+										if (key == 80 && counter >= 1 && counter <= 8) {
 											counter++;
 										}
 										if (key == '\r') {
@@ -1081,7 +884,7 @@ int main(){
 												}
 												pTempStudent = pHeadStudentInCourse;
 												while (pTempStudent != nullptr) {	
-													cout << "  id: " << pTempStudent->id << "    user: " << user << endl;	// print all student in 1 course
+													//cout << "  id: " << pTempStudent->id << "    user: " << user << endl;	// print all student in 1 course
 													if (pTempStudent->id == user) {
 														cout << "\nfind 1 course\n";
 														break; // find student
@@ -1152,10 +955,25 @@ int main(){
 												}
 
 											}
-											if (counter == 3) {	// delete course
-												
+											if (counter == 3) {	// remove course
+												RemoveTheEnrolledCourse(pStudent->pHeadCourse, defaultSemester, defaultSchoolYear, user);
 											}
-											if (counter == 4) {	// return
+											if (counter == 4) {	//  view list of his/her course
+											
+											}
+											if (counter == 5) {	// view list of classes
+											
+											}
+											if (counter == 6) {	// view list of student in class
+											
+											}
+											if (counter == 7) {	// view list of courses
+
+											}
+											if (counter == 8) {	// view list of student in course
+
+											}
+											if (counter == 9) {	// return
 												counter = 0;
 												system("cls");
 												break;

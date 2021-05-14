@@ -75,6 +75,13 @@ struct  ScoreBoardOfClass {
 void SetColor(int backgound_color, int text_color);
 void GoTo(SHORT posX, SHORT posY);
 
+void loadListofSchoolYear(SchoolYear*& pHeadSchoolYear, int& schoolYearSize, char path[]);
+void loadListOfClass(Class*& pHeadClass, int& sizeOfListClass, char* path);
+void loadListOfSemester(Semester*& pHeadSemester, int& sizeOfListSemester, char* path);
+void loadListOfStudent(Student*& pHeadStudent, int& sizeOfListStudent, char* path);
+void loadListOfCourse(Course*& pHeadCourse, int& sizeOfListCourse, char* path);
+
+
 //void inputStudentData(Student*& pHeadStudent, Student*& pTailStudent, char path[]);
 void OutputCSVFIle(Student* pHeadStudent, char path[]);
 void signUp(string path);
@@ -96,7 +103,7 @@ void viewListOfCourses(Course* pHead);
 void viewListOfClasses(Class* pHead);
 void ViewCourse(Student* pHead);
 bool enrollCourse(Course* pCourse, Student* pStudent, string &pTempCourseName);
-void RemoveTheEnrolledCourse(Course* pCourse, Semester* pSemester, SchoolYear* pSchool, char* path, string IdSearched);
+void RemoveTheEnrolledCourse(Course* pEnrolledCourse, string defaultSemester, string defaultSchoolYear, string IdSearched);
 void ViewListOfStudentInCourse(Course* pCourse);
 //void ViewScoreBoard(int& numberOfStudent);
 void DrawListofStudentInClass(int width, int height, int x, int y);
