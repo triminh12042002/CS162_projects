@@ -1885,13 +1885,13 @@ void UpdateScoreInCourse(char* path, int NumbersOfStudent, string FullNameSearch
 	read.open(path);
 	for (int i = 0; i < NumbersOfStudent; i++)
 	{
-		read >> Course[i].no;
-		read >> Course[i].id;
-		read >> Course[i].fullname;
-		read >> Course[i].totalMark;
-		read >> Course[i].finalMark;
-		read >> Course[i].midtermMark;
-		read >> Course[i].otherMark;
+		getline(read, Course[i].no, ',');
+		getline(read, Course[i].id, ',');
+		getline(read, Course[i].fullname, ',');
+		getline(read, Course[i].totalMark, ',');
+		getline(read, Course[i].finalMark, ',');
+		getline(read, Course[i].midtermMark, ',');
+		getline(read, Course[i].otherMark, '\n');
 	}
 	// ASK Which course do they want to update???
 	for (int i = 0; i < NumbersOfStudent; i++)
@@ -1943,13 +1943,13 @@ void UpdateScoreInCourse(char* path, int NumbersOfStudent, string FullNameSearch
 	write.open(path);
 	for (int i = 0; i < NumbersOfStudent; i++)
 	{
-		write << Course[i].no;
-		write << Course[i].id;
-		write << Course[i].fullname;
-		write << Course[i].totalMark;
-		write << Course[i].finalMark;
-		write << Course[i].midtermMark;
-		write << Course[i].otherMark;
+		write << Course[i].no << ',';
+		write << Course[i].id << ',';
+		write << Course[i].fullname << ',';
+		write << Course[i].totalMark << ',';
+		write << Course[i].finalMark << ',';
+		write << Course[i].midtermMark << ',';
+		write << Course[i].otherMark << '\n';
 	}
 	write.close();
 }
