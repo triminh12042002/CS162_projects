@@ -1878,3 +1878,78 @@ void ViewScoreBoard(int& numberOfStudent, char* path) {
     int wait;
     cin >> wait;
 }
+void UpdateScoreInCourse(char* path, int NumbersOfStudent, string FullNameSearched)
+{
+	ScoreBoardOfCourse Course[60];
+	ifstream read;
+	read.open(path);
+	for (int i = 0; i < NumbersOfStudent; i++)
+	{
+		read >> Course[i].no;
+		read >> Course[i].id;
+		read >> Course[i].fullname;
+		read >> Course[i].totalMark;
+		read >> Course[i].finalMark;
+		read >> Course[i].midtermMark;
+		read >> Course[i].otherMark;
+	}
+	// ASK Which course do they want to update???
+	for (int i = 0; i < NumbersOfStudent; i++)
+	{
+		if (Course[i].fullname == FullNameSearched)
+		{
+			//Show the current mark
+			cout << "Current Final Mark: " << Course[i].finalMark << endl;
+			cout << "Current Midterm Mark: " << Course[i].midtermMark << endl;
+			cout << "Which Course do you want to update?";
+			cout << "1.Final mark";
+			cout << "2.Midterm mark";
+			cout << "Type the Number Here: ";
+			int x;
+			cin >> x;
+			string b;
+			getline(cin, b);
+			switch (x)
+			{
+			case 1:
+			{
+				getline(cin, Course[i].finalMark);
+				break;
+			}
+			case 2:
+			{
+				getline(cin, Course[i].midtermMark);
+				break;
+			}
+			default:
+				break;
+			}
+
+			//Total course will be affected
+			//convert string to float
+			string stra(Course[i].finalMark);
+			float a = stoi(stra);
+			string strb(Course[i].midtermMark);
+			float b = stoi(strb);
+			float x = a * 0.6 + b * 0.4;
+			//convert float to string
+			Course[i].totalMark = to_string(x);
+		}
+	}
+	read.close();
+
+	//write back to the file
+	ofstream write;
+	write.open(path);
+	for (int i = 0; i < NumbersOfStudent; i++)
+	{
+		write << Course[i].no;
+		write << Course[i].id;
+		write << Course[i].fullname;
+		write << Course[i].totalMark;
+		write << Course[i].finalMark;
+		write << Course[i].midtermMark;
+		write << Course[i].otherMark;
+	}
+	write.close();
+}
