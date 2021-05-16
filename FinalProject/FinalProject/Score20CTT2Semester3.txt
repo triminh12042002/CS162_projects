@@ -1,0 +1,52 @@
+1,1751098,Nguyen Minh Quang,8.5,7,7.25,3,5, ,7
+2,1751105,Do Vuong Quoc Thinh,9,8,8.5,2,4, ,6
+3,18125051,Nguyen Cong Nam,9,9,9,3,5, ,7
+4,18125071,Le Cao Tien Dat,6,9,7.5,4,8, ,8
+5,20125020,Le Quoc Anh,8,7,7.5,3,8, ,8
+6,20125022,Võ Huy Dang,5,10,7.5,4,8, ,6
+7,20125028,Nguyen Nhat Hao,9,8,8.5,3,8, ,7
+8,20125030,Le Minh Hoang,10,9,9.5,5,7, ,7
+9,20125044,Bui Trong Nhan,4,10,7,3,2, ,5
+10,20125047,Phan Huynh Tan Phat,7,8,7.5,1,7, ,8
+11,20125049,Nguyen Xuan Quang,10,8,9,3,6, ,8
+12,20125051,Tran Nguyen Dang Tam,8,3,5.5,3,7, ,6
+13,20125053,Tran To Bang Trinh,7,7,7,2,5, ,8
+14,20125055,Truong Nhat Anh,8,9,8.5,2,8, ,8
+15,20125061,Nguyen Ha Ngoc Linh,10,6,8,3,8, ,8
+16,20125070,Le Vo Duc Anh,8,9,8.5,2,8, ,8
+17,20125071,Bui Le Gia Cat,10,8,9,3,4, ,6
+18,20125074,Duong Hoang Huy,8,10,9,3,8, ,8
+19,20125075,Ha Gia Khang,8,3,5.5,3,7, ,6
+20,20125076,Nguyen Minh Quan,5,6,5.5,4,3, ,4
+21,20125077,Truong Duc Thang,7,8,7.5,3,8, ,8
+22,20125086,Ho Trong Bao,7,8,7.5,3,8, ,8
+23,20125087,Huynh Ba Dong Cat,8,8,8,2,5, ,6
+24,20125088,Le Quoc Cuong,8,3,5.5,3,8, ,8
+25,20125089,Quang The Cuong,6,8,7,1,1, ,3
+26,20125091,Dang Truong Duy,7,7,7,2,2, ,5
+27,20125092,Le Vinh Hien,7,8,7.5,3,8, ,8
+28,20125094,Tran Dao Bao Huan,9,6,7.5,3,2, ,6
+29,20125096,Phan Vinh Khang,8,8,8,2,8, ,8
+30,20125097,Le Gia Khanh,7,7,7,2,8, ,8
+31,20125098,Pham Dinh Khoi,6,7,6.5,1,8, ,8
+32,20125099,Hoang Thi Minh Khue,8,3,5.5,3,8, ,8
+33,20125100,Ha Thien Loc,7,8,7.5,3,2, ,6
+34,20125104,Mach Vinh Phat,9,6,7.5,3,7, ,6
+35,20125105,Pham Tan Phat,5,6,5.5,4,8, ,8
+36,20125107,Ho Van Quan,6,8,7,1,8, ,8
+37,20125108,Dao Nhat Quang,7,7,7,2,1, ,5
+38,20125109,Truong Kien Quoc,7,8,7.5,3,1, ,5
+39,20125110,Le Pham Nhat Quynh,8,10,9,3,8, ,7
+40,20125112,Nguyen Ho Truong Son,6,7,6.5,1,5, ,5
+41,20125113,Nguyen Quang Tan,8,3,5.5,3,8, ,8
+42,20125114,Nguyen Ngoc Thach,6,7,6.5,1,8, ,8
+43,20125115,Pham Quoc Thieu,9,9,9,3,8, ,8
+44,20125116,Luu Le Thuan,9,3,6,3,8, ,8
+45,20125119,Nguyen Minh Tri,8,10,9,3,2, ,7
+46,20125121,Pham Thanh Tu,8,9,8.5,2,8, ,8
+47,20125122,Ngo Minh Tuan,6,8,7,1,9, ,5
+48,20125123,Hoang Thanh Tung,6,7,6.5,1,8, ,8
+49,20125125,Truong Thuy Tuong Vy,7,8,7.5,8,7, ,8
+50,20125128,Nguyen Dang Khoa,9,9,9,3,8, ,6
+51,20125130,Nguyen Phu Vinh,8,3,5.5,3,8, ,7
+52,18125102,Nguyen Hong Ngoc,6,8,7,1,8, ,8

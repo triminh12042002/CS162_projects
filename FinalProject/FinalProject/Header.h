@@ -68,8 +68,8 @@ struct SchoolYear {
 struct  ScoreBoardOfCourse {
 	string no, id, fullname, totalMark, finalMark, midtermMark, otherMark;
 };
-struct  ScoreBoardOfClass {
-	string no, id, fullname;
+struct  ScoreBoardOfClasss {
+	string no, id, fullname, subject1, subject2, subject3, subject4, subject5, subject6, gpa;
 
 };
 void SetColor(int backgound_color, int text_color);
@@ -115,4 +115,9 @@ void DrawCourseScore(int width, int height, int x, int y);
 void ViewScoreBoard(char* path, int sizeOfScoreBoardOfCourse);
 //int CountStudent(char* path);
 //void ViewScoreBoard(char* path);
+void ExportScore(char* path, int NumberOfStudent);
+void ScoreBoardOfClassSemesterIII(int NumberOfStudent, char* path);
+void ScoreBoardOfClassSemesterII(int NumberOfStudent, char* path);
+void ScoreBoardOfClassSemesterI(int NumberOfStudent, char* path);
+void DrawScoreOfStudentInClass(int width, int height, int x, int y);
 

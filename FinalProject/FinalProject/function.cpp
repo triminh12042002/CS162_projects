@@ -2010,3 +2010,468 @@ void UpdateScoreInCourse(char* path, int NumbersOfStudent, string FullNameSearch
 	}
 	write.close();
 }
+//view Score of Class
+void DrawScoreOfStudentInClass(int width, int height, int x, int y) {
+	// top board
+	GoTo(x, y);
+	cout << char(201);
+	for (int j = 1; j <= 4 * width - 1; ++j) {
+		//if (j % 4 == 0) cout << char(209);
+	   //else cout << char(205);
+		switch (j)
+		{
+		case 3:
+		{
+			cout << char(209);
+			break;
+		}
+		case 12:
+		{
+			cout << char(209);
+			break;
+		}
+		case 42:
+		{
+			cout << char(209);
+			break;
+		}
+		case 53:
+		{
+			cout << char(209);
+			break;
+		}
+		case 64:
+		{
+			cout << char(209);
+			break;
+		}
+		case 75:
+		{
+			cout << char(209);
+			break;
+		}
+		case 86:
+		{
+			cout << char(209);
+			break;
+		}
+		case 97:
+		{
+			cout << char(209);
+			break;
+		}
+		case 108:
+		{
+			cout << char(209);
+			break;
+		}
+		case 113:
+		{
+			cout << char(209);
+			break;
+		}
+		default:
+		{
+			cout << char(205);
+		}
+		}
+	}
+	cout << char(187);
+	// mid board
+	cout << endl;
+	GoTo(x, y + 2);
+	// final mark
+
+	// 
+	for (int i = 2; i <= 2 * height - 1 + 2; ++i) {
+		if (i == 1) {
+			cout << char(186);
+			for (int j = 2; j <= 4 * width - 1; ++j) {
+				//if (j % 4 == 0) cout << char(179);// ve gach xuong
+				//else cout << " ";
+				switch (j)
+				{
+				case 3:
+				{
+					cout << char(179);
+					break;
+				}
+				case 12:
+				{
+					cout << char(179);
+					break;
+				}
+				case 42:
+				{
+					cout << char(179);
+					break;
+				}
+				case 53:
+				{
+					cout << char(179);
+					break;
+				}
+				case 64:
+				{
+					cout << char(179);
+					break;
+				}
+				case 75:
+				{
+					cout << char(179);
+					break;
+				}
+				case 86:
+				{
+					cout << char(179);
+					break;
+				}
+				case 97:
+				{cout << char(179);
+				break;
+				}
+				case 108:
+				{
+					cout << char(179);
+					break;
+				}
+				case 113:
+				{
+					cout << char(179);
+					break;
+				}
+				default:
+				{
+					cout << " ";
+				}
+				}
+			}
+			cout << char(186);
+			cout << endl;
+			GoTo(x, ++y);
+		}
+		else {
+			if (i % 2 == 0) {
+				cout << char(199);
+				for (int j = 1; j <= 4 * width - 1; ++j) {
+					// if (j % 4 == 0) cout << char(197);
+					 //else cout << char(196);
+					switch (j)
+					{
+					case 3:
+					{
+						cout << char(197);
+						break;
+					}
+					case 12:
+					{
+						cout << char(197);
+						break;
+					}
+					case 42:
+					{
+						cout << char(197);
+						break;
+					}
+					case 53:
+					{
+						cout << char(197);
+						break;
+					}
+					case 64:
+					{
+						cout << char(197);
+						break;
+					}
+					case 75:
+					{
+						cout << char(197);
+						break;
+					}
+					case 86:
+					{
+						cout << char(197);
+						break;
+					}
+					case 97:
+					{cout << char(197);
+					break;
+					}
+					case 108:
+					{
+						cout << char(197);
+						break;
+					}
+					case 113:
+					{
+						cout << char(197);
+						break;
+					}
+					default:
+					{
+						cout << char(196);
+
+					}
+					}
+				}
+				cout << char(182);
+				cout << endl;
+				GoTo(x, ++y);
+			}
+			else {
+				cout << char(186);
+				for (int j = 1; j <= 4 * width - 1; ++j) {
+					//if (j % 4 == 0) cout << char(179);// ve gach xuong
+					//else cout << " ";
+					switch (j)
+					{
+					case 3:
+					{
+						cout << char(179);
+						break;
+					}
+					case 12:
+					{
+						cout << char(179);
+						break;
+					}
+					case 42:
+					{
+						cout << char(179);
+						break;
+					}
+					case 53:
+					{
+						cout << char(179);
+						break;
+					}
+					case 64:
+					{
+						cout << char(179);
+						break;
+					}
+					case 75:
+					{
+						cout << char(179);
+						break;
+					}
+					case 86:
+					{
+						cout << char(179);
+						break;
+					}
+					case 97:
+					{cout << char(179);
+					break;
+					}
+					case 108:
+					{
+						cout << char(179);
+						break;
+					}
+					case 113:
+					{
+						cout << char(179);
+						break;
+					}
+					default:
+					{
+						cout << " ";
+					}
+					}
+				}
+				cout << char(186);
+				cout << endl;
+				GoTo(x, ++y);
+			}
+		}
+
+	}
+	// bot board
+	cout << char(200);
+	for (int j = 1; j <= 4 * width - 1; ++j) {
+		//if (j % 4 == 0) cout << char(207);
+		//else cout << char(205);
+		switch (j)
+		{
+		case 3:
+		{
+			cout << char(207);
+			break;
+		}
+		case 12:
+		{
+			cout << char(207);
+			break;
+		}
+		case 42:
+		{
+			cout << char(207);
+			break;
+		}
+		case 53:
+		{
+			cout << char(207);
+			break;
+		}
+		case 64:
+		{
+			cout << char(207);
+			break;
+		}
+		case 75:
+		{
+			cout << char(207);
+			break;
+		}
+		case 86:
+		{
+			cout << char(207);
+			break;
+		}
+		case 97:
+		{cout << char(207);
+		break;
+		}
+		case 108:
+		{
+			cout << char(207);
+			break;
+		}
+		case 113:
+		{
+			cout << char(207);
+			break;
+		}
+		default:
+		{
+			cout << char(205);
+
+		}
+		}
+	}
+	cout << char(188);
+}
+void ScoreBoardOfClassSemesterI(int NumberOfStudent, char* path)
+{
+	//Semester 1
+	DrawScoreOfStudentInClass(28, NumberOfStudent, 0, 0);//28 cố định ko đổi
+	GoTo(1, 1);
+	cout << "No";
+	GoTo(6, 1);
+	cout << "ID";
+	GoTo(13, 1);
+	cout << "Full Name";
+	GoTo(43, 1);
+	cout << "  CS161";
+	GoTo(54, 1);
+	cout << "  MTH251";
+	GoTo(65, 1);
+	cout << " PH211";
+	GoTo(76, 1);
+	cout << " BAA00101";
+	GoTo(87, 1);
+	cout << "  CM101";
+	GoTo(98, 1);
+	cout << "";
+	GoTo(109, 1);
+	cout << "GPA";
+	int x = 1;
+	ExportScore(path, NumberOfStudent);
+}
+void ScoreBoardOfClassSemesterII(int NumberOfStudent, char* path)
+{
+	//Semester 2
+	DrawScoreOfStudentInClass(28, NumberOfStudent + 1, 0, 0);//28 cố định ko đổi
+	GoTo(1, 1);
+	cout << "No";
+	GoTo(6, 1);
+	cout << "ID";
+	GoTo(13, 1);
+	cout << "Full Name";
+	GoTo(43, 1);
+	cout << "  CS162";
+	GoTo(54, 1);
+	cout << "  MTH252";
+	GoTo(65, 1);
+	cout << " PH212";
+	GoTo(76, 1);
+	cout << " BAA00102";
+	GoTo(87, 1);
+	cout << " BAA00021";
+	GoTo(98, 1);
+	cout << " BAA00004";
+	GoTo(109, 1);
+	cout << "GPA";
+	ExportScore(path, NumberOfStudent + 1);
+}
+void ScoreBoardOfClassSemesterIII(int NumberOfStudent, char* path)
+{
+	//semester 3
+	DrawScoreOfStudentInClass(28, NumberOfStudent + 1, 0, 0);//28 cố định ko đổi
+	GoTo(1, 1);
+	cout << "No";
+	GoTo(6, 1);
+	cout << "ID";
+	GoTo(13, 1);
+	cout << "Full Name";
+	GoTo(43, 1);
+	cout << "  CS163";
+	GoTo(54, 1);
+	cout << "  MTH261";
+	GoTo(65, 1);
+	cout << " PH213";
+	GoTo(76, 1);
+	cout << " BAA00103";
+	GoTo(87, 1);
+	cout << " BAA00022";
+	GoTo(98, 1);
+	cout << "";
+	GoTo(109, 1);
+	cout << "GPA";
+	ExportScore(path, NumberOfStudent + 1);
+}
+void ExportScore(char* path, int NumberOfStudent)
+{
+	ifstream read;
+	read.open(path);
+	ScoreBoardOfClasss infor[100];
+	for (int i = 0; i < NumberOfStudent; i++)
+	{
+		getline(read, infor[i].no, ',');
+		getline(read, infor[i].id, ',');
+		getline(read, infor[i].fullname, ',');
+		getline(read, infor[i].subject1, ',');
+		getline(read, infor[i].subject2, ',');
+		getline(read, infor[i].subject3, ',');
+		getline(read, infor[i].subject4, ',');
+		getline(read, infor[i].subject5, ',');
+		getline(read, infor[i].subject6, ',');
+		getline(read, infor[i].gpa, '\n');
+	}
+	for (int i = 3, j = 0; i < 2 * NumberOfStudent; i = i + 2, j++)
+	{
+
+		GoTo(1, i);
+		cout << infor[j].no;
+		GoTo(4, i);
+		cout << infor[j].id;
+		GoTo(13, i);
+		cout << infor[j].fullname;
+		GoTo(47, i);
+		cout << infor[j].subject1;
+		GoTo(58, i);
+		cout << infor[j].subject2;
+		GoTo(68, i);
+		cout << infor[j].subject3;
+		GoTo(80, i);
+		cout << infor[j].subject4;
+		GoTo(91, i);
+		cout << infor[j].subject5;
+		GoTo(102, i);
+		cout << infor[j].subject6;
+		GoTo(110, i);
+		cout << infor[j].gpa;
+	}
+	read.close();
+}
