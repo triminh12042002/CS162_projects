@@ -1825,7 +1825,7 @@ void DrawCourseScore(int width, int height, int x, int y) {
     }
     cout << char(188);
 }
-int CountStudent() { //For Drawing Board of Score Course
+int CountStudent(char* path) {
     int count = 0;
     ifstream write;
     ScoreBoardOfCourse ScoreCourse;
@@ -1843,13 +1843,13 @@ int CountStudent() { //For Drawing Board of Score Course
     write.close();
     return count+1;
 }
-void ViewScoreBoard() {
+void ViewScoreBoard(char* path) {
     int count = 0;
     ifstream write;
     ScoreBoardOfCourse ScoreCourse;
     int i = 3, numberOfStudent;
-    numberOfStudent = CountStudent();
-    write.open("ScoreCourse.csv");
+    numberOfStudent = CountStudent(path);
+    write.open(path);
     if (!write.is_open()) {
         cout << "Error Loading File.";
     }
