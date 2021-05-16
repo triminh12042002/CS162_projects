@@ -437,7 +437,7 @@ int main(){
 																	}
 																	GoTo(0, 0);
 																	SetColor(0, 7);
-																	cout << "List of Semester" << sizeOfListSemester;
+																	cout << "Number of Semester" << sizeOfListSemester;
 																	for (int j = 0; pTempSemester != nullptr && j < sizeOfListSemester; ++j) {
 																		GoTo(10, 5 + 2 * j);
 																		SetColor(0, Set[j]);
@@ -464,12 +464,10 @@ int main(){
 																		counter++;
 																	}
 																	if (key == '\r') {
-
+																		system("cls");
 																		pTempSemester = pHeadSemester;
 																		for (int j = 0; pTempSemester != nullptr && j < sizeOfListSemester; ++j) {
 																			if (counter == j + 1) {
-																				cout << "\n enter " << pTempSemester->semesterName;
-
 																				// load list of course in this semester
 																				Course* pHeadCourse = pTempSemester->pHeadCourse;
 																				string pathListOfCourse = "Course" + pTempSemester->semesterName + pTempSchoolYear->schoolYearName + ".csv";
@@ -482,8 +480,9 @@ int main(){
 																					pathListOfCourseChar[i] = pathListOfCourse[i];
 																				}
 																				pathListOfCourseChar[size] = '\0';
-																				loadListOfCourse(pHeadCourse, sizeOfListCourse, pathListOfCourseChar);	// load list of semester in  this school year
-																				system("cls");
+																				loadListOfCourse(pHeadCourse, sizeOfListCourse, pathListOfCourseChar);	// load list of course in  this school year
+																				pTempSemester->pHeadCourse = pHeadCourse;
+																			//	system("cls");
 																				for (int i = 0; i < 20; ++i) {
 																					Set[i] = 7;
 																				}
@@ -504,7 +503,7 @@ int main(){
 																					SetColor(0, 7);
 																					cout << "Number of course: " << sizeOfListCourse;
 																					
-																					GoTo(10, 3);
+																					GoTo(15, 3);
 																					SetColor(0, 6);
 																					cout << "the beginning of a semester";
 
@@ -524,7 +523,7 @@ int main(){
 																					SetColor(0, Set[3]);
 																					cout << "Delete Course";
 
-																					GoTo(10, 5 + 2 * 4);
+																					GoTo(15, 5 + 2 * 4);
 																					SetColor(0, 6);
 																					cout << "The end of semester";
 
@@ -567,10 +566,13 @@ int main(){
 																						if (counter == 1) {	// view courses
 																							system("cls");
 																							pTempCourse = pHeadCourse;
-																							for (int j = 0; pTempCourse != nullptr && j < sizeOfListCourse; ++j) {
+																							cout << "number of course:" << sizeOfListCourse << endl;
+																							int j = 0;
+																							while(pTempCourse != nullptr) {
 																								GoTo(10, 5  + j*2);
 																								cout << pTempCourse->courseName;
 																								pTempCourse = pTempCourse->pNext;
+																								j++;
 																							}
 																							cout << "\n\n Press any key to return";
 																							key = _getch();
@@ -586,31 +588,67 @@ int main(){
 																							system("cls");
 																						}
 																						if (counter == 3) {	//update course info
+																							system("cls");
 																							cout << "enter update course info";
 																							// load list of course in semester
-																							system("cls");
 																							UpdateCourseInformation(pHeadCourse, pathListOfCourseChar);
-																							
+																							system("cls");
 
 																						}
 																						if (counter == 4) {	//delete course
+																							system("cls");
+
 																							cout << "enter delete course";
-																							deleteCourse(pHeadCourse);
+																							deleteCourse(pHeadCourse, pathListOfCourseChar);
+																							system("cls");
+
 																						}
 																						if (counter == 5) {	//export list of student
 																							cout << "enter export";
+
 																						}
 																						if (counter == 6) {	//import score board
-																							cout << "enter delete course";
+																							cout << "enter import score board";
 																						}
 																						if (counter == 7) {	// view scoreboard of score
-																							cout << "enter delete course";
+																							cout << "enter view scoreboard of score";
 																						}
 																						if (counter == 8) {	//update student result
-																							cout << "enter delete course";
+																							cout << "enter update student result";
 																						}
 																						if (counter == 9) {	//view scoreboard of class
-																							cout << "enter delete course";
+																							Course* pCur = nullptr;
+																							string courseName;
+																							pCur = pHeadCourse;
+																							cout << "Which Course do you want to Update? Please Input the Course's name: ";
+																							getline(cin, courseName);
+																							while (pCur != nullptr && pCur->courseName != courseName)
+																							{
+																								pCur = pCur->pNext;
+																							}
+																							//Look for the Course 
+																							if (pCur == nullptr)
+																							{
+																								cout << "This Course does not exist in this semester.";
+																								
+																							}
+																							if (pCur->courseName == courseName) {
+																								// load list of course in this semester
+																								string pathScoreCourse = "ScoreBoard" + pCur->courseName + pTempSemester->semesterName + pTempSchoolYear->schoolYearName + ".csv";
+																								int sizeOfScoreCourse = 0;
+																								int size = pathScoreCourse.size();
+																								// declaring character array
+																								char* pathScoreCourseChar = new char[size + 1];
+																								// string to char array
+																								for (int i = 0; i < size; ++i) {
+																									pathScoreCourseChar[i] = pathScoreCourse[i];
+																								}
+																								pathScoreCourseChar[size] = '\0';
+
+																								cout << "enter view scoreboard of class";
+																								//ViewScoreBoard(pathScoreCourseChar);
+																							}
+																							
 																						}
 																						if (counter == 10) {	// return
 																							counter = 0;

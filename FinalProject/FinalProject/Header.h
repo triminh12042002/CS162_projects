@@ -93,7 +93,7 @@ void CreateClass(Student* pHeadStudent, int& sizeOfClass, char* path);
 //void addAllStudentsToClass(Class*& pClass);
 void create1Student(Student*& pStudent);
 void add1StudentToClass(Student*& pHeadStudent, int &sizeOfListStudent, char* path);
-void deleteCourse(Course*& pHead);
+void deleteCourse(Course*& pHead, char*);
 void addCourseToSemester(Course*& pCourse);
 void CreateCourseRegistration(Course*& pHeadCourse, int& size, char* pathListOfCourseChar);
 void CreateSemesterOfYear(SchoolYear* pTempSchoolYear, Semester*& pSemester, int& sizeOfSemester, char* path);
@@ -112,6 +112,7 @@ void ScoreBoardOfClass(int NumberOfStudent);
 void DrawScorceBoardOfClass(int width, int height, int x, int y);
 string createDate();
 void DrawCourseScore(int width, int height, int x, int y);
-int CountStudent(char* path);
-void ViewScoreBoard(char* path);
+void ViewScoreBoard(char* path, int sizeOfScoreBoardOfCourse);
+//int CountStudent(char* path);
+//void ViewScoreBoard(char* path);
 

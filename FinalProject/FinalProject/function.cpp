@@ -239,8 +239,8 @@ void loadListOfCourse(Course*& pHeadCourse, int& sizeOfListCourse, char* path) {
 		}
 		pTemp->pNext = nullptr;
 		pTemp->courseName = temp;
-		getline(fin, pTemp->startDate, ',');
-		getline(fin, pTemp->endDate, ',');
+		//getline(fin, pTemp->startDate, ',');
+		//getline(fin, pTemp->endDate, ',');
 		getline(fin, pTemp->id, ',');
 		getline(fin, pTemp->teacherName, ',');
 		getline(fin, pTemp->numOfCredits, ',');
@@ -551,29 +551,76 @@ void add1StudentToClass(Student*& pHeadStudent,int &sizeOfListStudent,char* path
 		sizeOfListStudent++;
 	}
 }
-void deleteCourse(Course*& pHead) {
+void deleteCourse(Course*& pHead, char* path) {
 	string nameOfCourse, idOfCourse;
-	cout << "Input name of the course that you want to delete : "; cin >> nameOfCourse;
+	cout << "\n\nInput name of the course that you want to delete : "; 
+	getline(cin, nameOfCourse);
 
 	Course* courseHead = pHead;
-	if (courseHead->courseName == nameOfCourse) {
-		pHead = courseHead->pNext;
-		delete courseHead;
+	if (courseHead == nullptr) {
+		cout << "There is no course for deleting";
 		return;
 	}
-
-	Course* temp = courseHead;
-	courseHead = courseHead->pNext;
-	while (courseHead) {
-		if (courseHead->courseName == nameOfCourse) {
-			temp->pNext = courseHead->pNext;
-			delete courseHead;
-			return;
+	Course* pCur = nullptr;
+	if (courseHead->courseName == nameOfCourse) {
+		pHead = pHead->pNext;
+		delete courseHead;
+		// load again to file
+		ofstream write;
+		write.open(path);
+		//ofstream write;
+		pCur = pHead;
+		while (pCur != nullptr)
+		{
+			write << pCur->courseName << ",";
+			write << pCur->id << ",";
+			write << pCur->teacherName << ",";
+			write << pCur->numOfCredits << ",";
+			write << pCur->maxNumOfStudents << ",";
+			write << pCur->day1 << ",";
+			write << pCur->hour1 << ",";
+			write << pCur->day2 << ",";
+			write << pCur->hour2 << "\n";
+			pCur = pCur->pNext;
 		}
-		temp = courseHead;
-		courseHead = courseHead->pNext;
+		write.close();
+		return;
 	}
-	cout << "The course that you want to delete does not exits in this semester. " << endl;
+	else {
+		Course* temp = pHead;
+		while (temp->pNext) {
+			if (temp->pNext->courseName == nameOfCourse) {
+				pCur = temp->pNext;
+				temp->pNext = temp->pNext->pNext;
+				delete pCur;
+				// load again to file
+				ofstream write;
+				write.open(path);
+				//ofstream write;
+				Course* pCur = pHead;
+				while (pCur != nullptr)
+				{
+					write << pCur->courseName << ",";
+					write << pCur->id << ",";
+					write << pCur->teacherName << ",";
+					write << pCur->numOfCredits << ",";
+					write << pCur->maxNumOfStudents << ",";
+					write << pCur->day1 << ",";
+					write << pCur->hour1 << ",";
+					write << pCur->day2 << ",";
+					write << pCur->hour2 << "\n";
+					pCur = pCur->pNext;
+				}
+				write.close();
+				return;
+				
+			}
+			temp = temp->pNext;
+		}
+		cout << "The course that you want to delete does not exits in this semester. " << endl;
+		return;
+	}
+	
 	return;
 }
 void addCourseToSemester(Course*& pCourse) {
@@ -709,7 +756,7 @@ void UpdateCourseInformation(Course*& pHeadCourse,char* path)
 	Course* pCur = nullptr;
 	string courseName;
 	pCur = pHeadCourse;
-	cout << "Which Course do you want to Update? Please Input the ID Course: ";
+	cout << "Which Course do you want to Update? Please Input the Course's name: ";
 	getline(cin, courseName);
 	while (pCur != nullptr && pCur->courseName != courseName)
 	{
@@ -1825,36 +1872,24 @@ void DrawCourseScore(int width, int height, int x, int y) {
     }
     cout << char(188);
 }
-int CountStudent(char* path) {
-    int count = 0;
+void ViewScoreBoard(char* path, int sizeOfScoreBoardOfCourse) {
     ifstream write;
     ScoreBoardOfCourse ScoreCourse;
-    write.open(path);
-    while (!write.eof()) {
-        getline(write, ScoreCourse.no, ',');
-        getline(write, ScoreCourse.id, ',');
-        getline(write, ScoreCourse.fullname, ',');
-        getline(write, ScoreCourse.midtermMark, ',');
-        getline(write, ScoreCourse.finalMark, ',');
-        getline(write, ScoreCourse.totalMark, ',');
-        getline(write, ScoreCourse.otherMark, '\n');
-        count++;
-    }
-    write.close();
-    return count+1;
-}
-void ViewScoreBoard(char* path) {
-    int count = 0;
-    ifstream write;
-    ScoreBoardOfCourse ScoreCourse;
-    int i = 3, numberOfStudent;
-    numberOfStudent = CountStudent(path);
-    write.open(path);
+    int i = 3;
+	write.open(path);
+	write.open(path);
+	if (write.is_open() == false) {
+		write.close();
+		ofstream fout;
+		fout.open(path);
+		fout.close();
+		write.open(path);
+	}
     if (!write.is_open()) {
         cout << "Error Loading File.";
     }
     else {
-        DrawCourseScore(15, numberOfStudent, 0, 0);
+        DrawCourseScore(15, sizeOfScoreBoardOfCourse, 0, 0);
         GoTo(1, 1);
         cout << "NO";
         GoTo(8, 1);
@@ -1948,12 +1983,12 @@ void UpdateScoreInCourse(char* path, int NumbersOfStudent, string FullNameSearch
 			//Total course will be affected
 			//convert string to float
 			string stra(Course[i].finalMark);
-			float a = stoi(stra);
+			float final = stoi(stra);
 			string strb(Course[i].midtermMark);
-			float b = stoi(strb);
-			float x = a * 0.6 + b * 0.4;
+			float midterm = stoi(strb);
+			float total = final * 0.6 + midterm * 0.4;
 			//convert float to string
-			Course[i].totalMark = to_string(x);
+			Course[i].totalMark = to_string(total);
 		}
 	}
 	read.close();

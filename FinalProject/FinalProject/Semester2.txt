@@ -1,0 +1,6 @@
+Introduction To Laws,22/02/2021,15/05/2021,BAA00004,Duong Nguyen The Nguye, 3, 90 , Wednesday,13:30,Wednesday,15:30,
+Physical Education I, 24/02/2021,05/05/2021,BAA00021,Phan Thi Le Hang, 2,90, Thursday,7:30,Thursday , 9:30,
+Marxist-Leninist Political Economics,23/02/2021,15/05/2021,BAA00102,Nguyen Tri Phuong,2,90,Tuesday,13:30,Tuesday,13:30,
+Introduction To Computer Science II, 24/02/2021,15/05/2021,CS162,Dinh Ba Tien,4,50,Tuesday,7:30,Saturday,7:30,
+Calculus II,20/02/2021,15/05/2021,MTH252,Nguyen Thi Thu Van, 4, 50, Wednesday,9:30,Wednesday,7:30, 
+General Physics II,21/02/2021,15/05/2021,PH212,Nguyen Huu Nha,4,50,Thursday,15:30,Friday,9:30 
