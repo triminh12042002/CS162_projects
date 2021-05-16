@@ -241,7 +241,10 @@ void loadListOfCourse(Course*& pHeadCourse, int& sizeOfListCourse, char* path) {
 		pTemp->courseName = temp;
 		//getline(fin, pTemp->startDate, ',');
 		//getline(fin, pTemp->endDate, ',');
+		getline(fin, pTemp->startDate, ',');
+		getline(fin, pTemp->endDate, ',');
 		getline(fin, pTemp->id, ',');
+		
 		getline(fin, pTemp->teacherName, ',');
 		getline(fin, pTemp->numOfCredits, ',');
 		getline(fin, pTemp->maxNumOfStudents, ',');
@@ -872,21 +875,21 @@ void viewListOfCourses(Course* pHead) {
 	Course* pTemp = pHead;
 	GoTo(1, 0);
 	cout << "Course ID";
-	GoTo(10, 0);
+	GoTo(12, 0);
 	cout << "Course Name";
-	GoTo(50, 0);
+	GoTo(52, 0);
 	cout << "Number of Credits";
-	GoTo(54, 0);
+	GoTo(64, 0);
 	cout << "Teacher Name";
 	for (int i = 2;pTemp != nullptr; i = i + 2)
 	{
 		GoTo(1, i);
 		cout << pTemp->id;
-		GoTo(10, i);
+		GoTo(12, i);
 		cout << pTemp->courseName;
-		GoTo(50, i);
+		GoTo(52, i);
 		cout << pTemp->numOfCredits;
-		GoTo(54, i);
+		GoTo(64, i);
 		cout << pTemp->teacherName;
 		pTemp = pTemp->pNext;
 	}
@@ -1001,7 +1004,7 @@ void RemoveTheEnrolledCourse(Course* pEnrolledCourse, string defaultSemester, st
 {		
 	
 	viewListOfCourses(pEnrolledCourse);
-	cout << "Enter Courses Name that you want to remove\n";
+	cout << "\nEnter Courses Name that you want to remove\n";
 	string name;
 	getline(cin, name);
 	Course* pTemp = pEnrolledCourse;
@@ -2377,7 +2380,7 @@ void ScoreBoardOfClassSemesterI(int NumberOfStudent, char* path)
 	GoTo(109, 1);
 	cout << "GPA";
 	int x = 1;
-	ExportScore(path, NumberOfStudent);
+	ExportScore(path);
 }
 void ScoreBoardOfClassSemesterII(int NumberOfStudent, char* path)
 {
@@ -2403,7 +2406,7 @@ void ScoreBoardOfClassSemesterII(int NumberOfStudent, char* path)
 	cout << " BAA00004";
 	GoTo(109, 1);
 	cout << "GPA";
-	ExportScore(path, NumberOfStudent + 1);
+	ExportScore(path);
 }
 void ScoreBoardOfClassSemesterIII(int NumberOfStudent, char* path)
 {
@@ -2429,16 +2432,21 @@ void ScoreBoardOfClassSemesterIII(int NumberOfStudent, char* path)
 	cout << "";
 	GoTo(109, 1);
 	cout << "GPA";
-	ExportScore(path, NumberOfStudent + 1);
+	ExportScore(path);
 }
-void ExportScore(char* path, int NumberOfStudent)
+
+void ExportScore(char* path)
 {
 	ifstream read;
 	read.open(path);
 	ScoreBoardOfClasss infor[100];
-	for (int i = 0; i < NumberOfStudent; i++)
+	int i = 0;
+	while(!read.eof())
 	{
 		getline(read, infor[i].no, ',');
+		if (infor[i].no == "") {
+			break;
+		}
 		getline(read, infor[i].id, ',');
 		getline(read, infor[i].fullname, ',');
 		getline(read, infor[i].subject1, ',');
@@ -2448,7 +2456,9 @@ void ExportScore(char* path, int NumberOfStudent)
 		getline(read, infor[i].subject5, ',');
 		getline(read, infor[i].subject6, ',');
 		getline(read, infor[i].gpa, '\n');
+		i++;
 	}
+	int NumberOfStudent = i;
 	for (int i = 3, j = 0; i < 2 * NumberOfStudent; i = i + 2, j++)
 	{
 
