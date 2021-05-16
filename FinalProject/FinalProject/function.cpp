@@ -870,11 +870,27 @@ void viewListOfStudents(Class* pHead) {
 }
 void viewListOfCourses(Course* pHead) {
 	Course* pTemp = pHead;
-	cout << "Course ID\tCourse Name\tNumber of Credits\tTeacher Name\n";
-	while (pTemp) {
-		cout << pTemp->id << "\t" << pTemp->courseName << "\t" << pTemp->numOfCredits << "\t" << pTemp->teacherName << endl;
+	GoTo(1, 0);
+	cout << "Course ID";
+	GoTo(10, 0);
+	cout << "Course Name";
+	GoTo(50, 0);
+	cout << "Number of Credits";
+	GoTo(54, 0);
+	cout << "Teacher Name";
+	for (int i = 2;pTemp != nullptr; i = i + 2)
+	{
+		GoTo(1, i);
+		cout << pTemp->id;
+		GoTo(10, i);
+		cout << pTemp->courseName;
+		GoTo(50, i);
+		cout << pTemp->numOfCredits;
+		GoTo(54, i);
+		cout << pTemp->teacherName;
 		pTemp = pTemp->pNext;
 	}
+	
 }
 void viewListOfClasses(Class* pHead) {
 	cout << "LIST OF CLASSES" << endl;
@@ -1158,21 +1174,17 @@ void DrawListofStudentInClass(int width, int height, int x, int y) {
 			cout << char(209);
 			break;
 		}
-		case 47:
+		case 48:
 		{
 			cout << char(209);
 			break;
 		}
-		case 58:
+		case 60:
 		{
 			cout << char(209);
 			break;
 		}
-		case 69:
-		{
-			cout << char(209);
-			break;
-		}
+		
 		default:
 		{
 			cout << char(205);
@@ -1209,21 +1221,17 @@ void DrawListofStudentInClass(int width, int height, int x, int y) {
 					cout << char(197);
 					break;
 				}
-				case 47:
+				case 48:
 				{
 					cout << char(197);
 					break;
 				}
-				case 58:
+				case 60:
 				{
 					cout << char(197);
 					break;
 				}
-				case 69:
-				{
-					cout << char(197);
-					break;
-				}
+				
 				default:
 				{
 					cout << char(196);
@@ -1257,21 +1265,17 @@ void DrawListofStudentInClass(int width, int height, int x, int y) {
 					cout << char(179);
 					break;
 				}
-				case 47:
+				case 48:
 				{
 					cout << char(179);
 					break;
 				}
-				case 58:
+				case 60:
 				{
 					cout << char(179);
 					break;
 				}
-				case 69:
-				{
-					cout << char(179);
-					break;
-				}
+				
 				default:
 				{
 					cout << " ";
@@ -1305,21 +1309,17 @@ void DrawListofStudentInClass(int width, int height, int x, int y) {
 			cout << char(207);
 			break;
 		}
-		case 47:
+		case 48:
 		{
 			cout << char(207);
 			break;
 		}
-		case 58:
+		case 60:
 		{
 			cout << char(207);
 			break;
 		}
-		case 69:
-		{
-			cout << char(207);
-			break;
-		}
+		
 		default:
 		{
 			cout << char(205);
@@ -1331,7 +1331,7 @@ void DrawListofStudentInClass(int width, int height, int x, int y) {
 }
 void ListofStudentInClass(int NumberOfStudent, Student* pHead)
 {
-	DrawListofStudentInClass(14, NumberOfStudent, 0, 0);
+	DrawListofStudentInClass(18, NumberOfStudent, 0, 0);
 	Student* pTemp = pHead;
 	for (int i = 2; i < 2 * NumberOfStudent+1; i = i + 2)
 	{
@@ -1341,11 +1341,11 @@ void ListofStudentInClass(int NumberOfStudent, Student* pHead)
 		cout << pTemp->id;
 		GoTo(13, i);
 		cout << pTemp->firstName + " " + pTemp->lastName;
-		GoTo(28, i);
+		GoTo(41, i);
 		cout << pTemp->gender;
-		GoTo(35, i);
+		GoTo(49, i);
 		cout << pTemp->dateOfBirth;
-		GoTo(46, i);
+		GoTo(61, i);
 		cout << pTemp->socialId;
 		pTemp = pTemp->pNext;
 	}
@@ -1873,11 +1873,12 @@ void DrawCourseScore(int width, int height, int x, int y) {
     cout << char(188);
 }
 void ViewScoreBoard(char* path, int sizeOfScoreBoardOfCourse) {
+	system("cls");
     ifstream write;
     ScoreBoardOfCourse ScoreCourse;
     int i = 3;
 	write.open(path);
-	write.open(path);
+	//write.open(path);
 	if (write.is_open() == false) {
 		write.close();
 		ofstream fout;
@@ -1930,8 +1931,9 @@ void ViewScoreBoard(char* path, int sizeOfScoreBoardOfCourse) {
         }
         
     }
-    int wait;
-    cin >> wait;
+	cout << "\nPress any key to return";
+	char key;
+	key = _getch();
 }
 void UpdateScoreInCourse(char* path, int NumbersOfStudent, string FullNameSearched)
 {

@@ -545,7 +545,7 @@ int main(){
 
 																					GoTo(10, 5 + 2 * 9);
 																					SetColor(0, Set[8]);
-																					cout << "View scoreboard of course"; 
+																					cout << "View scoreboard of class"; 
 
 																					GoTo(10, 5 + 2 * 10);
 																					SetColor(0, Set[9]);
@@ -610,13 +610,9 @@ int main(){
 																						if (counter == 6) {	//import score board
 																							cout << "enter import score board";
 																						}
-																						if (counter == 7) {	// view scoreboard of score
-																							cout << "enter view scoreboard of score";
-																						}
-																						if (counter == 8) {	//update student result
-																							cout << "enter update student result";
-																						}
-																						if (counter == 9) {	//view scoreboard of class
+																						if (counter == 7) {	// view scoreboard of course
+																							system("cls");
+																							cout << "enter view scoreboard of course";
 																							Course* pCur = nullptr;
 																							string courseName;
 																							pCur = pHeadCourse;
@@ -630,24 +626,34 @@ int main(){
 																							if (pCur == nullptr)
 																							{
 																								cout << "This Course does not exist in this semester.";
-																								
-																							}
-																							if (pCur->courseName == courseName) {
-																								// load list of course in this semester
-																								string pathScoreCourse = "ScoreBoard" + pCur->courseName + pTempSemester->semesterName + pTempSchoolYear->schoolYearName + ".csv";
-																								int sizeOfScoreCourse = 0;
-																								int size = pathScoreCourse.size();
-																								// declaring character array
-																								char* pathScoreCourseChar = new char[size + 1];
-																								// string to char array
-																								for (int i = 0; i < size; ++i) {
-																									pathScoreCourseChar[i] = pathScoreCourse[i];
-																								}
-																								pathScoreCourseChar[size] = '\0';
 
-																								cout << "enter view scoreboard of class";
-																								//ViewScoreBoard(pathScoreCourseChar);
 																							}
+																							else {
+																								if (pCur->courseName == courseName) {
+																									// load list of course in this semester
+																									string pathScoreCourse = "ScoreBoard" + pCur->courseName + pTempSemester->semesterName + pTempSchoolYear->schoolYearName + ".csv";
+																									int sizeOfScoreCourse = 0;
+																									int size = pathScoreCourse.size();
+																									// declaring character array
+																									char* pathScoreCourseChar = new char[size + 1];
+																									// string to char array
+																									for (int i = 0; i < size; ++i) {
+																										pathScoreCourseChar[i] = pathScoreCourse[i];
+																									}
+																									pathScoreCourseChar[size] = '\0';
+
+																									cout << "enter view scoreboard of class";
+																									ViewScoreBoard(pathScoreCourseChar, 60);
+																								}
+																							}
+
+																						}
+																						if (counter == 8) {	//update student result
+																							cout << "enter update student result";
+																						}
+																						if (counter == 9) {	//view scoreboard of class
+																							
+																							
 																							
 																						}
 																						if (counter == 10) {	// return
@@ -918,9 +924,9 @@ int main(){
 												pHeadStudent = pTempClass->pHeadStudent;
 												pTempStudent = pHeadStudent;
 												while (pTempStudent != nullptr) {
-													cout << pTempStudent->id;
+													//cout << pTempStudent->id;
 													if (pTempStudent->id == user) {
-														cout << "\nfind";
+														cout << "\n\nsuccesfully find your class";
 														break;	// find student
 													}
 													pTempStudent = pTempStudent->pNext;
@@ -929,8 +935,10 @@ int main(){
 												pTempClass = pTempClass->pNext;
 											}
 											if (pTempStudent == nullptr) {
-												cout << "cannot find your class";
-
+												cout << "\n\ncannot find your class, you cannot view student in class";
+												key = _getch();
+												counter = 0;
+												system("cls");
 												break;
 											}
 											Student* pStudent = pTempStudent;
@@ -945,7 +953,8 @@ int main(){
 											pathListOfCourseChar[size] = '\0';
 											Course* pHeadCourse = nullptr; // pHeadCourse for list course in this default semester
 											//cout << endl << pathListOfCourseChar;
-											loadListOfCourse(pHeadCourse, sizeOfListClass, pathListOfCourseChar);
+											int sizeOfListCourse = 0;
+											loadListOfCourse(pHeadCourse, sizeOfListCourse, pathListOfCourseChar);
 											pTempCourse = pHeadCourse;
 											int sizeOfListEnrolledCourse = 0;
 
@@ -961,14 +970,14 @@ int main(){
 													pathListOfStudentInCourseChar[i] = pathListOfStudentInCourse[i];
 												}
 												pathListOfStudentInCourseChar[size] = '\0';
-												//cout << endl << pathListOfStudentInCourseChar;
+												cout << endl << pathListOfStudentInCourseChar;
 												Student* pHeadStudentInCourse = nullptr;
 												loadListOfStudent(pHeadStudentInCourse, sizeOfListStudent, pathListOfStudentInCourseChar);	// load list of student in course
 												if (pHeadStudentInCourse == nullptr) {
-													//cout << "\nno student in this course";
+													cout << "\nno student in this course";
 												}
 												else {
-													//cout << endl << pHeadStudentInCourse->firstName << endl;
+													cout << "\nnumber of student in course:" << sizeOfListStudent << endl;
 												}
 												pTempStudent = pHeadStudentInCourse;
 												while (pTempStudent != nullptr) {	
@@ -998,6 +1007,7 @@ int main(){
 
 											if (counter == 1) {	// enroll course
 												//cout << endl << user << endl;
+												system("cls");
 												string pTempCourseName = "";
 												if (enrollCourse(pHeadCourse, pStudent, pTempCourseName) == false || pStudent->pHeadCourse == nullptr) {
 													cout << "\ncannot";
@@ -1029,11 +1039,13 @@ int main(){
 													fout.close();
 													cout << "\n write success";
 													key = _getch();
+													cout << "\n\nPress any key to return";
 													system("cls");
 												}
 												
 											}
 											if (counter == 2) {	// view enrolled course
+												system("cls");
 												if (pHeadEnrolledCourse == nullptr) {
 													cout << "\nNot enroll any course";
 												}
@@ -1041,12 +1053,20 @@ int main(){
 													Course* pTemp = pHeadEnrolledCourse;
 													viewListOfCourses(pTemp);
 												}
+												key = _getch();
+												cout << "\n\nPress any key to return";
+												system("cls");
 
 											}
 											if (counter == 3) {	// remove course
+												system("cls");
 												RemoveTheEnrolledCourse(pStudent->pHeadCourse, defaultSemester, defaultSchoolYear, user);
+												key = _getch();
+												cout << "\n\nPress any key to return";
+												system("cls");
 											}
 											if (counter == 4) {	// view list of his/her course
+												system("cls");
 												if (pHeadEnrolledCourse == nullptr) {
 													cout << "\nNot enroll any course";
 												}
@@ -1054,13 +1074,19 @@ int main(){
 													Course* pTemp = pHeadEnrolledCourse;
 													viewListOfCourses(pTemp);
 												}
+												key = _getch();
+												cout << "\n\nPress any key to return";
+												system("cls");
 											}
 											if (counter == 5) {	// view list of classes
+												system("cls");
 												viewListOfClasses(pHeadClass);
 												key = _getch();
 												cout << "\n\nPress any key to return";
+												system("cls");
 											}
 											if (counter == 6) {	// view list of student in class
+												system("cls");
 												pTempClass = pHeadClass;
 												cout << "\nenter the class name";
 												string className;
@@ -1092,6 +1118,7 @@ int main(){
 												system("cls");
 											}
 											if (counter == 7) {	// view list of courses
+												system("cls");
 												viewListOfCourses(pHeadCourse);
 												cout << "\n\npress any key to return";
 												key = _getch();
@@ -1099,6 +1126,7 @@ int main(){
 												system("cls");
 											}
 											if (counter == 8) {	// view list of student in course
+												system("cls");
 												pTempCourse = pHeadCourse;
 												cout << "\nenter the course name";
 												string courseName;
@@ -1120,7 +1148,7 @@ int main(){
 													loadListOfStudent(pHeadStudentInCourse, sizeOfListStudent, pathListOfStudentInCourseChar);
 													// view
 													ListofStudentInClass(sizeOfListStudent, pHeadStudentInCourse);
-													cout << "\n view success";
+													cout << "\n\n\n view success";
 												}
 												else {
 													cout << "\n\nCannot find the course name that you enter.\n Please enter exactly.";
