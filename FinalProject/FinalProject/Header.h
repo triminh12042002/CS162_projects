@@ -112,5 +112,5 @@ void ScoreBoardOfClass(int NumberOfStudent);
 void DrawScorceBoardOfClass(int width, int height, int x, int y);
 string createDate();
 void DrawCourseScore(int width, int height, int x, int y);
-void ViewScoreBoard();
+void ViewScoreBoard(char* path);
 
