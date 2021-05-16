@@ -1829,7 +1829,7 @@ int CountStudent(char* path) {
     int count = 0;
     ifstream write;
     ScoreBoardOfCourse ScoreCourse;
-    write.open("ScoreCourse.csv");
+    write.open(path);
     while (!write.eof()) {
         getline(write, ScoreCourse.no, ',');
         getline(write, ScoreCourse.id, ',');
