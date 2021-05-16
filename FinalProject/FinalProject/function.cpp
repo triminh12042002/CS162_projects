@@ -1825,16 +1825,16 @@ void DrawCourseScore(int width, int height, int x, int y) {
     }
     cout << char(188);
 }
-void ViewScoreBoard(int& numberOfStudent, char* path) {
+void ViewScoreBoard() {
     ifstream write;
     ScoreBoardOfCourse ScoreCourse;
-    int i = 3;
-    write.open(path);
+    int i = 3, numberOfStudent;
+    write.open("ScoreCourse.csv");
     if (!write.is_open()) {
         cout << "Error Loading File.";
     }
     else {
-        DrawCourseScore(15, numberOfStudent, 0, 0);
+        DrawCourseScore(15, 50, 0, 0);
         GoTo(1, 1);
         cout << "NO";
         GoTo(8, 1);
@@ -1856,7 +1856,7 @@ void ViewScoreBoard(int& numberOfStudent, char* path) {
             getline(write, ScoreCourse.midtermMark, ',');
             getline(write, ScoreCourse.finalMark, ',');
             getline(write, ScoreCourse.totalMark, ',');
-            getline(write, ScoreCourse.otherMark, ',');
+            getline(write, ScoreCourse.otherMark, '\n');
             GoTo(2, i);
             cout << ScoreCourse.no;
             GoTo(5, i);
