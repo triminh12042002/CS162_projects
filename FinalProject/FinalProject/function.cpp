@@ -2380,7 +2380,7 @@ void ScoreBoardOfClassSemesterI(int NumberOfStudent, char* path)
 	GoTo(109, 1);
 	cout << "GPA";
 	int x = 1;
-	ExportScore(path);
+	//ExportScore(path);
 }
 void ScoreBoardOfClassSemesterII(int NumberOfStudent, char* path)
 {
@@ -2435,7 +2435,7 @@ void ScoreBoardOfClassSemesterIII(int NumberOfStudent, char* path)
 	ExportScore(path);
 }
 
-void ExportScore(char* path)
+int ExportScore(char* path)
 {
 	ifstream read;
 	read.open(path);
@@ -2484,4 +2484,5 @@ void ExportScore(char* path)
 		cout << infor[j].gpa;
 	}
 	read.close();
+	return NumberOfStudent;
 }

@@ -14,53 +14,18 @@ Semester* pTempSemester = nullptr;
 Course* pTempCourse = nullptr;
 Student* pTempStudent = nullptr;
 bool isContinue = true;
-
+void DrawMoodle() {
+	GoTo(55, 0);
+	cout << "Course Registration System ";
+}
 int main(){
+	DrawMoodle();
 	const string defaultSchoolYear = "2020-2021";
 	const string defaultSemester = "2";
 	const string defaultYear = "2021";
 	const string defaultMonth = "5";
 	const string defaultDay = "16";
-	// input student from csv file to a list
-	// output student data to a csv file
-
-	/*Student* pHeadStudent = nullptr;
-	Student* pTailStudent = nullptr;
-	char inputPath[] = "input.csv";
-	inputStudentData(pHeadStudent, pTailStudent, inputPath);
-	Student* pTemp = pHeadStudent;
-	while (pTemp != nullptr) {
-		cout << pTemp->firstName << endl;
-		pTemp = pTemp->pNext;
-	}
-	cout << endl;
-	char outputPath[] = "output.csv";
-	OutputCSVFIle(pHeadStudent, outputPath);*/
 	
-
-	/*signUp();
-	string temp;
-	getline(cin, temp);
-	*/
-
-
-	/*account* pLogin = nullptr;
-	string loginPath = "loginData.txt";
-	cout << login(pLogin, loginPath);
-	*/
-
-	/*
-	// create 1 class
-	Class* pClass = new Class;	
-	// input student data from csv file to class list of student
-	addAllStudentsToClass(pClass);
-	// add 1 more student to this class
-	add1StudentToClass(pClass);
-	cout << "tail: " << pClass->pTailStudent->no;
-	*/
-	/*Course* pHeadCourse = nullptr;
-	char path[] = "Toan";
-	UpdateCourseInformation(pHeadCourse, path);*/
 
 
 	
@@ -85,15 +50,15 @@ int main(){
 				Set[0] = 2;
 				counter = 1;
 			}
-			GoTo(10, 5);
+			GoTo(55, 5);
 			SetColor(0, Set[0]);
 			cout << "Staff";
 
-			GoTo(10, 7);
+			GoTo(55, 7);
 			SetColor(0, Set[1]);
 			cout << "Student";
 
-			GoTo(10, 9);
+			GoTo(55, 9);
 			SetColor(0, Set[2]);
 			cout << "Exit";
 
@@ -117,15 +82,15 @@ int main(){
 							Set[0] = 2;
 							counter = 1;
 						}
-						GoTo(10, 5);
+						GoTo(55, 5);
 						SetColor(0, Set[0]);
 						cout << "Login";
 
-						GoTo(10, 7);
+						GoTo(55, 7);
 						SetColor(0, Set[1]);
 						cout << "Sign up";
 
-						GoTo(10, 9);
+						GoTo(55, 9);
 						SetColor(0, Set[2]);
 						cout << "Return";
 						key = _getch();
@@ -165,24 +130,24 @@ int main(){
 											counter = 1;
 										}
 										pTempSchoolYear = pHeadSchoolYear;
-										GoTo(10, 5);
+										GoTo(55, 5);
 										SetColor(0, 7);
 										cout << "List of school years\n";
 										for (int j = 0; pTempSchoolYear != nullptr && j < schoolYearSize; ++j) {
-											GoTo(10, 7 + 2 * j);
+											GoTo(55, 7 + 2 * j);
 											SetColor(0, Set[j]);
 											cout << pTempSchoolYear->schoolYearName;
 											pTempSchoolYear = pTempSchoolYear->pNext;
 										}
-										GoTo(10, 7 + 2 * schoolYearSize);
+										GoTo(55, 7 + 2 * schoolYearSize);
 										SetColor(0, Set[schoolYearSize]);
 										cout << "Create School Year\n";
 
-										GoTo(10, 7 + 2 * (schoolYearSize + 1));
+										GoTo(55, 7 + 2 * (schoolYearSize + 1));
 										SetColor(0, Set[schoolYearSize + 1]);
 										cout << "Return\n";
 
-										GoTo(10, 7 + 2 * (schoolYearSize + 2));
+										GoTo(55, 7 + 2 * (schoolYearSize + 2));
 										SetColor(0, Set[schoolYearSize + 2]);
 										cout << "Back to first menu\n";
 
@@ -216,15 +181,15 @@ int main(){
 															Set[0] = 2;
 															counter = 1;
 														}
-														GoTo(10, 5);
+														GoTo(55, 5);
 														SetColor(0, Set[0]);
 														cout << "Class";
 														
-														GoTo(10, 5 + 2);
+														GoTo(55, 5 + 2);
 														SetColor(0, Set[1]);
 														cout << "Semester";
 
-														GoTo(10, 5 + 4);
+														GoTo(55, 5 + 4);
 														SetColor(0, Set[2]);
 														cout << "Return";
 
@@ -267,24 +232,24 @@ int main(){
 																		Set[0] = 2;
 																		counter = 1;
 																	}
-																	GoTo(0, 0);
+																	GoTo(55, 0);
 																	SetColor(0, 7);
 																	cout << "List of Classes";
 																	for (int j = 0; pTempClass != nullptr && j < sizeOfListClass; ++j) {
-																		GoTo(10, 5 + 2 * j);
+																		GoTo(55, 5 + 2 * j);
 																		SetColor(0, Set[j]);
 																		cout << pTempClass->className;
 																		pTempClass = pTempClass->pNext;
 																	}
-																	GoTo(10, 5 + 2 * sizeOfListClass);
+																	GoTo(55, 5 + 2 * sizeOfListClass);
 																	SetColor(0, Set[sizeOfListClass]);
 																	cout << "Create CLass";
 
-																	GoTo(10, 5 + 2 * (sizeOfListClass + 1));
+																	GoTo(55, 5 + 2 * (sizeOfListClass + 1));
 																	SetColor(0, Set[sizeOfListClass + 1]);
 																	cout << "Return";
 
-																	GoTo(10, 5 + 2 * (sizeOfListClass + 2));
+																	GoTo(55, 5 + 2 * (sizeOfListClass + 2));
 																	SetColor(0, Set[sizeOfListClass + 2]);
 																	cout << "Back to first menu";
 
@@ -322,19 +287,19 @@ int main(){
 																				Set[0] = 2;
 																				counter = 1;
 																				for (int i = 0;;) {
-																					GoTo(10, 5 + 2 );
+																					GoTo(55, 5 + 2 );
 																					SetColor(0, Set[0]);
 																					cout << "Add 1 student";
 
-																					GoTo(10, 5 + 4);
+																					GoTo(55, 5 + 4);
 																					SetColor(0, Set[1]);
 																					cout << "Add all student";
 
-																					GoTo(10, 5 + 6);
+																					GoTo(55, 5 + 6);
 																					SetColor(0, Set[2]);
 																					cout << "Return";
 
-																					GoTo(10, 5 + 8);
+																					GoTo(55, 5 + 8);
 																					SetColor(0, Set[3]);
 																					cout << "Back to first menu";
 
@@ -435,24 +400,24 @@ int main(){
 																		Set[0] = 2;
 																		counter = 1;
 																	}
-																	GoTo(0, 0);
+																	GoTo(55, 0);
 																	SetColor(0, 7);
 																	cout << "Number of Semester" << sizeOfListSemester;
 																	for (int j = 0; pTempSemester != nullptr && j < sizeOfListSemester; ++j) {
-																		GoTo(10, 5 + 2 * j);
+																		GoTo(55, 5 + 2 * j);
 																		SetColor(0, Set[j]);
 																		cout << "Semester " << pTempSemester->semesterName;
 																		pTempSemester = pTempSemester->pNext;
 																	}
-																	GoTo(10, 5 + 2 * sizeOfListSemester);
+																	GoTo(55, 5 + 2 * sizeOfListSemester);
 																	SetColor(0, Set[sizeOfListSemester]);
 																	cout << "Create Semester";
 
-																	GoTo(10, 5 + 2 * (sizeOfListSemester + 1));
+																	GoTo(55, 5 + 2 * (sizeOfListSemester + 1));
 																	SetColor(0, Set[sizeOfListSemester + 1]);
 																	cout << "Return";
 
-																	GoTo(10, 5 + 2 * (sizeOfListSemester + 2));
+																	GoTo(55, 5 + 2 * (sizeOfListSemester + 2));
 																	SetColor(0, Set[sizeOfListSemester + 2]);
 																	cout << "Back to first menu";
 
@@ -503,55 +468,55 @@ int main(){
 																					SetColor(0, 7);
 																					cout << "Number of course: " << sizeOfListCourse;
 																					
-																					GoTo(15, 3);
+																					GoTo(50, 3);
 																					SetColor(0, 6);
 																					cout << "the beginning of a semester";
 
-																					GoTo(10, 5 );
+																					GoTo(55, 5 );
 																					SetColor(0, Set[0]);
 																					cout << "View Courses";
 
-																					GoTo(10, 5 + 2 * 1);
+																					GoTo(55, 5 + 2 * 1);
 																					SetColor(0, Set[1]);
 																					cout << "Add Course";
 
-																					GoTo(10, 5 + 2 * 2);
+																					GoTo(55, 5 + 2 * 2);
 																					SetColor(0, Set[2]);
 																					cout << "Update Course Information";
 
-																					GoTo(10, 5 + 2 * 3);
+																					GoTo(55, 5 + 2 * 3);
 																					SetColor(0, Set[3]);
 																					cout << "Delete Course";
 
-																					GoTo(15, 5 + 2 * 4);
+																					GoTo(50, 5 + 2 * 4);
 																					SetColor(0, 6);
 																					cout << "The end of semester";
 
-																					GoTo(10, 5 + 2 * 5);
+																					GoTo(55, 5 + 2 * 5);
 																					SetColor(0, Set[4]);
 																					cout << "Export list of student";
 
-																					GoTo(10, 5 + 2 * 6);
+																					GoTo(55, 5 + 2 * 6);
 																					SetColor(0, Set[5]);
 																					cout << "Import list of scoreboard of course";
 
-																					GoTo(10, 5 + 2 * 7);
+																					GoTo(55, 5 + 2 * 7);
 																					SetColor(0, Set[6]);
 																					cout << "View scoreboard of course";
 
-																					GoTo(10, 5 + 2 * 8);
+																					GoTo(55, 5 + 2 * 8);
 																					SetColor(0, Set[7]);
 																					cout << "Update student result";
 
-																					GoTo(10, 5 + 2 * 9);
+																					GoTo(55, 5 + 2 * 9);
 																					SetColor(0, Set[8]);
 																					cout << "View scoreboard of class"; 
 
-																					GoTo(10, 5 + 2 * 10);
+																					GoTo(55, 5 + 2 * 10);
 																					SetColor(0, Set[9]);
 																					cout << "Return";
 
-																					GoTo(10, 5 + 2 * 11);
+																					GoTo(55, 5 + 2 * 11);
 																					SetColor(0, Set[10]);
 																					cout << "Back to first menu";
 
@@ -594,7 +559,7 @@ int main(){
 																							cout << "number of course:" << sizeOfListCourse << endl;
 																							int j = 0;
 																							while (pTempCourse != nullptr) {
-																								GoTo(10, 5 + j * 2);
+																								GoTo(55, 5 + j * 2);
 																								cout << pTempCourse->courseName;
 																								pTempCourse = pTempCourse->pNext;
 																								j++;
@@ -613,7 +578,7 @@ int main(){
 																							cout << "number of course:" << sizeOfListCourse << endl;
 																							int j = 0;
 																							while (pTempCourse != nullptr) {
-																								GoTo(10, 5 + j * 2);
+																								GoTo(55, 5 + j * 2);
 																								cout << pTempCourse->courseName;
 																								pTempCourse = pTempCourse->pNext;
 																								j++;
@@ -638,7 +603,7 @@ int main(){
 																							cout << "number of course:" << sizeOfListCourse << endl;
 																							int j = 0;
 																							while (pTempCourse != nullptr) {
-																								GoTo(10, 5 + j * 2);
+																								GoTo(55, 5 + j * 2);
 																								cout << pTempCourse->courseName;
 																								pTempCourse = pTempCourse->pNext;
 																								j++;
@@ -646,7 +611,7 @@ int main(){
 																							Course* pCur = nullptr;
 																							string courseName;
 																							pCur = pHeadCourse;
-																							cout << "Which Course do you want to Update? Please Input the Course's name: ";
+																							cout << "\nWhich Course do you want view? Please Input the Course's name: ";
 																							getline(cin, courseName);
 																							while (pCur != nullptr && pCur->courseName != courseName)
 																							{
@@ -684,6 +649,7 @@ int main(){
 																						}
 																						if (counter == 8) {	//update student result
 																							cout << "enter update student result";
+
 																							key = _getch();
 																							cout << "\n\nPress any key to return";
 																							system("cls");
@@ -717,23 +683,36 @@ int main(){
 																								cout << "This class does not exist in this shoolyear.";
 																								
 																							}
-																							if (pTempClass->className == className){
-																								system("cls");
-																								string pathScoreCourse = "Score" + pTempClass->className+"Semester"+ pTempSemester->semesterName + ".txt";
-																								int sizeOfScoreCourse = 0;
-																								int size = pathScoreCourse.size();
-																								// declaring character array
-																								char* pathScoreCourseChar = new char[size + 1];
-																								// string to char array
-																								for (int i = 0; i < size; ++i) {
-																									pathScoreCourseChar[i] = pathScoreCourse[i];
-																								}
-																								pathScoreCourseChar[size] = '\0';
-																								int sizeOfStudent = 0;
-																								
-																								ExportScore(pathScoreCourseChar);
+																							else {
+																								if (pTempClass->className == className) {
+																									system("cls");
+																									string pathScoreCourse = "Score" + pTempClass->className + "Semester" + pTempSemester->semesterName + ".txt";
+																									int sizeOfScoreCourse = 0;
+																									int size = pathScoreCourse.size();
+																									// declaring character array
+																									char* pathScoreCourseChar = new char[size + 1];
+																									// string to char array
+																									for (int i = 0; i < size; ++i) {
+																										pathScoreCourseChar[i] = pathScoreCourse[i];
+																									}
+																									pathScoreCourseChar[size] = '\0';
+																									int sizeOfStudent = 0;
+																									sizeOfStudent = ExportScore(pathScoreCourseChar);
+																									if (pTempSemester->semesterName == "1") {
+																										ScoreBoardOfClassSemesterI(sizeOfStudent, pathScoreCourseChar);
+																									}
 
+																									if (pTempSemester->semesterName == "2") {
+																										ScoreBoardOfClassSemesterII(sizeOfStudent, pathScoreCourseChar);
+																									}
+																									if (pTempSemester->semesterName == "3") {
+																										ScoreBoardOfClassSemesterIII(sizeOfStudent, pathScoreCourseChar);
+																									}
+
+
+																								}
 																							}
+																							
 																							key = _getch();
 																							cout << "\n\nPress any key to return";
 																							system("cls");

@@ -1,7 +1,6 @@
-Introduction To Laws,12/26/2019,1/27/2020,BAA00004,Duong Nguyen The Nguye,3,90,Introduction To Laws,Wednesday,13:30,Wednesday,15:30
-Physical Education I,12/27/2019,1/28/2020,BAA00021,Phan Thi Le Hang,2,90,Physical Education I,Thursday,7:30,Thursday,9:30
-Marxist-Leninist Political Economics,12/28/2019,1/29/2020,BAA00102,Nguyen Tri Phuong,2,90,Marxist-Leninist Political Economics,Tuesday,13:30,Tuesday,13:30
-Introduction To Computer Science II,12/29/2019,1/30/2020,CS162,Dinh Ba Tien,4,50,Introduction To Computer Science II,Tuesday,7:30,Saturday,7:30
-Calculus II,12/30/2019,1/31/2020,MTH252,Nguyen Thi Thu Van,4,50,Calculus II,Wednesday,9:30,Wednesday,7:30
-General Physics II,12/31/2019,2/1/2020,PH212,Nguyen Huu Nha,4,50,General Physics II,Thursday,15:30,Friday,9:30
-newCourse,1/1/2020,2/2/2020,nc,no,5,50,newCourse,monday,12:00,sunday,7:30
+Introduction To Laws,newID,Duong Nguyen The Nguye,3,90,Introduction To Laws,Introduction To Laws,Wednesday,13:30,Wednesday,15:30
+Physical Education I,BAA00021,Phan Thi Le Hang,2,90,Physical Education I,Physical Education I,Thursday,7:30,Thursday,9:30
+Marxist-Leninist Political Economics,BAA00102,Nguyen Tri Phuong,2,90,Marxist-Leninist Political Economics,Marxist-Leninist Political Economics,Tuesday,13:30,Tuesday,13:30
+Introduction To Computer Science II,CS162,Dinh Ba Tien,4,50,Introduction To Computer Science II,Introduction To Computer Science II,Tuesday,7:30,Saturday,7:30
+Calculus II,MTH252,Nguyen Thi Thu Van,4,50,Calculus II,Calculus II,Wednesday,9:30,Wednesday,7:30
+General Physics II,PH212,Nguyen Huu Nha,4,50,General Physics II,General Physics II,Thursday,15:30,Friday,9:30
