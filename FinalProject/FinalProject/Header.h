@@ -115,6 +115,7 @@ void DrawCourseScore(int width, int height, int x, int y);
 void ViewScoreBoard(char* path, int sizeOfScoreBoardOfCourse);
 //int CountStudent(char* path);
 //void ViewScoreBoard(char* path);
+void UpdateScoreInCourse(char* path, int NumbersOfStudent, string FullNameSearched);
 int ExportScore(char* path);
 void ScoreBoardOfClassSemesterIII(int NumberOfStudent, char* path);
 void ScoreBoardOfClassSemesterII(int NumberOfStudent, char* path);

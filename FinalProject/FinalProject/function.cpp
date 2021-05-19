@@ -243,10 +243,11 @@ void loadListOfCourse(Course*& pHeadCourse, int& sizeOfListCourse, char* path) {
 		//getline(fin, pTemp->endDate, ',');
 		getline(fin, pTemp->startDate, ',');
 		getline(fin, pTemp->endDate, ',');
-		getline(fin, pTemp->id, ',');
 		
 		getline(fin, pTemp->teacherName, ',');
 		getline(fin, pTemp->numOfCredits, ',');
+		getline(fin, pTemp->id, ',');
+
 		getline(fin, pTemp->maxNumOfStudents, ',');
 		getline(fin, pTemp->day1, ',');
 		getline(fin, pTemp->hour1, ',');
@@ -693,11 +694,11 @@ void CreateCourseRegistration(Course*& pHeadCourse, int& size ,char* pathListOfC
 		write << pCur->courseName << ",";
 		write << pCur->startDate << ",";
 		write << pCur->endDate << ",";
-		write << pCur->id << ",";
 		write << pCur->teacherName << ",";
 		write << pCur->numOfCredits << ",";
+		write << pCur->id << ",";
+
 		write << pCur->maxNumOfStudents << ",";
-		write << pCur->courseName << ",";
 		write << pCur->day1 << ",";
 		write << pCur->hour1 << ",";
 		write << pCur->day2 << ",";
@@ -879,7 +880,7 @@ void viewListOfCourses(Course* pHead) {
 	cout << "Course Name";
 	GoTo(52, 0);
 	cout << "Number of Credits";
-	GoTo(64, 0);
+	GoTo(69, 0);
 	cout << "Teacher Name";
 	for (int i = 2;pTemp != nullptr; i = i + 2)
 	{
@@ -889,7 +890,7 @@ void viewListOfCourses(Course* pHead) {
 		cout << pTemp->courseName;
 		GoTo(52, i);
 		cout << pTemp->numOfCredits;
-		GoTo(64, i);
+		GoTo(69, i);
 		cout << pTemp->teacherName;
 		pTemp = pTemp->pNext;
 	}
@@ -1961,10 +1962,10 @@ void UpdateScoreInCourse(char* path, int NumbersOfStudent, string FullNameSearch
 			//Show the current mark
 			cout << "Current Final Mark: " << Course[i].finalMark << endl;
 			cout << "Current Midterm Mark: " << Course[i].midtermMark << endl;
-			cout << "Which Course do you want to update?";
-			cout << "1.Final mark";
-			cout << "2.Midterm mark";
-			cout << "Type the Number Here: ";
+			cout << "\nWhich Course do you want to update?";
+			cout << "\n1.Final mark";
+			cout << "\n2.Midterm mark";
+			cout << "\nType the Number Here: ";
 			int x;
 			cin >> x;
 			string b;

@@ -4,46 +4,46 @@
 4,18125048,Nguyen Tran Quang Duy,8,10,9,7,8, ,6
 5,20125004,Hoang Hiep,8,9,8.5,7,6, ,8
 6,20125005,Nguyen Hoang Hiep,8,8,8,8,8, ,8
-7,20125006,Nguyen Hoang Khang,7,8,7.5,5,6, ,6
-8,20125007,Nguyen Vu Dang Khoa,6,7,6.5,8,8, ,7
-9,20125009,Ta Quang Khoi,7,8,7.5,3,8, ,7
-10,20125010,Tran Bao Loi,5,6,5.5,4,5, ,5
-11,20125011,Nguyen Quang Long,7,7,7,5,5, ,6
-12,20125012,Nguyen Duc Manh,8,7,7.5,3,8, ,7
-13,20125014,Thai Viet Nhat,8,8.5,8.3,4,6, ,5
-14,20125015,Nguyen Phong,6,8,7,3,6, ,6
-15,20125017,Nguyen Nham ,6,6,6,4,6, ,5
-16,20125019,To Tuan An,9,6,7.5,3,6, ,7
-17,20125021,Luong Hoang Chau,8,7,7.5,6,6, ,7
-18,20125023,Vu Hoang Dat,8,9,8.5,2,6, ,7
-19,20125025,Duong Tuan Dung,9,9,9,3,6, ,7
-20,20125027,Phan Minh Duy,6,8,7,1,6, ,5
-21,20125029,Tu Khai Hoai,8,9,8.5,2,6, ,5
-22,20125031,Pham Viet Hoang,7,9,8,2,6, ,6
-23,20125032,Truong Viet Hoang,7,7,7,2,6, ,5
-24,20125033,Le Minh Huan,6,7,6.5,1,6, ,5
-25,20125034,Vo Bui Phu Hung,7,8,7.5,3,6, ,8
-26,20125038,Le Nguyen Quang Minh,8,7,7.5,3,6, ,6
-27,20125039,Tran Minh Nam,7,8,7.5,3,6, ,6
-28,20125040,Dinh Vo Truc Ngan,9,6,7.5,3,6, ,7
-29,20125046,Huynh Man Nhu,6,6,6,4,6, ,7
-30,20125048,Nguyen Hoai Nam Phuong,8,9,8.5,2,6, ,7
-31,20125052,Lam Hien Toan,8,9,8.5,8,6, ,7
-32,20125054,Van Hoang Yen,6,8,7,3,6, ,6
+7,20125006,Nguyen Hoang Khang,7,8,7.5,5,6,8 ,6
+8,20125007,Nguyen Vu Dang Khoa,6,7,6.5,8,8, 8,7
+9,20125009,Ta Quang Khoi,7,8,7.5,3,8,8 ,7
+10,20125010,Tran Bao Loi,5,6,5.5,4,5, 8,5
+11,20125011,Nguyen Quang Long,7,7,7,5,5, 8,6
+12,20125012,Nguyen Duc Manh,8,7,7.5,3,8, 8,7
+13,20125014,Thai Viet Nhat,8,8.5,8.3,4,6,8 ,5
+14,20125015,Nguyen Phong,6,8,7,3,6,8 ,6
+15,20125017,Nguyen Nham ,6,6,6,4,6,8 ,5
+16,20125019,To Tuan An,9,6,7.5,3,6,8 ,7
+17,20125021,Luong Hoang Chau,8,7,7.5,6,6, 8,7
+18,20125023,Vu Hoang Dat,8,9,8.5,2,6, 8,7
+19,20125025,Duong Tuan Dung,9,9,9,3,6, 8,7
+20,20125027,Phan Minh Duy,6,8,7,1,6, 8,5
+21,20125029,Tu Khai Hoai,8,9,8.5,2,6, 8,5
+22,20125031,Pham Viet Hoang,7,9,8,2,6, 8,6
+23,20125032,Truong Viet Hoang,7,7,7,2,6, 8,5
+24,20125033,Le Minh Huan,6,7,6.5,1,6,8 ,5
+25,20125034,Vo Bui Phu Hung,7,8,7.5,3,6,8 ,8
+26,20125038,Le Nguyen Quang Minh,8,7,7.5,3,6,8 ,6
+27,20125039,Tran Minh Nam,7,8,7.5,3,6, 8,6
+28,20125040,Dinh Vo Truc Ngan,9,6,7.5,3,6,8 ,7
+29,20125046,Huynh Man Nhu,6,6,6,4,6,8 ,7
+30,20125048,Nguyen Hoai Nam Phuong,8,9,8.5,2,6, 8,7
+31,20125052,Lam Hien Toan,8,9,8.5,8,6, 8,7
+32,20125054,Van Hoang Yen,6,8,7,3,6,8 ,6
 33,20125058,Nguyen Viet Hung,9,6,7.5,3,6, ,8
-34,20125059,Le Quy Khoi,6,8,7,1,6, ,4
-35,20125060,Dinh My Ky,7,7,7,2,6, ,5
-36,20125067,Luong Thien Tri,7,8,7.5,3,6, ,7
-37,20125068,Thai Vo Duc Trong,8,10,9,3,6, ,7
-38,20125069,Tran Lac Viet,4,9,6.5,5,6, ,7
-39,20125081,Vo Huynh,5,10,7.5,4,6, ,7
-40,20125090,Cao Thanh Duy,6,10,8,2,6, ,6
-41,20125101,Vuong Huy Hoang Luong,7,7,7,5,6, ,6
-42,20125102,Truong Nhat Minh,9,6,7.5,3,6, ,7
-43,20125106,Le Van Hoang Phi,9,3,6,3,6, ,6
-44,20125111,Nguyen Huynh Sang,7,4,5.5,3,6, ,5
-45,20125117,Nguyen Trong Tin,10,5,7.5,4,6, ,7
-46,20125124,Nguyen Minh Uyen,10,8,9,3,6, ,7
-47,20125126,Bui Duy Bao,10,6,8,3,6, ,7
-48,20125127,Dao Quang Dung,9,3,6,3,6, ,7
-49,20125129,Nguyen Dinh Quoc,8,3,5.5,3,6, ,7
+34,20125059,Le Quy Khoi,6,8,7,1,6,8 ,4
+35,20125060,Dinh My Ky,7,7,7,2,6, 8,5
+36,20125067,Luong Thien Tri,7,8,7.5,3,6,8 ,7
+37,20125068,Thai Vo Duc Trong,8,10,9,3,6,8 ,7
+38,20125069,Tran Lac Viet,4,9,6.5,5,6, 8,7
+39,20125081,Vo Huynh,5,10,7.5,4,6, 8,7
+40,20125090,Cao Thanh Duy,6,10,8,2,6, 8,6
+41,20125101,Vuong Huy Hoang Luong,7,7,7,5,6,8 ,6
+42,20125102,Truong Nhat Minh,9,6,7.5,3,6, 8,7
+43,20125106,Le Van Hoang Phi,9,3,6,3,6, 8,6
+44,20125111,Nguyen Huynh Sang,7,4,5.5,3,6,8 ,5
+45,20125117,Nguyen Trong Tin,10,5,7.5,4,6,8 ,7
+46,20125124,Nguyen Minh Uyen,10,8,9,3,6,8 ,7
+47,20125126,Bui Duy Bao,10,6,8,3,6, 8,7
+48,20125127,Dao Quang Dung,9,3,6,3,6, 8,7
+49,20125129,Nguyen Dinh Quoc,8,3,5.5,3,6, 8,7
